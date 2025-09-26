@@ -36,12 +36,76 @@
 </script>
 
 <script>
-function submitForm() {
+function validateForm() {
+  let isValid = true;
+  
   // Get form field values
-  const firstName = document.getElementById('firstName').value || '';
-  const lastName = document.getElementById('lastName').value || '';
-  const email = document.getElementById('email').value || '';
-  const countryTravel = document.getElementById('countryTravel').value || '';
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const countryTravel = document.getElementById('countryTravel').value;
+  
+  // Reset error states
+  document.getElementById('firstNameError').classList.add('hidden');
+  document.getElementById('lastNameError').classList.add('hidden');
+  document.getElementById('emailError').classList.add('hidden');
+  document.getElementById('countryError').classList.add('hidden');
+  
+  // Reset field styles
+  document.getElementById('firstName').classList.remove('border-red-500');
+  document.getElementById('lastName').classList.remove('border-red-500');
+  document.getElementById('email').classList.remove('border-red-500');
+  document.getElementById('countryTravel').classList.remove('border-red-500');
+  
+  // Validate first name
+  if (!firstName || firstName.length < 2) {
+    document.getElementById('firstNameError').classList.remove('hidden');
+    document.getElementById('firstName').classList.add('border-red-500');
+    isValid = false;
+  }
+  
+  // Validate last name
+  if (!lastName || lastName.length < 2) {
+    document.getElementById('lastNameError').classList.remove('hidden');
+    document.getElementById('lastName').classList.add('border-red-500');
+    isValid = false;
+  }
+  
+  // Validate email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email || !emailRegex.test(email)) {
+    document.getElementById('emailError').classList.remove('hidden');
+    document.getElementById('email').classList.add('border-red-500');
+    isValid = false;
+  }
+  
+  // Validate country
+  if (!countryTravel) {
+    document.getElementById('countryError').classList.remove('hidden');
+    document.getElementById('countryTravel').classList.add('border-red-500');
+    isValid = false;
+  }
+  
+  return isValid;
+}
+
+function submitForm() {
+  // Validate form first
+  if (!validateForm()) {
+    // Scroll to first error
+    const firstError = document.querySelector('.border-red-500');
+    if (firstError) {
+      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstError.focus();
+    }
+    return;
+  }
+  
+  // Get form field values
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const countryTravel = document.getElementById('countryTravel').value;
   
   // Build the URL with parameters
   const baseUrl = 'https://idpcheckout.fillout.com/t/2ESX5foenCus';
@@ -55,6 +119,41 @@ function submitForm() {
   // Redirect to external form with parameters
   window.open(`${baseUrl}?${params.toString()}`, '_blank');
 }
+
+// Add real-time validation
+document.addEventListener('DOMContentLoaded', function() {
+  showSlide(0);
+  
+  // Add input event listeners for real-time validation
+  document.getElementById('firstName').addEventListener('input', function() {
+    if (this.value.trim().length >= 2) {
+      this.classList.remove('border-red-500');
+      document.getElementById('firstNameError').classList.add('hidden');
+    }
+  });
+  
+  document.getElementById('lastName').addEventListener('input', function() {
+    if (this.value.trim().length >= 2) {
+      this.classList.remove('border-red-500');
+      document.getElementById('lastNameError').classList.add('hidden');
+    }
+  });
+  
+  document.getElementById('email').addEventListener('input', function() {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(this.value.trim())) {
+      this.classList.remove('border-red-500');
+      document.getElementById('emailError').classList.add('hidden');
+    }
+  });
+  
+  document.getElementById('countryTravel').addEventListener('change', function() {
+    if (this.value) {
+      this.classList.remove('border-red-500');
+      document.getElementById('countryError').classList.add('hidden');
+    }
+  });
+});
 
 // Carousel functionality
 let currentSlide = 0;
@@ -161,19 +260,148 @@ document.addEventListener('DOMContentLoaded', function() {
 <span class="text-xs box-border caret-transparent block leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-2 py-1 rounded-[3.35544e+07px] border-solid">Step 1 of 3</span>
 </div>
 <form aria-label="IDP application step 1" class="box-border caret-transparent gap-x-4 grid outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 mt-4"><div class="text-sm box-border caret-transparent gap-x-2 grid grid-cols-2 leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2">
-<label class="box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">First Name</span>
-<input id="firstName" aria-label="First Name" placeholder="Jane" class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[10px] border-solid" />
+<label class="box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">First Name <span class="text-red-500">*</span></span>
+<input id="firstName" aria-label="First Name" placeholder="Jane" required class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[10px] border-solid focus:border-green-500 focus:ring-1 focus:ring-green-500" />
+<span id="firstNameError" class="text-red-500 text-xs hidden">First name is required</span>
 </label>
-<label class="box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Last Name</span>
-<input id="lastName" aria-label="Last Name" placeholder="Doe" class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[10px] border-solid" />
+<label class="box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Last Name <span class="text-red-500">*</span></span>
+<input id="lastName" aria-label="Last Name" placeholder="Doe" required class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[10px] border-solid focus:border-green-500 focus:ring-1 focus:ring-green-500" />
+<span id="lastNameError" class="text-red-500 text-xs hidden">Last name is required</span>
 </label>
 </div>
-<label class="text-sm box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Email</span>
-<input id="email" aria-label="Email" placeholder="jane@example.com" type="email" class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[10px] border-solid" />
+<label class="text-sm box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Email <span class="text-red-500">*</span></span>
+<input id="email" aria-label="Email" placeholder="jane@example.com" type="email" required class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[10px] border-solid focus:border-green-500 focus:ring-1 focus:ring-green-500" />
+<span id="emailError" class="text-red-500 text-xs hidden">Please enter a valid email address</span>
 <span class="text-slate-600 text-xs box-border caret-transparent block leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">We'll send your digital IDP here.</span>
 </label>
-<label class="text-sm box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Destination Country</span>
-<input id="countryTravel" aria-label="Country of Travel" placeholder="e.g., Italy" class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[10px] border-solid" />
+<label class="text-sm box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Destination Country <span class="text-red-500">*</span></span>
+<select id="countryTravel" aria-label="Country of Travel" required class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[10px] border-solid focus:border-green-500 focus:ring-1 focus:ring-green-500 bg-white">
+<option value="">Select your destination country</option>
+<option value="Afghanistan">Afghanistan</option>
+<option value="Albania">Albania</option>
+<option value="Algeria">Algeria</option>
+<option value="Argentina">Argentina</option>
+<option value="Armenia">Armenia</option>
+<option value="Australia">Australia</option>
+<option value="Austria">Austria</option>
+<option value="Azerbaijan">Azerbaijan</option>
+<option value="Bahrain">Bahrain</option>
+<option value="Bangladesh">Bangladesh</option>
+<option value="Belarus">Belarus</option>
+<option value="Belgium">Belgium</option>
+<option value="Benin">Benin</option>
+<option value="Bolivia">Bolivia</option>
+<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+<option value="Botswana">Botswana</option>
+<option value="Brazil">Brazil</option>
+<option value="Bulgaria">Bulgaria</option>
+<option value="Cambodia">Cambodia</option>
+<option value="Canada">Canada</option>
+<option value="Chile">Chile</option>
+<option value="China">China</option>
+<option value="Colombia">Colombia</option>
+<option value="Costa Rica">Costa Rica</option>
+<option value="Croatia">Croatia</option>
+<option value="Cyprus">Cyprus</option>
+<option value="Czech Republic">Czech Republic</option>
+<option value="Denmark">Denmark</option>
+<option value="Dominican Republic">Dominican Republic</option>
+<option value="Ecuador">Ecuador</option>
+<option value="Egypt">Egypt</option>
+<option value="Estonia">Estonia</option>
+<option value="Finland">Finland</option>
+<option value="France">France</option>
+<option value="Georgia">Georgia</option>
+<option value="Germany">Germany</option>
+<option value="Ghana">Ghana</option>
+<option value="Greece">Greece</option>
+<option value="Guatemala">Guatemala</option>
+<option value="Haiti">Haiti</option>
+<option value="Hungary">Hungary</option>
+<option value="Iceland">Iceland</option>
+<option value="India">India</option>
+<option value="Indonesia">Indonesia</option>
+<option value="Iran">Iran</option>
+<option value="Iraq">Iraq</option>
+<option value="Ireland">Ireland</option>
+<option value="Israel">Israel</option>
+<option value="Italy">Italy</option>
+<option value="Ivory Coast">Ivory Coast</option>
+<option value="Jamaica">Jamaica</option>
+<option value="Japan">Japan</option>
+<option value="Jordan">Jordan</option>
+<option value="Kazakhstan">Kazakhstan</option>
+<option value="Kenya">Kenya</option>
+<option value="Kuwait">Kuwait</option>
+<option value="Kyrgyzstan">Kyrgyzstan</option>
+<option value="Laos">Laos</option>
+<option value="Latvia">Latvia</option>
+<option value="Lebanon">Lebanon</option>
+<option value="Lesotho">Lesotho</option>
+<option value="Lithuania">Lithuania</option>
+<option value="Luxembourg">Luxembourg</option>
+<option value="Madagascar">Madagascar</option>
+<option value="Malawi">Malawi</option>
+<option value="Malaysia">Malaysia</option>
+<option value="Mali">Mali</option>
+<option value="Malta">Malta</option>
+<option value="Mexico">Mexico</option>
+<option value="Moldova">Moldova</option>
+<option value="Monaco">Monaco</option>
+<option value="Mongolia">Mongolia</option>
+<option value="Montenegro">Montenegro</option>
+<option value="Morocco">Morocco</option>
+<option value="Namibia">Namibia</option>
+<option value="Nepal">Nepal</option>
+<option value="Netherlands">Netherlands</option>
+<option value="New Zealand">New Zealand</option>
+<option value="Niger">Niger</option>
+<option value="Nigeria">Nigeria</option>
+<option value="North Macedonia">North Macedonia</option>
+<option value="Norway">Norway</option>
+<option value="Pakistan">Pakistan</option>
+<option value="Paraguay">Paraguay</option>
+<option value="Peru">Peru</option>
+<option value="Philippines">Philippines</option>
+<option value="Poland">Poland</option>
+<option value="Portugal">Portugal</option>
+<option value="Romania">Romania</option>
+<option value="Russia">Russia</option>
+<option value="Rwanda">Rwanda</option>
+<option value="San Marino">San Marino</option>
+<option value="Saudi Arabia">Saudi Arabia</option>
+<option value="Senegal">Senegal</option>
+<option value="Serbia">Serbia</option>
+<option value="Seychelles">Seychelles</option>
+<option value="Sierra Leone">Sierra Leone</option>
+<option value="Singapore">Singapore</option>
+<option value="Slovakia">Slovakia</option>
+<option value="Slovenia">Slovenia</option>
+<option value="South Africa">South Africa</option>
+<option value="South Korea">South Korea</option>
+<option value="Spain">Spain</option>
+<option value="Sri Lanka">Sri Lanka</option>
+<option value="Sweden">Sweden</option>
+<option value="Switzerland">Switzerland</option>
+<option value="Syria">Syria</option>
+<option value="Tajikistan">Tajikistan</option>
+<option value="Thailand">Thailand</option>
+<option value="Togo">Togo</option>
+<option value="Tunisia">Tunisia</option>
+<option value="Turkey">Turkey</option>
+<option value="Turkmenistan">Turkmenistan</option>
+<option value="Uganda">Uganda</option>
+<option value="Ukraine">Ukraine</option>
+<option value="United Arab Emirates">United Arab Emirates</option>
+<option value="United Kingdom">United Kingdom</option>
+<option value="Uruguay">Uruguay</option>
+<option value="Uzbekistan">Uzbekistan</option>
+<option value="Vatican City">Vatican City</option>
+<option value="Venezuela">Venezuela</option>
+<option value="Vietnam">Vietnam</option>
+<option value="Zimbabwe">Zimbabwe</option>
+</select>
+<span id="countryError" class="text-red-500 text-xs hidden">Please select your destination country</span>
 </label>
 <button type="button" onclick="submitForm()" class="text-zinc-50 text-sm items-center bg-green-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] caret-transparent flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-2 px-4 py-3 rounded-[14px]">Start Application</button>
 <div class="text-slate-600 text-xs items-center box-border caret-transparent flex justify-between leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-center box-border caret-transparent gap-x-1 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-6.svg" alt="Icon" class="box-border caret-transparent h-3.5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-3.5" />
@@ -257,7 +485,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <ul id="carousel-slides" class="relative box-border caret-transparent grid basis-[0%] grow grid-cols-[repeat(1,minmax(0px,1fr))] h-full list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] pl-0">
 <li class="carousel-slide active box-border caret-transparent col-start-1 row-start-1 h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left w-full transition-opacity duration-500">
 <picture class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-<img alt="IDP booklet cover and interior pages on a desk" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/241620c6-aa15-4715-831b-2c2e6ef171bd.jpg" class="box-border caret-transparent h-full max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full rounded-[14px]" />
+<img alt="IDP booklet cover and interior pages on a desk" src="https://internationaldrivingadvisor.com/images/advisor-booklet.jpg" class="box-border caret-transparent h-full max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full rounded-[14px]" />
 </picture>
 </li>
 <li class="carousel-slide box-border caret-transparent col-start-1 row-start-1 h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left w-full transition-opacity duration-500 opacity-0">
@@ -267,7 +495,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </li>
 <li class="carousel-slide box-border caret-transparent col-start-1 row-start-1 h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left w-full transition-opacity duration-500 opacity-0">
 <picture class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-<img alt="Compact ID card with driver details on textured background" src="https://internationaldrivingadvisor.com/images/advisor-booklet.jpg" class="box-border caret-transparent h-full max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full rounded-[14px]" />
+<img alt="Compact ID card with driver details on textured background" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/11.jpg" class="box-border caret-transparent h-full max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full rounded-[14px]" />
 </picture>
 </li>
 </ul>
