@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Your International Driving Permit by International Driving Advisor</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+  content: [],
+  theme: {
+    extend: {
+      fontFamily: {
+        inter_var: [
+          'Inter var',
+          'Inter',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'Noto Sans',
+          'sans-serif',
+          'Apple Color Emoji',
+          'Segoe UI Emoji',
+          'Segoe UI Symbol',
+          'Noto Color Emoji'
+        ]
+      }
+    }
+  }
+};
+</script>
+
+<script>
+function submitForm() {
+  // Get form field values
+  const firstName = document.getElementById('firstName').value || '';
+  const lastName = document.getElementById('lastName').value || '';
+  const email = document.getElementById('email').value || '';
+  const countryTravel = document.getElementById('countryTravel').value || '';
+  
+  // Build the URL with parameters
+  const baseUrl = 'https://idpcheckout.fillout.com/t/2ESX5foenCus';
+  const params = new URLSearchParams({
+    first_name: firstName,
+    last_name: lastName,
+    email: email,
+    country_travel: countryTravel
+  });
+  
+  // Redirect to external form with parameters
+  window.open(`${baseUrl}?${params.toString()}`, '_blank');
+}
+
+// Carousel functionality
+let currentSlide = 0;
+const totalSlides = 3;
+
+function showSlide(index) {
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.carousel-dot');
+  
+  // Hide all slides
+  slides.forEach((slide, i) => {
+    if (i === index) {
+      slide.classList.add('active');
+      slide.classList.remove('opacity-0');
+    } else {
+      slide.classList.remove('active');
+      slide.classList.add('opacity-0');
+    }
+  });
+  
+  // Update dots
+  dots.forEach((dot, i) => {
+    if (i === index) {
+      dot.classList.add('active');
+      dot.classList.remove('w-2.5');
+      dot.classList.add('w-6');
+      dot.classList.remove('bg-[oklab(0.214881_-0.00419383_-0.00736864_/_0.3)]');
+      dot.classList.add('bg-[oklab(0.214881_-0.00419383_-0.00736864_/_0.8)]');
+    } else {
+      dot.classList.remove('active');
+      dot.classList.remove('w-6');
+      dot.classList.add('w-2.5');
+      dot.classList.remove('bg-[oklab(0.214881_-0.00419383_-0.00736864_/_0.8)]');
+      dot.classList.add('bg-[oklab(0.214881_-0.00419383_-0.00736864_/_0.3)]');
+    }
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % totalSlides;
+  showSlide(currentSlide);
+}
+
+function previousSlide() {
+  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+  showSlide(currentSlide);
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  showSlide(currentSlide);
+}
+
+// Auto-advance carousel every 5 seconds
+setInterval(nextSlide, 5000);
+
+// Initialize carousel when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  showSlide(0);
+});
+</script>
+</head>
+<body class="text-zinc-900 text-base not-italic normal-nums font-normal accent-auto bg-white box-border caret-transparent flex h-full tracking-[normal] leading-6 list-outside list-disc min-h-[1000px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none text-start indent-[0px] normal-case visible w-full overflow-auto border-separate font-inter_var"><div class="box-border caret-transparent h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none w-full"><div class="bg-white box-border caret-transparent min-h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full"><header class="sticky backdrop-blur bg-[oklab(0.999994_0.0000455677_0.0000200868_/_0.8)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] z-20 border-gray-200 border-b border-solid top-0"><div class="items-center box-border caret-transparent flex justify-between max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto px-6 py-3"><div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2">
+<svg class="text-green-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" fill="currentColor" viewBox="0 0 24 24">
+  <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+</svg>
+<span class="font-semibold box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">International Driving Advisor</span>
+</div>
+<nav class="text-sm items-center box-border caret-transparent gap-x-6 hidden leading-5 min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 md:flex md:min-h-[auto] md:min-w-[auto]"><a href="#works" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">How it works</a>
+<a href="#pricing" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Pricing</a>
+<a href="faq.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">FAQ</a>
+<a href="contact.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Contact Us</a>
+</nav>
+<a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=header_button" class="text-zinc-50 text-sm items-center bg-green-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] box-border caret-transparent gap-x-2 flex leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 px-4 py-2 rounded-[14px]">Get Your IDP<img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-3.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+</a>
+</div>
+</header>
+<main class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><section class="relative box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overflow-hidden" style="background-color: #eaf4f0;"><div class="absolute bg-[url('https://storage.googleapis.com/storage.magicpath.ai/user/321092292427538432/assets/world-dots-hero.png')] bg-no-repeat bg-cover box-border caret-transparent opacity-25 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] -z-10 bg-center inset-0 md:opacity-30"></div>
+<div class="absolute bg-[linear-gradient(rgba(234,244,240,1)_0%,rgba(234,244,240,0.7)_50%,rgba(234,244,240,1)_100%)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] -z-10 inset-0"></div>
+<div class="items-start box-border caret-transparent gap-x-10 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-10 mx-auto pt-[65px] pb-[50px] px-6 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h1 class="text-4xl font-semibold box-border caret-transparent leading-[45px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-5xl md:leading-[60px]">Drive with confidence abroad. Get your International Driving Permit today.</h1>
+<p class="text-slate-600 box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-3"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Instant application, professional translation, and global recognition. Perfect for international travelers and expats.</span>
+</p>
+<div class="box-border caret-transparent gap-x-3 flex flex-col outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3 mt-6 md:flex-row"><a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=hero_button" class="text-zinc-50 text-sm items-center bg-green-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.1)_0px_4px_6px_-4px] box-border caret-transparent flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] px-5 py-3 rounded-[14px]"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Apply in 3 Minutes</span>
+</a>
+<a href="#what-you-receive" class="text-sm items-center box-border caret-transparent flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] bg-white border border-gray-200 px-5 py-3 rounded-[14px] border-solid shadow-sm hover:shadow-md transition-shadow"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">See Features</span>
+</a>
+</div>
+<div class="text-slate-600 text-sm items-center box-border caret-transparent gap-x-4 flex leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 mt-6"><div class="items-center box-border caret-transparent gap-x-1 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-green-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Money‑back guarantee</span>
+</div>
+<div class="items-center box-border caret-transparent gap-x-1 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-green-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">No hidden fees</span>
+</div>
+<div class="items-center box-border caret-transparent gap-x-1 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-green-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">24/7 support</span>
+</div>
+</div>
+</div>
+<aside class="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_20px_25px_-5px,rgba(0,0,0,0.1)_0px_8px_10px_-6px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-[18px] border-solid"><div class="items-center box-border caret-transparent flex justify-between outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><svg class="text-green-500 box-border caret-transparent h-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5" fill="currentColor" viewBox="0 0 24 24">
+  <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+</svg>
+<h2 class="text-lg font-semibold box-border caret-transparent leading-7 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Start Application</h2>
+</div>
+<span class="text-xs box-border caret-transparent block leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-2 py-1 rounded-[3.35544e+07px] border-solid">Step 1 of 3</span>
+</div>
+<form aria-label="IDP application step 1" class="box-border caret-transparent gap-x-4 grid outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 mt-4"><div class="text-sm box-border caret-transparent gap-x-2 grid grid-cols-2 leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2">
+<label class="box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">First Name</span>
+<input id="firstName" aria-label="First Name" placeholder="Jane" class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[10px] border-solid" />
+</label>
+<label class="box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Last Name</span>
+<input id="lastName" aria-label="Last Name" placeholder="Doe" class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[10px] border-solid" />
+</label>
+</div>
+<label class="text-sm box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Email</span>
+<input id="email" aria-label="Email" placeholder="jane@example.com" type="email" class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[10px] border-solid" />
+<span class="text-slate-600 text-xs box-border caret-transparent block leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">We'll send your digital IDP here.</span>
+</label>
+<label class="text-sm box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Destination Country</span>
+<input id="countryTravel" aria-label="Country of Travel" placeholder="e.g., Italy" class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[10px] border-solid" />
+</label>
+<button type="button" onclick="submitForm()" class="text-zinc-50 text-sm items-center bg-green-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] caret-transparent flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-2 px-4 py-3 rounded-[14px]">Start Application</button>
+<div class="text-slate-600 text-xs items-center box-border caret-transparent flex justify-between leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-center box-border caret-transparent gap-x-1 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-6.svg" alt="Icon" class="box-border caret-transparent h-3.5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-3.5" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Your data is secure</span>
+</div>
+<div class="items-center box-border caret-transparent gap-x-1 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-7.svg" alt="Icon" class="text-green-500 box-border caret-transparent h-3.5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-3.5" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">100% Money‑back Guarantee</span>
+</div>
+</div>
+</form>
+</aside>
+</div>
+</section>
+<section aria-label="key benefits" class="box-border caret-transparent max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto pt-5 pb-[90px] px-6"><div class="box-border caret-transparent gap-x-4 grid grid-cols-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_1px_3px_0px,rgba(0,0,0,0.1)_0px_1px_2px_-1px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[18px] border-solid"><div class="items-center box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-8.svg" alt="Icon" class="text-green-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" />
+<h3 class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Legally Recognized</h3>
+</div>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Accepted in 150+ countries alongside your valid driver’s license.</p>
+</div>
+<div class="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_1px_3px_0px,rgba(0,0,0,0.1)_0px_1px_2px_-1px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[18px] border-solid"><div class="items-center box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-9.svg" alt="Icon" class="text-green-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" />
+<h3 class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Fast Turnaround</h3>
+</div>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Apply in minutes. Digital copy delivered within 2 hours.</p>
+</div>
+<div class="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_1px_3px_0px,rgba(0,0,0,0.1)_0px_1px_2px_-1px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[18px] border-solid"><div class="items-center box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-10.svg" alt="Icon" class="text-green-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" />
+<h3 class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">20+ Languages</h3>
+</div>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Professional translations for hassle-free car rentals abroad.</p>
+</div>
+</div>
+</section>
+<section aria-label="how and languages" class="bg-[oklab(0.97588_-0.000229359_-0.00283861_/_0.2)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-start box-border caret-transparent gap-x-10 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-10 mx-auto pt-[60px] pb-[55px] px-6 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h3 id="works" class="text-2xl font-semibold box-border caret-transparent leading-8 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">How it works</h3>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">We streamlined the process so you can get on the road faster.</span>
+</p>
+<ol class="box-border caret-transparent list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-6 pl-0"><li class="items-start box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3 text-left mb-4"><span class="text-green-500 text-xs font-semibold items-center bg-[oklab(0.638374_-0.127061_0.0523999_/_0.1)] box-border caret-transparent grid shrink-0 h-7 justify-items-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-7 rounded-[3.35544e+07px]">1</span>
+<p class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Complete the 3-minute application</span>
+</p>
+</li>
+<li class="items-start box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3 text-left mb-4"><span class="text-green-500 text-xs font-semibold items-center bg-[oklab(0.638374_-0.127061_0.0523999_/_0.1)] box-border caret-transparent grid shrink-0 h-7 justify-items-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-7 rounded-[3.35544e+07px]">2</span>
+<p class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Upload your valid driver’s license</span>
+</p>
+</li>
+<li class="items-start box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3 text-left"><span class="text-green-500 text-xs font-semibold items-center bg-[oklab(0.638374_-0.127061_0.0523999_/_0.1)] box-border caret-transparent grid shrink-0 h-7 justify-items-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-7 rounded-[3.35544e+07px]">3</span>
+<p class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Receive your digital IDP via email</span>
+</p>
+</li>
+</ol>
+</div>
+<aside class="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.1)_0px_4px_6px_-4px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-3xl border-solid"><div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><svg class="text-green-500 box-border caret-transparent h-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5" fill="currentColor" viewBox="0 0 24 24">
+  <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+</svg>
+<h4 class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Supported Languages</h4>
+</div>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">English, Spanish, French, German, Italian, Portuguese, Arabic, Chinese, Japanese, Korean and more.</span>
+</p>
+<ul class="box-border caret-transparent gap-x-2 flex flex-wrap list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-4 pl-0"><li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid"><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">en</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid"><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">es</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid"><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">fr</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid"><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">de</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid"><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">it</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid"><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">pt</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid"><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">ar</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid"><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">ja</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid"><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">ko</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid"><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">zh</span>
+</li>
+</ul>
+</aside>
+</div>
+</section>
+<section aria-label="what you receive" class="bg-[oklab(0.97588_-0.000229359_-0.00283861_/_0.2)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-center box-border caret-transparent gap-x-10 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-10 mx-auto px-6 py-12 md:grid-cols-[repeat(2,minmax(0px,1fr))] md:py-16"><figure class="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-[18px] border-dashed"><div class="aspect-[4_/_3] bg-[oklab(0.984579_-0.000600815_-0.00156349_/_0.4)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full overflow-hidden rounded-[14px]"><section aria-label="IDP preview carousel" class="relative items-stretch box-border caret-transparent flex h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full">
+<button type="button" aria-label="Previous image" onclick="previousSlide()" class="text-[oklab(0.214881_-0.00419383_-0.00736864_/_0.7)] items-center bg-white/80 hover:bg-white caret-transparent flex justify-center min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center px-3 py-2 rounded-lg shadow-sm transition-colors z-10 absolute left-2 top-1/2 transform -translate-y-1/2">‹</button>
+<ul id="carousel-slides" class="relative box-border caret-transparent grid basis-[0%] grow grid-cols-[repeat(1,minmax(0px,1fr))] h-full list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] pl-0">
+<li class="carousel-slide active box-border caret-transparent col-start-1 row-start-1 h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left w-full transition-opacity duration-500">
+<picture class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
+<img alt="IDP booklet cover and interior pages on a desk" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/241620c6-aa15-4715-831b-2c2e6ef171bd.jpg" class="box-border caret-transparent h-full max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full rounded-[14px]" />
+</picture>
+</li>
+<li class="carousel-slide box-border caret-transparent col-start-1 row-start-1 h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left w-full transition-opacity duration-500 opacity-0">
+<picture class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
+<img alt="Open booklet translation page with multilingual text" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/10.jpg" class="box-border caret-transparent h-full max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full rounded-[14px]" />
+</picture>
+</li>
+<li class="carousel-slide box-border caret-transparent col-start-1 row-start-1 h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left w-full transition-opacity duration-500 opacity-0">
+<picture class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
+<img alt="Compact ID card with driver details on textured background" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/11.jpg" class="box-border caret-transparent h-full max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full rounded-[14px]" />
+</picture>
+</li>
+</ul>
+<button type="button" aria-label="Next image" onclick="nextSlide()" class="text-[oklab(0.214881_-0.00419383_-0.00736864_/_0.7)] items-center bg-white/80 hover:bg-white caret-transparent flex justify-center min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center px-3 py-2 rounded-lg shadow-sm transition-colors z-10 absolute right-2 top-1/2 transform -translate-y-1/2">›</button>
+
+<!-- Carousel Navigation Dots -->
+<nav aria-label="Carousel navigation" class="absolute items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 left-1/2 bottom-3 transform -translate-x-1/2">
+<button type="button" aria-label="Go to slide 1" onclick="goToSlide(0)" class="carousel-dot active bg-[oklab(0.214881_-0.00419383_-0.00736864_/_0.8)] caret-transparent block h-2 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center w-6 p-0 rounded-[3.35544e+07px] transition-all duration-300"></button>
+<button type="button" aria-label="Go to slide 2" onclick="goToSlide(1)" class="carousel-dot bg-[oklab(0.214881_-0.00419383_-0.00736864_/_0.3)] caret-transparent block h-2 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center w-2.5 p-0 rounded-[3.35544e+07px] transition-all duration-300"></button>
+<button type="button" aria-label="Go to slide 3" onclick="goToSlide(2)" class="carousel-dot bg-[oklab(0.214881_-0.00419383_-0.00736864_/_0.3)] caret-transparent block h-2 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center w-2.5 p-0 rounded-[3.35544e+07px] transition-all duration-300"></button>
+</nav>
+</section>
+</div>
+<figcaption class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-3">Preview of the digital International Driving Permit you&#39;ll receive.</figcaption>
+</figure>
+<div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h3 id="what-you-receive" class="text-2xl font-semibold box-border caret-transparent leading-8 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">What you’ll receive</h3>
+<ul class="text-sm box-border caret-transparent leading-5 list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4 pl-0"><li class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-green-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Valid in 150+ countries</span>
+</li>
+<li class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-green-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Available in your language</span>
+</li>
+<li class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-green-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Validity: 12 months from issue</span>
+</li>
+</ul>
+<div class="text-slate-600 text-xs items-center box-border caret-transparent gap-x-2 flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-4"><span class="box-border caret-transparent flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overflow-hidden"><span class="bg-[oklab(0.214881_-0.00419383_-0.00736864_/_0.1)] box-border caret-transparent hidden h-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]"></span>
+<img sizes="20px" alt="United States flag" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/Flag_of_the_United_States.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]" />
+<img sizes="20px" alt="France flag" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/Flag_of_France.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]" />
+<img sizes="20px" alt="Germany flag" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/Flag_of_Germany.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]" />
+<img sizes="20px" alt="Italy flag" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/Flag_of_Italy.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]" />
+<img sizes="20px" alt="Spain flag" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/Flag_of_Spain.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 rounded-[3.35544e+07px]" />
+</span>
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Flags represent coverage. Exact list provided after purchase.</span>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="pricing options" class="box-border caret-transparent max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto pb-12 px-6 md:pb-16"><header class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mb-6"><p class="text-slate-600 text-xs font-semibold box-border caret-transparent justify-center tracking-[0.3px] leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center uppercase"><span id="pricing" class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Risk-Free Pricing:</span>
+</p>
+<h3 class="text-2xl font-semibold box-border caret-transparent justify-center leading-8 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-1"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">100% Money-Back Guarantee</span>
+</h3>
+<p class="text-slate-600 text-sm box-border caret-transparent justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-2"><span class="box-border caret-transparent justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Full refund if not accepted anywhere, plus unlimited free replacements.</span>
+</p>
+</header>
+<div class="text-xs box-border caret-transparent gap-x-2 grid grid-cols-[repeat(3,minmax(0px,1fr))] leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-center mb-4 md:text-sm md:leading-5"><div class="text-xs text-zinc-50 bg-[linear-gradient(rgb(40,164,106)_0%,oklab(0.638374_-0.127061_0.0523999_/_0.8)_100%)] box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-green-500 px-3 py-2 rounded-[3.35544e+07px] border-solid md:text-sm md:leading-5"><span class="text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">3 years</span>
+<p class="text-zinc-200 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">Expires 2028</p>
+</div>
+<div class="text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-3 py-2 rounded-[3.35544e+07px] border-solid md:text-sm md:leading-5"><span class="text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">2 years</span>
+<p class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">Expires 2027</p>
+</div>
+<div class="text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-3 py-2 rounded-[3.35544e+07px] border-solid md:text-sm md:leading-5"><span class="text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">1 year</span>
+<p class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">Expires 2026</p>
+</div>
+</div>
+<div class="box-border caret-transparent gap-x-6 grid grid-cols-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 pt-[19px] md:grid-cols-[repeat(2,minmax(0px,1fr))]"><article class="relative text-zinc-50 bg-[linear-gradient(rgb(40,164,106)_0%,oklab(0.638374_-0.127061_0.0523999_/_0.8)_100%)] shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_20px_25px_-5px,rgba(0,0,0,0.1)_0px_8px_10px_-6px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-3xl border-solid"><p class="absolute text-zinc-900 text-xs font-semibold bg-[oklab(0.999994_0.0000455678_0.0000200868_/_0.9)] box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid left-4 -top-3">Best value with the complete package</p>
+<h3 class="text-xl font-semibold box-border caret-transparent leading-7 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">PRINT <span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">+ FREE</span>
+ DIGITAL</h3>
+<p class="text-[oklab(0.985059_0.0000448823_0.0000197291_/_0.9)] text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Best for Long‑Term Travelers &amp; Frequent Flyers</p>
+<p class="text-3xl font-bold box-border caret-transparent tracking-[-0.75px] leading-9 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4">$79</p>
+<p class="text-[oklab(0.985059_0.0000448823_0.0000197291_/_0.8)] text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Shipping calculated at checkout</p>
+<a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=print_digital_button" class="text-zinc-900 text-sm font-semibold items-center bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] caret-transparent inline-flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-5 px-4 py-3 rounded-[14px]">Start application</a>
+<ul class="text-sm box-border caret-transparent leading-5 list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-6 pl-0"><li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-12.svg" alt="Icon" class="text-zinc-900 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Free access to all benefits of the Digital IDP format included</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-12.svg" alt="Icon" class="text-zinc-900 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Accepted in 150+ Countries — Travel Without Worries</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-12.svg" alt="Icon" class="text-zinc-900 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Includes a Free ID Card with English License Details</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-12.svg" alt="Icon" class="text-zinc-900 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Globally Recognized &amp; Meets International Standards</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-12.svg" alt="Icon" class="text-zinc-900 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Essential for Non‑English Speaking Countries</span>
+</li>
+</ul>
+</article>
+<article class="relative bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_20px_25px_-5px,rgba(0,0,0,0.1)_0px_8px_10px_-6px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-3xl border-solid"><p class="absolute text-green-500 text-xs font-semibold bg-[oklab(0.638374_-0.127061_0.0523999_/_0.1)] box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid right-4 -top-3">Start your adventure in a few minutes</p>
+<h3 class="text-xl font-semibold box-border caret-transparent leading-7 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">ONLINE ONLY</h3>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Best for Short Trips or Last‑Minute Plans</p>
+<p class="text-3xl font-bold box-border caret-transparent tracking-[-0.75px] leading-9 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4">$59</p>
+<a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=digital_button" class="text-zinc-50 text-sm font-semibold items-center bg-green-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] caret-transparent inline-flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-5 px-4 py-3 rounded-[14px]">Start application</a>
+<ul class="text-sm box-border caret-transparent leading-5 list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-6 pl-0"><li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-green-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Easily accessible digital format, accepted in many countries</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-green-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Can be obtained online, fast and easy process</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex opacity-60 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-13.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Accepted widely, but not in all countries</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex opacity-60 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-13.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Doesn’t include Printed Booklet and Complementary Plastic Card</span>
+</li>
+</ul>
+</article>
+</div>
+</section>
+<section aria-label="social proof" class="box-border caret-transparent max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto px-6 py-12 md:py-16"><header class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mb-6"><h2 class="text-2xl font-semibold box-border caret-transparent tracking-[-0.6px] leading-8 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-3xl md:tracking-[-0.75px] md:leading-9">What Our Customers Say</h2>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2 md:text-base md:leading-6">See what thousands of satisfied customers say about their seamless international driving experience</p></header>
+<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-[18px] border-solid"><div class="[align-items:normal] box-border caret-transparent gap-x-4 flex flex-col justify-normal outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 md:items-center md:flex-row md:justify-between"><div class="text-sm items-center box-border caret-transparent gap-x-2 flex leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><div class="text-[oklch(0.795_0.184_86.047)] items-center box-border caret-transparent flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-14.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-14.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-14.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-14.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-15.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+</div>
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">4.8 (341 reviews)</span>
+</div>
+<p class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Sarah from Texas received her IDP 2 hours ago</p>
+</div>
+<div class="box-border caret-transparent gap-x-4 grid grid-cols-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><blockquote class="text-sm bg-white box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-4 rounded-[14px] border-solid"><p class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">“So fast! Submitted at lunch and had my IDP before my flight.”</p>
+<footer class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Sarah, US • Verified traveler</footer>
+</blockquote>
+<blockquote class="text-sm bg-white box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-4 rounded-[14px] border-solid"><p class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">“Car rental in Japan was seamless. Process took 2 mins.”</p>
+<footer class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Marco, IT • Drove in JP</footer>
+</blockquote>
+<blockquote class="text-sm bg-white box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-4 rounded-[14px] border-solid"><p class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">“Clear steps, fair pricing, great support on WhatsApp.”</p>
+<footer class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Aisha, AE • Urgent trip</footer>
+</blockquote>
+</div>
+</div>
+</section>
+<section class="box-border caret-transparent max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto px-6 py-12 md:py-16"><h3 class="text-2xl font-semibold box-border caret-transparent justify-center leading-8 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center">Frequently Asked Questions</h3>
+<div class="box-border caret-transparent gap-x-6 grid grid-cols-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_1px_3px_0px,rgba(0,0,0,0.1)_0px_1px_2px_-1px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[18px] border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">What is an International Driving Permit?</p>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">An International Driving Permit (IDP) is a document that translates your existing driver's license into multiple languages. It acts as a supplement to, not a replacement for, your valid driver's license.</p>
+</div>
+<div class="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_1px_3px_0px,rgba(0,0,0,0.1)_0px_1px_2px_-1px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[18px] border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Do I need an IDP?</p>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">It depends on your destination. Many countries legally require an IDP to drive, and most car rental agencies abroad will ask for one. It's highly recommended for international travel to avoid potential penalties and issues.</p>
+</div>
+<div class="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_1px_3px_0px,rgba(0,0,0,0.1)_0px_1px_2px_-1px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[18px] border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">How long is my IDP valid for?</p>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">An IDP is typically valid for one year from the date of issue, or until your domestic driver's license expires, whichever comes first. Some IDPs issued under different international agreements may be valid for up to three years.</p>
+</div>
+<div class="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_1px_3px_0px,rgba(0,0,0,0.1)_0px_1px_2px_-1px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[18px] border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Which countries accept the IDP?</p>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Over 150 countries worldwide accept the International Driving Permit. It is recognized in most of the Americas, Europe, Asia, Africa, and Australia.</p>
+</div>
+<div class="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_1px_3px_0px,rgba(0,0,0,0.1)_0px_1px_2px_-1px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[18px] border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">How quickly can I get my IDP?</p>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">In-person applications at your local issuing office can often be processed in under an hour. Online and mail-in applications can take anywhere from a few days to several weeks, depending on the provider and shipping options selected.</p>
+</div>
+<div class="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_1px_3px_0px,rgba(0,0,0,0.1)_0px_1px_2px_-1px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[18px] border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">What countries is this valid in?</p>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">This IDP is valid in over 150 countries that signed the 1949 Geneva Convention and/or 1968 Vienna Convention on Road Traffic, including popular destinations like Europe, Asia, Africa, and South America.</p>
+</div>
+</div>
+</section>
+<section aria-label="final cta" class="bg-[oklab(0.97588_-0.000229359_-0.00283861_/_0.3)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-center box-border caret-transparent gap-x-6 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 mx-auto px-6 py-12 md:grid-cols-[repeat(3,minmax(0px,1fr))] md:py-16"><div class="box-border caret-transparent col-end-auto col-start-auto outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:col-end-[span_2] md:col-start-[span_2]"><h3 class="text-2xl font-semibold box-border caret-transparent leading-8 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Get Your International Driving Permit Now</h3>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Process before your trip — get approved today.</p>
+</div>
+<div class="box-border caret-transparent justify-self-auto outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:justify-self-end"><a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=footer_button" class="text-zinc-50 text-sm items-center bg-green-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.1)_0px_4px_6px_-4px] box-border caret-transparent inline-flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] px-5 py-3 rounded-[14px]">Get Approved in 2 Hours</a>
+</div>
+</div>
+</section>
+</main>
+<footer class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border-gray-200 border-t border-solid">
+<div class="box-border caret-transparent gap-x-8 grid grid-cols-1 max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-8 mx-auto px-6 py-10 md:grid-cols-4">
+<!-- Company Info -->
+<div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
+<div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mb-4">
+<svg class="text-green-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" fill="currentColor" viewBox="0 0 24 24">
+  <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+</svg>
+<span class="font-semibold text-lg box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">International Driving Advisor</span>
+</div>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Your trusted partner for international driving translations.</p>
+</div>
+
+<!-- Support -->
+<div class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
+<p class="font-semibold text-lg box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mb-4">Support</p>
+<div class="space-y-3">
+<a href="mailto:hello@internationaldrivingadvisor.com" class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-slate-600 hover:text-green-500 transition-colors">
+<img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-17.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+hello@internationaldrivingadvisor.com
+</a>
+<a href="tel:+10000000000" class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-slate-600 hover:text-green-500 transition-colors">
+<img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-18.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
++1 (000) 000-0000
+</a>
+</div>
+</div>
+
+<!-- Company -->
+<div class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
+<p class="font-semibold text-lg box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mb-4">Company</p>
+<div class="space-y-2">
+<a href="about.html" class="text-slate-600 hover:text-green-500 block transition-colors">About Us</a>
+<a href="contact.html" class="text-slate-600 hover:text-green-500 block transition-colors">Contact</a>
+<a href="faq.html" class="text-slate-600 hover:text-green-500 block transition-colors">FAQ</a>
+</div>
+</div>
+
+<!-- Legal -->
+<div class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
+<p class="font-semibold text-lg box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mb-4">Legal</p>
+<div class="space-y-2">
+<a href="privacy.html" class="text-slate-600 hover:text-green-500 block transition-colors">Privacy Policy</a>
+<a href="cookies.html" class="text-slate-600 hover:text-green-500 block transition-colors">Cookie Policy</a>
+<a href="terms.html" class="text-slate-600 hover:text-green-500 block transition-colors">Terms & Conditions</a>
+<a href="legal.html" class="text-slate-600 hover:text-green-500 block transition-colors">Legal Disclaimer</a>
+<a href="refund.html" class="text-slate-600 hover:text-green-500 block transition-colors">Refund Policy</a>
+<a href="shipping.html" class="text-slate-600 hover:text-green-500 block transition-colors">Shipping & Delivery</a>
+</div>
+</div>
+</div>
+
+<!-- Footer Bottom -->
+<div class="border-t border-gray-200 mt-8">
+<div class="max-w-6xl mx-auto px-6 py-6">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-slate-600 text-xs">© 2025 International Driving Advisor. All rights reserved.</p>
+<p class="text-slate-600 text-xs">The IDP is a translation of your license and must be used with your valid driver's license.</p>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body>
+
+</html>
