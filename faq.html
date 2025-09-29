@@ -3,37 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frequently Asked Questions - International Driving Advisor</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-  content: [],
-  theme: {
-    extend: {
-      fontFamily: {
-        inter_var: [
-          'Inter var',
-          'Inter',
-          'ui-sans-serif',
-          'system-ui',
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'Segoe UI',
-          'Roboto',
-          'Helvetica Neue',
-          'Arial',
-          'Noto Sans',
-          'sans-serif',
-          'Apple Color Emoji',
-          'Segoe UI Emoji',
-          'Segoe UI Symbol',
-          'Noto Color Emoji'
-        ]
+  <title>FAQ - International Driving Advisor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      content: [],
+      theme: {
+        extend: {
+          fontFamily: {
+            inter_var: [
+              'Inter var',
+              'Inter',
+              'ui-sans-serif',
+              'system-ui',
+              '-apple-system',
+              'BlinkMacSystemFont',
+              'Segoe UI',
+              'Roboto',
+              'Helvetica Neue',
+              'Arial',
+              'Noto Sans',
+              'sans-serif',
+              'Apple Color Emoji',
+              'Segoe UI Emoji',
+              'Segoe UI Symbol',
+              'Noto Color Emoji'
+            ]
+          }
+        }
+      }
+    };
+  </script>
+  <script>
+    function toggleFAQ(id) {
+      const content = document.getElementById(`faq-content-${id}`);
+      const icon = document.getElementById(`faq-icon-${id}`);
+      
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        content.classList.add('hidden');
+        icon.style.transform = 'rotate(0deg)';
       }
     }
-  }
-};
-</script>
+
+    function filterFAQs(category) {
+      const allFAQs = document.querySelectorAll('.faq-item');
+      const buttons = document.querySelectorAll('.filter-btn');
+      
+      // Update button styles
+      buttons.forEach(btn => {
+        if (btn.dataset.category === category) {
+          btn.classList.add('bg-green-500', 'text-white');
+          btn.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+        } else {
+          btn.classList.remove('bg-green-500', 'text-white');
+          btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+        }
+      });
+      
+      // Show/hide FAQs
+      allFAQs.forEach(faq => {
+        if (category === 'all' || faq.dataset.category === category) {
+          faq.style.display = 'block';
+        } else {
+          faq.style.display = 'none';
+        }
+      });
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      filterFAQs('all');
+    });
+  </script>
 </head>
 <body class="text-zinc-900 text-base not-italic normal-nums font-normal accent-auto bg-white box-border caret-transparent flex h-full tracking-[normal] leading-6 list-outside list-disc min-h-[1000px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none text-start indent-[0px] normal-case visible w-full overflow-auto border-separate font-inter_var">
   <div class="box-border caret-transparent h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none w-full">
@@ -49,10 +93,10 @@
             <a href="index.html" class="font-semibold box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">International Driving Advisor</a>
           </div>
           <nav class="text-sm items-center box-border caret-transparent gap-x-6 hidden leading-5 min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 md:flex md:min-h-[auto] md:min-w-[auto]">
-            <a href="index.html#features" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Features</a>
-            <a href="index.html#how" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">How it works</a>
+            <a href="index.html#works" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">How it works</a>
+            <a href="index.html#pricing" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Pricing</a>
             <a href="faq.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">FAQ</a>
-            <a href="contact.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Contact</a>
+            <a href="contact.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Contact Us</a>
           </nav>
           <a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=header_button" class="text-zinc-50 text-sm items-center bg-green-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] box-border caret-transparent gap-x-2 flex leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 px-4 py-2 rounded-[14px]">
             Get Your IDP
@@ -63,244 +107,546 @@
 
       <!-- Main Content -->
       <main class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-        <div class="max-w-4xl mx-auto px-6 py-12">
-          
-          <!-- Page Header -->
-          <div class="text-center mb-12">
-            <h1 class="text-4xl font-semibold box-border caret-transparent leading-[45px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-5xl md:leading-[60px] mb-4">Frequently Asked Questions</h1>
-            <p class="text-slate-600 text-lg">Get answers to common questions about our service</p>
+        
+        <!-- Hero Section -->
+        <section class="relative box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overflow-hidden" style="background-color: #eaf4f0;">
+          <div class="absolute bg-[url('https://storage.googleapis.com/storage.magicpath.ai/user/321092292427538432/assets/world-dots-hero.png')] bg-no-repeat bg-cover box-border caret-transparent opacity-25 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] -z-10 bg-center inset-0 md:opacity-30"></div>
+          <div class="absolute bg-[linear-gradient(rgba(234,244,240,1)_0%,rgba(234,244,240,0.7)_50%,rgba(234,244,240,1)_100%)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] -z-10 inset-0"></div>
+          <div class="max-w-6xl mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl font-semibold box-border caret-transparent leading-[45px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-5xl md:leading-[60px] mb-6">
+              Frequently Asked Questions
+            </h1>
+            <p class="text-slate-600 text-lg max-w-3xl mx-auto">
+              Find answers to common questions about International Driving Permits and our services.
+            </p>
           </div>
+        </section>
 
-          <!-- Content Sections -->
-          <div class="prose prose-lg max-w-none">
+        <!-- Search and Filter Section -->
+        <section class="max-w-6xl mx-auto px-6 py-8">
+          <div class="text-center mb-8">
+            <div class="max-w-md mx-auto mb-6">
+              <div class="relative">
+                <input 
+                  type="text" 
+                  placeholder="Search FAQs..." 
+                  class="w-full px-4 py-3 pl-10 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                  onkeyup="searchFAQs(this.value)"
+                />
+                <svg class="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </div>
+            </div>
             
-            <!-- FAQ Items -->
-            <div class="space-y-6">
-              
-              <!-- FAQ 1 -->
-              <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h3 class="text-xl font-semibold text-zinc-900 mb-3 flex items-start">
-                  <span class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">1</span>
-                  Is this an official driver's license?
-                </h3>
-                <div class="ml-11">
-                  <p class="text-slate-600">No. International Driving Advisor provides an <strong>unofficial translation of your valid domestic driver's license</strong> into multiple languages. It is <strong>not a government-issued license</strong> and does not replace your original license.</p>
-                </div>
-              </div>
+            <!-- Category Filters -->
+            <div class="flex flex-wrap justify-center gap-2">
+              <button onclick="filterFAQs('all')" data-category="all" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-green-500 text-white">
+                All Questions
+              </button>
+              <button onclick="filterFAQs('general')" data-category="general" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200">
+                General
+              </button>
+              <button onclick="filterFAQs('application')" data-category="application" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200">
+                Application Process
+              </button>
+              <button onclick="filterFAQs('validity')" data-category="validity" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200">
+                Validity & Usage
+              </button>
+              <button onclick="filterFAQs('pricing')" data-category="pricing" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200">
+                Pricing & Payment
+              </button>
+              <button onclick="filterFAQs('support')" data-category="support" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200">
+                Support
+              </button>
+            </div>
+          </div>
+        </section>
 
-              <!-- FAQ 2 -->
-              <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h3 class="text-xl font-semibold text-zinc-900 mb-3 flex items-start">
-                  <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">2</span>
-                  Are you affiliated with the government or AAA?
-                </h3>
-                <div class="ml-11">
-                  <p class="text-slate-600">No. We are a <strong>private, independent service provider</strong>. We are <strong>not affiliated with any government agency, embassy, consulate, or the American Automobile Association (AAA).</strong></p>
-                </div>
-              </div>
+        <!-- FAQ Content -->
+        <section class="max-w-4xl mx-auto px-6 pb-16">
+          <div class="space-y-4">
 
-              <!-- FAQ 3 -->
-              <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h3 class="text-xl font-semibold text-zinc-900 mb-3 flex items-start">
-                  <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">3</span>
-                  Can I use this translation to drive legally?
-                </h3>
-                <div class="ml-11">
-                  <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                    <p class="text-slate-600">No. This document is a <strong>translation only</strong> and does not grant legal driving rights. You must always carry and present your <strong>original valid driver's license</strong> when driving.</p>
-                  </div>
-                </div>
+            <!-- General Questions -->
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="general">
+              <button onclick="toggleFAQ(1)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">What is an International Driving Permit (IDP)?</h3>
+                <svg id="faq-icon-1" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-1" class="hidden px-6 pb-4">
+                <p class="text-gray-600">
+                  An International Driving Permit (IDP) is an official document that translates your domestic driver's license into multiple languages. It serves as a supplement to your valid driver's license and allows you to drive legally in over 150 countries worldwide. The IDP is recognized under the 1949 Geneva Convention and 1968 Vienna Convention on Road Traffic.
+                </p>
               </div>
-
-              <!-- FAQ 4 -->
-              <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h3 class="text-xl font-semibold text-zinc-900 mb-3 flex items-start">
-                  <span class="flex-shrink-0 w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">4</span>
-                  What do I need to provide to order?
-                </h3>
-                <div class="ml-11">
-                  <p class="text-slate-600 mb-3">You will need to submit:</p>
-                  <ul class="list-disc pl-6 text-slate-600 space-y-2">
-                    <li>A copy of your <strong>valid domestic driver's license</strong></li>
-                    <li>A recent <strong>passport-style photo</strong></li>
-                    <li>Your <strong>basic contact details</strong> for delivery</li>
-                  </ul>
-                </div>
-              </div>
-
-              <!-- FAQ 5 -->
-              <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h3 class="text-xl font-semibold text-zinc-900 mb-3 flex items-start">
-                  <span class="flex-shrink-0 w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">5</span>
-                  How long does it take to receive my order?
-                </h3>
-                <div class="ml-11">
-                  <div class="grid gap-4 md:grid-cols-2">
-                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                      <h4 class="font-semibold text-green-800 mb-2">Digital Copy</h4>
-                      <p class="text-slate-600 text-sm">Delivered by email within 2 hours, and under 8 minutes with urgent processing.</p>
-                    </div>
-                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <h4 class="font-semibold text-blue-800 mb-2">Printed Copy</h4>
-                      <p class="text-slate-600 text-sm">Shipping times vary depending on your country (7–25 business days).</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- FAQ 6 -->
-              <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h3 class="text-xl font-semibold text-zinc-900 mb-3 flex items-start">
-                  <span class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">6</span>
-                  Is my personal information safe?
-                </h3>
-                <div class="ml-11">
-                  <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                    <p class="text-slate-600 mb-3">Yes. We use multiple security measures to protect your data:</p>
-                    <ul class="list-disc pl-6 text-slate-600 space-y-1 text-sm">
-                      <li><strong>SSL encryption</strong> for data transmission</li>
-                      <li><strong>PCI-compliant payment processing</strong></li>
-                      <li><strong>GDPR standards</strong> for data protection</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <!-- FAQ 7 -->
-              <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h3 class="text-xl font-semibold text-zinc-900 mb-3 flex items-start">
-                  <span class="flex-shrink-0 w-8 h-8 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">7</span>
-                  What if my order is rejected by a car rental agency or authority?
-                </h3>
-                <div class="ml-11">
-                  <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                    <p class="text-slate-600">Since this is not an official license, acceptance is at the discretion of third parties. We cannot guarantee approval by every organization, but many travelers use translations for easier communication abroad.</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- FAQ 8 -->
-              <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                <h3 class="text-xl font-semibold text-zinc-900 mb-3 flex items-start">
-                  <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-sm font-bold mr-3 mt-0.5">8</span>
-                  Can I get a refund?
-                </h3>
-                <div class="ml-11">
-                  <p class="text-slate-600">Refunds are available in certain cases — please see our <a href="refund.html" class="text-green-500 hover:text-green-600 font-medium">Refund & Returns Policy</a> for full details.</p>
-                </div>
-              </div>
-
             </div>
 
-            <!-- Still Have Questions -->
-            <section class="mt-12">
-              <div class="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-8 text-center">
-                <div class="flex items-center justify-center mb-4">
-                  <svg class="h-8 w-8 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                  </svg>
-                  <h3 class="text-xl font-semibold text-zinc-900">Still have questions?</h3>
-                </div>
-                <p class="text-slate-600 mb-6">Our support team is here to help with any additional questions you may have.</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <a href="mailto:hello@internationaldrivingadvisor.com" class="inline-flex items-center px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                    </svg>
-                    Contact Support
-                  </a>
-                  <a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=faq_page" class="inline-flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
-                    </svg>
-                    Get Your IDP
-                  </a>
-                </div>
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="general">
+              <button onclick="toggleFAQ(2)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">Do I need an IDP to drive abroad?</h3>
+                <svg id="faq-icon-2" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-2" class="hidden px-6 pb-4">
+                <p class="text-gray-600 mb-3">
+                  It depends on your destination country and your home country's license. Many countries legally require an IDP for foreign drivers, and most international car rental companies will ask for one. Even if not legally required, an IDP is highly recommended because:
+                </p>
+                <ul class="text-gray-600 space-y-1 ml-4">
+                  <li>• It helps police and officials understand your license</li>
+                  <li>• Car rental agencies often require it</li>
+                  <li>• Insurance companies may require it for coverage</li>
+                  <li>• It can prevent legal complications while traveling</li>
+                </ul>
               </div>
-            </section>
+            </div>
 
-            <!-- Quick Links to Related Pages -->
-            <section class="mt-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Related Information</h2>
-              <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <a href="legal.html" class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:border-green-300 hover:bg-green-50 transition-colors">
-                  <svg class="w-6 h-6 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd" />
-                  </svg>
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="general">
+              <button onclick="toggleFAQ(3)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">Which countries accept the IDP?</h3>
+                <svg id="faq-icon-3" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-3" class="hidden px-6 pb-4">
+                <p class="text-gray-600 mb-3">
+                  Over 150 countries worldwide accept the International Driving Permit, including:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
                   <div>
-                    <h4 class="font-medium text-zinc-900">Legal Disclaimer</h4>
-                    <p class="text-slate-600 text-sm">Important legal information</p>
+                    <strong>Europe:</strong> All EU countries, UK, Switzerland, Norway, etc.
                   </div>
-                </a>
-                <a href="refund.html" class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:border-green-300 hover:bg-green-50 transition-colors">
-                  <svg class="w-6 h-6 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-                  </svg>
                   <div>
-                    <h4 class="font-medium text-zinc-900">Refund Policy</h4>
-                    <p class="text-slate-600 text-sm">Money-back guarantee details</p>
+                    <strong>Asia:</strong> Japan, South Korea, Thailand, Malaysia, Singapore, etc.
                   </div>
-                </a>
-                <a href="shipping.html" class="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:border-green-300 hover:bg-green-50 transition-colors">
-                  <svg class="w-6 h-6 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                    <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1V8a1 1 0 00-1-1h-3z" />
-                  </svg>
                   <div>
-                    <h4 class="font-medium text-zinc-900">Shipping & Delivery</h4>
-                    <p class="text-slate-600 text-sm">Delivery times and options</p>
+                    <strong>Americas:</strong> Canada, Mexico, Brazil, Argentina, Chile, etc.
                   </div>
-                </a>
+                  <div>
+                    <strong>Africa:</strong> South Africa, Morocco, Egypt, Kenya, etc.
+                  </div>
+                  <div>
+                    <strong>Oceania:</strong> Australia, New Zealand, Fiji, etc.
+                  </div>
+                  <div>
+                    <strong>Middle East:</strong> UAE, Israel, Jordan, etc.
+                  </div>
+                </div>
+                <p class="text-gray-600 mt-3">
+                  We provide a complete list of accepted countries with your IDP purchase.
+                </p>
               </div>
-            </section>
+            </div>
+
+            <!-- Application Process -->
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="application">
+              <button onclick="toggleFAQ(4)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">How do I apply for an IDP?</h3>
+                <svg id="faq-icon-4" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-4" class="hidden px-6 pb-4">
+                <p class="text-gray-600 mb-3">
+                  Our application process is simple and takes just 3 minutes:
+                </p>
+                <ol class="text-gray-600 space-y-2 ml-4">
+                  <li><strong>1. Fill out the application:</strong> Provide your personal details and destination country</li>
+                  <li><strong>2. Upload your driver's license:</strong> Take a clear photo of your valid driver's license</li>
+                  <li><strong>3. Make payment:</strong> Choose between digital-only or physical + digital options</li>
+                  <li><strong>4. Receive your IDP:</strong> Digital copy within 2 hours, physical copy by mail</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="application">
+              <button onclick="toggleFAQ(5)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">What documents do I need to apply?</h3>
+                <svg id="faq-icon-5" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-5" class="hidden px-6 pb-4">
+                <p class="text-gray-600 mb-3">
+                  You only need:
+                </p>
+                <ul class="text-gray-600 space-y-1 ml-4">
+                  <li>• A valid driver's license from your home country</li>
+                  <li>• A clear photo or scan of your license</li>
+                  <li>• Basic personal information (name, address, etc.)</li>
+                </ul>
+                <p class="text-gray-600 mt-3">
+                  <strong>Important:</strong> Your driver's license must be valid for at least 6 months from the application date.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="application">
+              <button onclick="toggleFAQ(6)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">How long does it take to get my IDP?</h3>
+                <svg id="faq-icon-6" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-6" class="hidden px-6 pb-4">
+                <div class="text-gray-600 space-y-3">
+                  <div>
+                    <strong>Digital IDP:</strong> Delivered within 2 hours via email (typically faster)
+                  </div>
+                  <div>
+                    <strong>Physical IDP:</strong> 3-7 business days for standard shipping, 1-3 days for express shipping
+                  </div>
+                  <p>
+                    We recommend applying at least 2 weeks before your travel date to ensure you receive your physical IDP in time.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Validity & Usage -->
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="validity">
+              <button onclick="toggleFAQ(7)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">How long is my IDP valid?</h3>
+                <svg id="faq-icon-7" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-7" class="hidden px-6 pb-4">
+                <p class="text-gray-600 mb-3">
+                  IDP validity depends on the type:
+                </p>
+                <ul class="text-gray-600 space-y-1 ml-4">
+                  <li>• <strong>1949 Geneva Convention IDP:</strong> Valid for 1 year from issue date</li>
+                  <li>• <strong>1968 Vienna Convention IDP:</strong> Valid for up to 3 years (depending on your license validity)</li>
+                </ul>
+                <p class="text-gray-600 mt-3">
+                  <strong>Important:</strong> Your IDP cannot be valid longer than your domestic driver's license. If your license expires, your IDP becomes invalid too.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="validity">
+              <button onclick="toggleFAQ(8)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">Can I use my IDP without my original license?</h3>
+                <svg id="faq-icon-8" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-8" class="hidden px-6 pb-4">
+                <p class="text-gray-600">
+                  <strong>No, absolutely not.</strong> An IDP is only a translation of your domestic driver's license and must always be carried together with your original license. The IDP is not valid on its own and cannot replace your domestic license. Always carry both documents when driving abroad.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="validity">
+              <button onclick="toggleFAQ(9)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">Can I use my IDP in my home country?</h3>
+                <svg id="faq-icon-9" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-9" class="hidden px-6 pb-4">
+                <p class="text-gray-600">
+                  No, an IDP is only valid for driving in foreign countries, not in the country where your original license was issued. You should use your domestic driver's license when driving in your home country.
+                </p>
+              </div>
+            </div>
+
+            <!-- Pricing & Payment -->
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="pricing">
+              <button onclick="toggleFAQ(10)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">How much does an IDP cost?</h3>
+                <svg id="faq-icon-10" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-10" class="hidden px-6 pb-4">
+                <div class="text-gray-600 space-y-3">
+                  <div>
+                    <strong>Digital Only:</strong> $59 - Perfect for short trips or last-minute plans
+                  </div>
+                  <div>
+                    <strong>Physical + Digital:</strong> $79 - Best value with complete package including physical booklet and ID card
+                  </div>
+                  <p>
+                    All prices are transparent with no hidden fees. Shipping costs are calculated at checkout for physical orders.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="pricing">
+              <button onclick="toggleFAQ(11)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">What payment methods do you accept?</h3>
+                <svg id="faq-icon-11" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-11" class="hidden px-6 pb-4">
+                <p class="text-gray-600 mb-3">
+                  We accept all major payment methods:
+                </p>
+                <ul class="text-gray-600 space-y-1 ml-4">
+                  <li>• Credit cards (Visa, Mastercard, American Express)</li>
+                  <li>• Debit cards</li>
+                  <li>• PayPal</li>
+                  <li>• Apple Pay</li>
+                  <li>• Google Pay</li>
+                </ul>
+                <p class="text-gray-600 mt-3">
+                  All payments are processed securely with bank-level encryption.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="pricing">
+              <button onclick="toggleFAQ(12)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">Do you offer refunds?</h3>
+                <svg id="faq-icon-12" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-12" class="hidden px-6 pb-4">
+                <p class="text-gray-600 mb-3">
+                  Yes! We offer a 100% money-back guarantee:
+                </p>
+                <ul class="text-gray-600 space-y-1 ml-4">
+                  <li>• Full refund if your IDP is not accepted where it should be valid</li>
+                  <li>• Refund available if we cannot process your application</li>
+                  <li>• 30-day refund window for unused IDPs</li>
+                </ul>
+                <p class="text-gray-600 mt-3">
+                  Contact our support team for refund requests. We stand behind our service quality.
+                </p>
+              </div>
+            </div>
+
+            <!-- Support -->
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="support">
+              <button onclick="toggleFAQ(13)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">How can I track my application status?</h3>
+                <svg id="faq-icon-13" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-13" class="hidden px-6 pb-4">
+                <p class="text-gray-600 mb-3">
+                  We keep you updated throughout the process:
+                </p>
+                <ul class="text-gray-600 space-y-1 ml-4">
+                  <li>• Email confirmation when application is received</li>
+                  <li>• Processing notification when review begins</li>
+                  <li>• Delivery notification with your digital IDP</li>
+                  <li>• Shipping tracking for physical orders</li>
+                </ul>
+                <p class="text-gray-600 mt-3">
+                  You can also contact our support team anytime for status updates.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="support">
+              <button onclick="toggleFAQ(14)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">What if I need help while traveling?</h3>
+                <svg id="faq-icon-14" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-14" class="hidden px-6 pb-4">
+                <p class="text-gray-600 mb-3">
+                  We provide 24/7 support for travelers:
+                </p>
+                <ul class="text-gray-600 space-y-1 ml-4">
+                  <li>• Emergency phone line: +1 (000) 000-0000</li>
+                  <li>• Emergency email: urgent@internationaldrivingadvisor.com</li>
+                  <li>• Live chat support on our website</li>
+                  <li>• Free replacement if your IDP is lost or damaged</li>
+                </ul>
+                <p class="text-gray-600 mt-3">
+                  We're here to help resolve any issues quickly so you can continue your travels.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item bg-white rounded-xl border border-gray-200 shadow-sm" data-category="support">
+              <button onclick="toggleFAQ(15)" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 rounded-xl transition-colors">
+                <h3 class="text-lg font-semibold">Can I get a replacement if my IDP is lost or stolen?</h3>
+                <svg id="faq-icon-15" class="w-5 h-5 text-gray-500 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="faq-content-15" class="hidden px-6 pb-4">
+                <p class="text-gray-600 mb-3">
+                  Yes, we provide free replacements:
+                </p>
+                <ul class="text-gray-600 space-y-1 ml-4">
+                  <li>• Digital replacement: Immediate via email</li>
+                  <li>• Physical replacement: Express shipped to your location</li>
+                  <li>• No additional fees for replacements</li>
+                  <li>• Available 24/7 for emergency situations</li>
+                </ul>
+                <p class="text-gray-600 mt-3">
+                  Contact our support team immediately if your IDP is lost or stolen while traveling.
+                </p>
+              </div>
+            </div>
 
           </div>
-        </div>
+        </section>
+
+        <!-- Still Have Questions Section -->
+        <section class="bg-[oklab(0.97588_-0.000229359_-0.00283861_/_0.2)] py-16">
+          <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-semibold mb-4">Still Have Questions?</h2>
+            <p class="text-slate-600 text-lg mb-8">
+              Can't find the answer you're looking for? Our support team is here to help.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <div class="w-12 h-12 bg-green-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                  <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  </svg>
+                </div>
+                <h3 class="font-semibold mb-2">Email Support</h3>
+                <p class="text-sm text-gray-600 mb-3">Response within 2-4 hours</p>
+                <a href="mailto:hello@internationaldrivingadvisor.com" class="text-green-500 hover:text-green-600 font-medium">
+                  Send Email
+                </a>
+              </div>
+              
+              <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <div class="w-12 h-12 bg-green-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                  <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                  </svg>
+                </div>
+                <h3 class="font-semibold mb-2">Live Chat</h3>
+                <p class="text-sm text-gray-600 mb-3">Available 24/7</p>
+                <button class="text-green-500 hover:text-green-600 font-medium">
+                  Start Chat
+                </button>
+              </div>
+              
+              <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <div class="w-12 h-12 bg-green-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                  <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                  </svg>
+                </div>
+                <h3 class="font-semibold mb-2">Phone Support</h3>
+                <p class="text-sm text-gray-600 mb-3">Mon-Fri: 9AM-6PM EST</p>
+                <a href="tel:+10000000000" class="text-green-500 hover:text-green-600 font-medium">
+                  Call Now
+                </a>
+              </div>
+            </div>
+            
+            <a href="contact.html" class="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors">
+              Contact Support Team
+            </a>
+          </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="max-w-6xl mx-auto px-6 py-16 text-center">
+          <h2 class="text-3xl font-semibold mb-4">Ready to Get Your International Driving Permit?</h2>
+          <p class="text-slate-600 text-lg mb-8 max-w-2xl mx-auto">
+            Start your application now and get your IDP in as little as 2 hours.
+          </p>
+          <a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=faq_cta" class="text-zinc-50 text-lg items-center bg-green-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.1)_0px_4px_6px_-4px] box-border caret-transparent inline-flex justify-center leading-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] px-8 py-4 rounded-[14px]">
+            Start Your Application
+          </a>
+        </section>
+
       </main>
 
       <!-- Footer -->
       <footer class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border-gray-200 border-t border-solid">
-        <div class="box-border caret-transparent gap-x-8 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-8 mx-auto px-6 py-10 md:grid-cols-[repeat(3,minmax(0px,1fr))]">
+        <div class="box-border caret-transparent gap-x-8 grid grid-cols-1 max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-8 mx-auto px-6 py-10 md:grid-cols-4">
+          <!-- Company Info -->
           <div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-            <div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2">
-              <svg class="text-green-500 box-border caret-transparent h-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5" fill="currentColor" viewBox="0 0 24 24">
+            <div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mb-4">
+              <svg class="text-green-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
               </svg>
-              <a href="index.html" class="font-semibold box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">International Driving Advisor</a>
+              <span class="font-semibold text-lg box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">International Driving Advisor</span>
             </div>
-            <p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Your trusted partner for international driving translations.</p>
+            <p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Your trusted partner for international driving translations.</p>
           </div>
+
+          <!-- Support -->
           <div class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-            <p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Support</p>
-            <a href="mailto:hello@internationaldrivingadvisor.com" class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-2">
-              <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-17.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-              hello@internationaldrivingadvisor.com
-            </a>
-            <a href="tel:+10000000000" class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-2">
-              <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-18.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-              +1 (000) 000-0000
-            </a>
+            <p class="font-semibold text-lg box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mb-4">Support</p>
+            <div class="space-y-3">
+              <a href="mailto:hello@internationaldrivingadvisor.com" class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-slate-600 hover:text-green-500 transition-colors">
+                <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-17.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+                hello@internationaldrivingadvisor.com
+              </a>
+              <a href="tel:+10000000000" class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-slate-600 hover:text-green-500 transition-colors">
+                <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-18.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+                +1 (000) 000-0000
+              </a>
+            </div>
           </div>
+
+          <!-- Company -->
           <div class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-            <p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Legal</p>
-            <p class="text-slate-600 box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">The IDP is a translation of your license and must be used with your valid driver's license.</p>
-            <div class="mt-2 space-y-1">
-              <a href="privacy.html" class="text-green-500 hover:text-green-600 block">Privacy Policy</a>
-              <a href="cookies.html" class="text-green-500 hover:text-green-600 block">Cookie Policy</a>
-              <a href="terms.html" class="text-green-500 hover:text-green-600 block">Terms & Conditions</a>
-              <a href="legal.html" class="text-green-500 hover:text-green-600 block">Legal Disclaimer</a>
-              <a href="refund.html" class="text-green-500 hover:text-green-600 block">Refund Policy</a>
-              <a href="shipping.html" class="text-green-500 hover:text-green-600 block">Shipping & Delivery</a>
-              <a href="about.html" class="text-green-500 hover:text-green-600 block">About Us</a>
-              <a href="faq.html" class="text-green-500 hover:text-green-600 block">FAQ</a>
+            <p class="font-semibold text-lg box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mb-4">Company</p>
+            <div class="space-y-2">
+              <a href="about.html" class="text-slate-600 hover:text-green-500 block transition-colors">About Us</a>
+              <a href="contact.html" class="text-slate-600 hover:text-green-500 block transition-colors">Contact</a>
+              <a href="faq.html" class="text-green-500 hover:text-green-600 block transition-colors font-medium">FAQ</a>
+            </div>
+          </div>
+
+          <!-- Legal -->
+          <div class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
+            <p class="font-semibold text-lg box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mb-4">Legal</p>
+            <div class="space-y-2">
+              <a href="privacy.html" class="text-slate-600 hover:text-green-500 block transition-colors">Privacy Policy</a>
+              <a href="cookies.html" class="text-slate-600 hover:text-green-500 block transition-colors">Cookie Policy</a>
+              <a href="terms.html" class="text-slate-600 hover:text-green-500 block transition-colors">Terms & Conditions</a>
+              <a href="legal.html" class="text-slate-600 hover:text-green-500 block transition-colors">Legal Disclaimer</a>
+              <a href="refund.html" class="text-slate-600 hover:text-green-500 block transition-colors">Refund Policy</a>
+              <a href="shipping.html" class="text-slate-600 hover:text-green-500 block transition-colors">Shipping & Delivery</a>
             </div>
           </div>
         </div>
-        <div class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center border-gray-200 px-6 py-4 border-t border-solid">© 2025 International Driving Advisor. All rights reserved.</div>
+
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-200 mt-8">
+          <div class="max-w-6xl mx-auto px-6 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p class="text-slate-600 text-xs">© 2025 International Driving Advisor. All rights reserved.</p>
+              <p class="text-slate-600 text-xs">The IDP is a translation of your license and must be used with your valid driver's license.</p>
+            </div>
+          </div>
+        </div>
       </footer>
+
     </div>
   </div>
+
+  <script>
+    function searchFAQs(query) {
+      const faqItems = document.querySelectorAll('.faq-item');
+      const searchTerm = query.toLowerCase();
+      
+      faqItems.forEach(item => {
+        const title = item.querySelector('h3').textContent.toLowerCase();
+        const content = item.querySelector('[id^="faq-content-"]').textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || content.includes(searchTerm) || searchTerm === '') {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>

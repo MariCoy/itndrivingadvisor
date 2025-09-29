@@ -4,36 +4,137 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - International Driving Advisor</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-  content: [],
-  theme: {
-    extend: {
-      fontFamily: {
-        inter_var: [
-          'Inter var',
-          'Inter',
-          'ui-sans-serif',
-          'system-ui',
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'Segoe UI',
-          'Roboto',
-          'Helvetica Neue',
-          'Arial',
-          'Noto Sans',
-          'sans-serif',
-          'Apple Color Emoji',
-          'Segoe UI Emoji',
-          'Segoe UI Symbol',
-          'Noto Color Emoji'
-        ]
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      content: [],
+      theme: {
+        extend: {
+          fontFamily: {
+            inter_var: [
+              'Inter var',
+              'Inter',
+              'ui-sans-serif',
+              'system-ui',
+              '-apple-system',
+              'BlinkMacSystemFont',
+              'Segoe UI',
+              'Roboto',
+              'Helvetica Neue',
+              'Arial',
+              'Noto Sans',
+              'sans-serif',
+              'Apple Color Emoji',
+              'Segoe UI Emoji',
+              'Segoe UI Symbol',
+              'Noto Color Emoji'
+            ]
+          }
+        }
       }
+    };
+  </script>
+  <script>
+    function validateContactForm() {
+      let isValid = true;
+      
+      // Get form field values
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+      
+      // Reset error states
+      document.getElementById('nameError').classList.add('hidden');
+      document.getElementById('emailError').classList.add('hidden');
+      document.getElementById('subjectError').classList.add('hidden');
+      document.getElementById('messageError').classList.add('hidden');
+      
+      // Reset field styles
+      document.getElementById('name').classList.remove('border-red-500');
+      document.getElementById('email').classList.remove('border-red-500');
+      document.getElementById('subject').classList.remove('border-red-500');
+      document.getElementById('message').classList.remove('border-red-500');
+      
+      // Validate name
+      if (!name || name.length < 2) {
+        document.getElementById('nameError').classList.remove('hidden');
+        document.getElementById('name').classList.add('border-red-500');
+        isValid = false;
+      }
+      
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        document.getElementById('emailError').classList.remove('hidden');
+        document.getElementById('email').classList.add('border-red-500');
+        isValid = false;
+      }
+      
+      // Validate subject
+      if (!subject || subject.length < 5) {
+        document.getElementById('subjectError').classList.remove('hidden');
+        document.getElementById('subject').classList.add('border-red-500');
+        isValid = false;
+      }
+      
+      // Validate message
+      if (!message || message.length < 10) {
+        document.getElementById('messageError').classList.remove('hidden');
+        document.getElementById('message').classList.add('border-red-500');
+        isValid = false;
+      }
+      
+      return isValid;
     }
-  }
-};
-</script>
+
+    function submitContactForm() {
+      if (!validateContactForm()) {
+        const firstError = document.querySelector('.border-red-500');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstError.focus();
+        }
+        return;
+      }
+      
+      // Show success message
+      document.getElementById('contactForm').classList.add('hidden');
+      document.getElementById('successMessage').classList.remove('hidden');
+    }
+
+    // Add real-time validation
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('name').addEventListener('input', function() {
+        if (this.value.trim().length >= 2) {
+          this.classList.remove('border-red-500');
+          document.getElementById('nameError').classList.add('hidden');
+        }
+      });
+      
+      document.getElementById('email').addEventListener('input', function() {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailRegex.test(this.value.trim())) {
+          this.classList.remove('border-red-500');
+          document.getElementById('emailError').classList.add('hidden');
+        }
+      });
+      
+      document.getElementById('subject').addEventListener('input', function() {
+        if (this.value.trim().length >= 5) {
+          this.classList.remove('border-red-500');
+          document.getElementById('subjectError').classList.add('hidden');
+        }
+      });
+      
+      document.getElementById('message').addEventListener('input', function() {
+        if (this.value.trim().length >= 10) {
+          this.classList.remove('border-red-500');
+          document.getElementById('messageError').classList.add('hidden');
+        }
+      });
+    });
+  </script>
 </head>
 <body class="text-zinc-900 text-base not-italic normal-nums font-normal accent-auto bg-white box-border caret-transparent flex h-full tracking-[normal] leading-6 list-outside list-disc min-h-[1000px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none text-start indent-[0px] normal-case visible w-full overflow-auto border-separate font-inter_var">
   <div class="box-border caret-transparent h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none w-full">
@@ -49,10 +150,10 @@
             <a href="index.html" class="font-semibold box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">International Driving Advisor</a>
           </div>
           <nav class="text-sm items-center box-border caret-transparent gap-x-6 hidden leading-5 min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 md:flex md:min-h-[auto] md:min-w-[auto]">
-            <a href="index.html#features" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Features</a>
-            <a href="index.html#how" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">How it works</a>
+            <a href="index.html#works" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">How it works</a>
+            <a href="index.html#pricing" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Pricing</a>
             <a href="faq.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">FAQ</a>
-            <a href="contact.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Contact</a>
+            <a href="about.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">About Us</a>
           </nav>
           <a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=header_button" class="text-zinc-50 text-sm items-center bg-green-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] box-border caret-transparent gap-x-2 flex leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 px-4 py-2 rounded-[14px]">
             Get Your IDP
@@ -63,228 +164,325 @@
 
       <!-- Main Content -->
       <main class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-        <div class="max-w-4xl mx-auto px-6 py-12">
-          
-          <!-- Page Header -->
-          <div class="text-center mb-12">
-            <h1 class="text-4xl font-semibold box-border caret-transparent leading-[45px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-5xl md:leading-[60px] mb-4">Contact Us</h1>
-            <p class="text-slate-600 text-lg">We're here to help with any questions you may have</p>
+        
+        <!-- Hero Section -->
+        <section class="relative box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overflow-hidden" style="background-color: #eaf4f0;">
+          <div class="absolute bg-[url('https://storage.googleapis.com/storage.magicpath.ai/user/321092292427538432/assets/world-dots-hero.png')] bg-no-repeat bg-cover box-border caret-transparent opacity-25 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] -z-10 bg-center inset-0 md:opacity-30"></div>
+          <div class="absolute bg-[linear-gradient(rgba(234,244,240,1)_0%,rgba(234,244,240,0.7)_50%,rgba(234,244,240,1)_100%)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] -z-10 inset-0"></div>
+          <div class="max-w-6xl mx-auto px-6 py-16 text-center">
+            <h1 class="text-4xl font-semibold box-border caret-transparent leading-[45px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-5xl md:leading-[60px] mb-6">
+              Contact Us
+            </h1>
+            <p class="text-slate-600 text-lg max-w-3xl mx-auto">
+              Have questions about your International Driving Permit? Our support team is here to help you every step of the way.
+            </p>
           </div>
+        </section>
 
-          <!-- Intro Text -->
-          <div class="text-center mb-12">
-            <div class="bg-green-50 border border-green-200 rounded-lg p-6">
-              <p class="text-slate-600 leading-relaxed">At <strong>International Driving Advisor</strong>, we believe in being transparent and easy to reach. If you have questions about our services, your order, or our policies, please contact us using the details below:</p>
-            </div>
-          </div>
-
-          <!-- Content Sections -->
-          <div class="prose prose-lg max-w-none">
+        <!-- Contact Methods Section -->
+        <section class="max-w-6xl mx-auto px-6 py-16">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             
             <!-- Email Support -->
-            <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900 flex items-center">
-                <span class="text-2xl mr-3">📧</span>
-                Email Support
-              </h2>
-              <div class="grid gap-4 md:grid-cols-3">
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <h3 class="font-semibold text-blue-800 mb-2">General Inquiries</h3>
-                  <a href="mailto:hello@internationaldrivingadvisor.com" class="text-blue-600 hover:text-blue-700 font-medium">hello@internationaldrivingadvisor.com</a>
-                </div>
-                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <h3 class="font-semibold text-green-800 mb-2">Refunds & Billing</h3>
-                  <a href="mailto:billing@internationaldrivingadvisor.com" class="text-green-600 hover:text-green-700 font-medium">billing@internationaldrivingadvisor.com</a>
-                </div>
-                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
-                  <h3 class="font-semibold text-purple-800 mb-2">Customer Support</h3>
-                  <a href="mailto:support@internationaldrivingadvisor.com" class="text-purple-600 hover:text-purple-700 font-medium">support@internationaldrivingadvisor.com</a>
-                </div>
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center">
+              <div class="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
               </div>
-            </section>
+              <h3 class="text-xl font-semibold mb-3">Email Support</h3>
+              <p class="text-slate-600 mb-4">Get detailed help via email. We typically respond within 2-4 hours.</p>
+              <a href="mailto:hello@internationaldrivingadvisor.com" class="text-green-500 hover:text-green-600 font-medium">
+                hello@internationaldrivingadvisor.com
+              </a>
+            </div>
 
-            <!-- Mailing Address -->
-            <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900 flex items-center">
-                <span class="text-2xl mr-3">📍</span>
-                Mailing Address
-              </h2>
-              <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                <div class="text-slate-600 space-y-1">
-                  <p><strong>International Driving Advisor Ltd.</strong></p>
-                  <p>[Your Registered Company Name, if different]</p>
-                  <p>[Street Address, Suite/Unit Number]</p>
-                  <p>[City, State/Province, ZIP/Postal Code]</p>
-                  <p>[Country]</p>
-                </div>
-                <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                  <p class="text-amber-700 text-sm"><strong>Note:</strong> This address is for correspondence only. Please use email for faster response times.</p>
-                </div>
+            <!-- Phone Support -->
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center">
+              <div class="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
               </div>
-            </section>
+              <h3 class="text-xl font-semibold mb-3">Phone Support</h3>
+              <p class="text-slate-600 mb-4">Speak directly with our support team during business hours.</p>
+              <a href="tel:+10000000000" class="text-green-500 hover:text-green-600 font-medium">
+                +1 (000) 000-0000
+              </a>
+              <p class="text-xs text-slate-500 mt-2">Mon-Fri: 9AM-6PM EST</p>
+            </div>
 
-            <!-- Support Hours -->
-            <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900 flex items-center">
-                <span class="text-2xl mr-3">🕑</span>
-                Support Hours
-              </h2>
-              <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                <div class="flex items-start">
-                  <div class="flex-shrink-0">
-                    <svg class="h-6 w-6 text-blue-500 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
-                  <div class="ml-3">
-                    <p class="text-slate-600">We aim to respond to all inquiries within <strong>24–48 hours (business days)</strong>.</p>
-                    <p class="text-slate-600 text-sm mt-2">For urgent matters, please clearly mark your email as "URGENT" in the subject line.</p>
-                  </div>
-                </div>
+            <!-- Live Chat -->
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 text-center">
+              <div class="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                </svg>
               </div>
-            </section>
-
-            <!-- Contact Form Alternative -->
-            <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Need Help Right Away?</h2>
-              <div class="grid gap-6 md:grid-cols-2">
-                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
-                  <h3 class="font-semibold text-green-800 mb-3 flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-                    </svg>
-                    Order Status
-                  </h3>
-                  <p class="text-slate-600 text-sm mb-3">Check your order status or request updates</p>
-                  <a href="mailto:support@internationaldrivingadvisor.com?subject=Order Status Inquiry" class="text-green-600 hover:text-green-700 font-medium text-sm">Email Order Support →</a>
-                </div>
-                <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
-                  <h3 class="font-semibold text-orange-800 mb-3 flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    </svg>
-                    Technical Issues
-                  </h3>
-                  <p class="text-slate-600 text-sm mb-3">Having trouble with our website or application?</p>
-                  <a href="mailto:hello@internationaldrivingadvisor.com?subject=Technical Support" class="text-orange-600 hover:text-orange-700 font-medium text-sm">Get Technical Help →</a>
-                </div>
-              </div>
-            </section>
-
-            <!-- Quick Links -->
-            <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Quick Links</h2>
-              <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                  <a href="privacy.html" class="flex items-center p-3 bg-white border border-gray-200 rounded-lg hover:border-green-300 hover:bg-green-50 transition-colors">
-                    <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="text-sm font-medium">Privacy Policy</span>
-                  </a>
-                  <a href="refund.html" class="flex items-center p-3 bg-white border border-gray-200 rounded-lg hover:border-green-300 hover:bg-green-50 transition-colors">
-                    <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="text-sm font-medium">Refund Policy</span>
-                  </a>
-                  <a href="shipping.html" class="flex items-center p-3 bg-white border border-gray-200 rounded-lg hover:border-green-300 hover:bg-green-50 transition-colors">
-                    <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                      <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1V8a1 1 0 00-1-1h-3z" />
-                    </svg>
-                    <span class="text-sm font-medium">Shipping & Delivery</span>
-                  </a>
-                  <a href="legal.html" class="flex items-center p-3 bg-white border border-gray-200 rounded-lg hover:border-green-300 hover:bg-green-50 transition-colors">
-                    <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="text-sm font-medium">Legal Disclaimer</span>
-                  </a>
-                </div>
-              </div>
-            </section>
-
-            <!-- FAQ Section -->
-            <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Frequently Asked Questions</h2>
-              <div class="space-y-4">
-                <div class="bg-white border border-gray-200 rounded-lg p-4">
-                  <h4 class="font-semibold text-zinc-900 mb-2">How quickly will I receive my IDP?</h4>
-                  <p class="text-slate-600 text-sm">Digital copies are delivered within 1-2 business days. Printed copies take 7-25 business days depending on your location.</p>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-4">
-                  <h4 class="font-semibold text-zinc-900 mb-2">Can I track my order?</h4>
-                  <p class="text-slate-600 text-sm">Yes! For printed orders, you'll receive a tracking number via email once your package ships.</p>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-4">
-                  <h4 class="font-semibold text-zinc-900 mb-2">What if my IDP is not accepted?</h4>
-                  <p class="text-slate-600 text-sm">We offer a 100% money-back guarantee if our service fails to deliver as promised due to our error.</p>
-                </div>
-              </div>
-            </section>
-
-            <!-- Response Time Notice -->
-            <section class="mb-12">
-              <div class="bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200 rounded-lg p-6">
-                <div class="flex items-start">
-                  <div class="flex-shrink-0">
-                    <svg class="h-8 w-8 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
-                  <div class="ml-4">
-                    <h3 class="text-xl font-semibold text-blue-800 mb-2">We're Here to Help</h3>
-                    <p class="text-blue-700">Our support team is committed to providing excellent customer service. We typically respond within 24-48 hours during business days.</p>
-                  </div>
-                </div>
-              </div>
-            </section>
+              <h3 class="text-xl font-semibold mb-3">Live Chat</h3>
+              <p class="text-slate-600 mb-4">Get instant help through our live chat widget on the website.</p>
+              <button class="text-green-500 hover:text-green-600 font-medium">
+                Start Live Chat
+              </button>
+              <p class="text-xs text-slate-500 mt-2">Available 24/7</p>
+            </div>
 
           </div>
-        </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="bg-[oklab(0.97588_-0.000229359_-0.00283861_/_0.2)] py-16">
+          <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-12">
+              <h2 class="text-3xl font-semibold mb-4">Send Us a Message</h2>
+              <p class="text-slate-600 text-lg">
+                Fill out the form below and we'll get back to you as soon as possible.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+              
+              <!-- Contact Form -->
+              <form id="contactForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                      type="text" 
+                      id="name" 
+                      name="name" 
+                      required
+                      class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors"
+                      placeholder="Your full name"
+                    />
+                    <span id="nameError" class="text-red-500 text-sm hidden">Please enter your full name</span>
+                  </div>
+                  
+                  <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      name="email" 
+                      required
+                      class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors"
+                      placeholder="your.email@example.com"
+                    />
+                    <span id="emailError" class="text-red-500 text-sm hidden">Please enter a valid email address</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
+                    Subject <span class="text-red-500">*</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="subject" 
+                    name="subject" 
+                    required
+                    class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors"
+                    placeholder="What can we help you with?"
+                  />
+                  <span id="subjectError" class="text-red-500 text-sm hidden">Please enter a subject</span>
+                </div>
+
+                <div>
+                  <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+                    Message <span class="text-red-500">*</span>
+                  </label>
+                  <textarea 
+                    id="message" 
+                    name="message" 
+                    rows="6" 
+                    required
+                    class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors resize-vertical"
+                    placeholder="Please provide details about your inquiry..."
+                  ></textarea>
+                  <span id="messageError" class="text-red-500 text-sm hidden">Please enter your message (minimum 10 characters)</span>
+                </div>
+
+                <div class="flex items-center">
+                  <input 
+                    type="checkbox" 
+                    id="newsletter" 
+                    name="newsletter"
+                    class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 focus:ring-2"
+                  />
+                  <label for="newsletter" class="ml-2 text-sm text-gray-600">
+                    I'd like to receive updates about International Driving Advisor services and travel tips
+                  </label>
+                </div>
+
+                <button 
+                  type="button" 
+                  onclick="submitContactForm()"
+                  class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors shadow-lg"
+                >
+                  Send Message
+                </button>
+              </form>
+
+              <!-- Success Message -->
+              <div id="successMessage" class="hidden text-center py-8">
+                <div class="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-900 mb-2">Message Sent Successfully!</h3>
+                <p class="text-gray-600 mb-6">
+                  Thank you for contacting us. We'll get back to you within 2-4 hours during business hours.
+                </p>
+                <button 
+                  onclick="document.getElementById('contactForm').classList.remove('hidden'); document.getElementById('successMessage').classList.add('hidden');"
+                  class="text-green-500 hover:text-green-600 font-medium"
+                >
+                  Send Another Message
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ Quick Links -->
+        <section class="max-w-6xl mx-auto px-6 py-16">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-semibold mb-4">Common Questions</h2>
+            <p class="text-slate-600 text-lg">
+              Looking for quick answers? Check out these frequently asked questions.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+              <h3 class="font-semibold mb-3">How long does processing take?</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Digital IDPs are typically delivered within 2 hours. Physical IDPs take 3-7 business days for shipping.
+              </p>
+              <a href="faq.html" class="text-green-500 hover:text-green-600 text-sm font-medium">
+                View Full FAQ →
+              </a>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+              <h3 class="font-semibold mb-3">What if my IDP is rejected?</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                We offer a 100% money-back guarantee if your IDP is not accepted anywhere it should be valid.
+              </p>
+              <a href="faq.html" class="text-green-500 hover:text-green-600 text-sm font-medium">
+                Learn More →
+              </a>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+              <h3 class="font-semibold mb-3">Can I track my application?</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Yes! You'll receive email updates at each stage, and can contact us anytime for status updates.
+              </p>
+              <a href="faq.html" class="text-green-500 hover:text-green-600 text-sm font-medium">
+                More Details →
+              </a>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Emergency Contact -->
+        <section class="bg-red-50 border-l-4 border-red-400 p-6 max-w-6xl mx-auto mb-16">
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <svg class="w-6 h-6 text-red-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+              </svg>
+            </div>
+            <div class="ml-3">
+              <h3 class="text-lg font-medium text-red-800">
+                Urgent Travel Assistance
+              </h3>
+              <div class="mt-2 text-sm text-red-700">
+                <p>
+                  If you're traveling and need immediate assistance with your IDP, please call our emergency line at 
+                  <a href="tel:+10000000000" class="font-semibold underline">+1 (000) 000-0000</a> 
+                  or email <a href="mailto:urgent@internationaldrivingadvisor.com" class="font-semibold underline">urgent@internationaldrivingadvisor.com</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </main>
 
       <!-- Footer -->
       <footer class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border-gray-200 border-t border-solid">
-        <div class="box-border caret-transparent gap-x-8 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-8 mx-auto px-6 py-10 md:grid-cols-[repeat(3,minmax(0px,1fr))]">
+        <div class="box-border caret-transparent gap-x-8 grid grid-cols-1 max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-8 mx-auto px-6 py-10 md:grid-cols-4">
+          <!-- Company Info -->
           <div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-            <div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2">
-              <svg class="text-green-500 box-border caret-transparent h-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-1.5-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+            <div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mb-4">
+              <svg class="text-green-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
               </svg>
-              <a href="index.html" class="font-semibold box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">International Driving Advisor</a>
+              <span class="font-semibold text-lg box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">International Driving Advisor</span>
             </div>
-            <p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Your trusted partner for international driving translations.</p>
+            <p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Your trusted partner for international driving translations.</p>
           </div>
+
+          <!-- Support -->
           <div class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-            <p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Support</p>
-            <a href="mailto:hello@internationaldrivingadvisor.com" class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-2">
-              <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-17.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-              hello@internationaldrivingadvisor.com
-            </a>
-            <a href="tel:+10000000000" class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-2">
-              <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-18.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-              +1 (000) 000-0000
-            </a>
+            <p class="font-semibold text-lg box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mb-4">Support</p>
+            <div class="space-y-3">
+              <a href="mailto:hello@internationaldrivingadvisor.com" class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-slate-600 hover:text-green-500 transition-colors">
+                <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-17.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+                hello@internationaldrivingadvisor.com
+              </a>
+              <a href="tel:+10000000000" class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-slate-600 hover:text-green-500 transition-colors">
+                <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-18.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+                +1 (000) 000-0000
+              </a>
+            </div>
           </div>
+
+          <!-- Company -->
           <div class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-            <p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Legal</p>
-            <p class="text-slate-600 box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">The IDP is a translation of your license and must be used with your valid driver's license.</p>
-            <div class="mt-2 space-y-1">
-              <a href="privacy.html" class="text-green-500 hover:text-green-600 block">Privacy Policy</a>
-              <a href="cookies.html" class="text-green-500 hover:text-green-600 block">Cookie Policy</a>
-              <a href="terms.html" class="text-green-500 hover:text-green-600 block">Terms & Conditions</a>
-              <a href="legal.html" class="text-green-500 hover:text-green-600 block">Legal Disclaimer</a>
-              <a href="refund.html" class="text-green-500 hover:text-green-600 block">Refund Policy</a>
-              <a href="shipping.html" class="text-green-500 hover:text-green-600 block">Shipping & Delivery</a>
-              <a href="about.html" class="text-green-500 hover:text-green-600 block">About Us</a>
-              <a href="faq.html" class="text-green-500 hover:text-green-600 block">FAQ</a>
+            <p class="font-semibold text-lg box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mb-4">Company</p>
+            <div class="space-y-2">
+              <a href="about.html" class="text-slate-600 hover:text-green-500 block transition-colors">About Us</a>
+              <a href="contact.html" class="text-green-500 hover:text-green-600 block transition-colors font-medium">Contact</a>
+              <a href="faq.html" class="text-slate-600 hover:text-green-500 block transition-colors">FAQ</a>
+            </div>
+          </div>
+
+          <!-- Legal -->
+          <div class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
+            <p class="font-semibold text-lg box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mb-4">Legal</p>
+            <div class="space-y-2">
+              <a href="privacy.html" class="text-slate-600 hover:text-green-500 block transition-colors">Privacy Policy</a>
+              <a href="cookies.html" class="text-slate-600 hover:text-green-500 block transition-colors">Cookie Policy</a>
+              <a href="terms.html" class="text-slate-600 hover:text-green-500 block transition-colors">Terms & Conditions</a>
+              <a href="legal.html" class="text-slate-600 hover:text-green-500 block transition-colors">Legal Disclaimer</a>
+              <a href="refund.html" class="text-slate-600 hover:text-green-500 block transition-colors">Refund Policy</a>
+              <a href="shipping.html" class="text-slate-600 hover:text-green-500 block transition-colors">Shipping & Delivery</a>
             </div>
           </div>
         </div>
-        <div class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center border-gray-200 px-6 py-4 border-t border-solid">© 2025 International Driving Advisor. All rights reserved.</div>
+
+        <!-- Footer Bottom -->
+        <div class="border-t border-gray-200 mt-8">
+          <div class="max-w-6xl mx-auto px-6 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p class="text-slate-600 text-xs">© 2025 International Driving Advisor. All rights reserved.</p>
+              <p class="text-slate-600 text-xs">The IDP is a translation of your license and must be used with your valid driver's license.</p>
+            </div>
+          </div>
+        </div>
       </footer>
+
     </div>
   </div>
 </body>
