@@ -11,3 +11,13 @@
   font-display: swap; /* Improves loading performance */
 }
 
+/* Force primary-300 focus colors for form inputs */
+#firstName:focus,
+#lastName:focus,
+#email:focus,
+#countryTravel:focus {
+  border-color: #7D80C7 !important;
+  box-shadow: 0 0 0 1px #7D80C7 !important;
+  outline: none !important;
+}
+
