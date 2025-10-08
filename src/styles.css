@@ -2,4 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Font fallback for better cross-browser compatibility */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+/* Ensure font loading with fallbacks */
+.font-heading {
+  font-family: 'Instrument Serif', ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+  font-display: swap; /* Improves loading performance */
+}
 

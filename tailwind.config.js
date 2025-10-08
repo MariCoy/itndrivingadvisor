@@ -29,7 +29,9 @@ module.exports = {
         ],
         heading: [
           'Instrument Serif',
+          'ui-serif',
           'Georgia',
+          'Cambria',
           'Times New Roman',
           'serif',
         ],
