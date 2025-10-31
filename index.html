@@ -601,7 +601,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <h3 class="font-heading text-[24px] md:text-[32px] font-semibold box-border caret-transparent leading-[32px] md:leading-[40px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">PRINT <span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">+ FREE</span>
  DIGITAL</h3>
 <p class="text-[oklab(0.985059_0.0000448823_0.0000197291_/_0.9)] text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Best for Long‑Term Travelers &amp; Frequent Flyers</p>
-<p class="text-3xl font-bold box-border caret-transparent tracking-[-0.75px] leading-9 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4">$79</p>
+<p id="print-digital-price" class="text-3xl font-bold box-border caret-transparent tracking-[-0.75px] leading-9 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4 transition-all duration-300">$79</p>
 <p class="text-[oklab(0.985059_0.0000448823_0.0000197291_/_0.8)] text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Shipping calculated at checkout</p>
 <a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=print_digital_button" class="text-gray-900 text-sm font-semibold items-center bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] caret-transparent inline-flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-5 px-4 py-3 rounded-[2px]">Start application</a>
 </div>
@@ -631,7 +631,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="flex-1">
 <h3 class="font-heading text-[24px] md:text-[32px] font-semibold box-border caret-transparent leading-[32px] md:leading-[40px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">DIGITAL ONLY</h3>
 <p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Best for Short Trips or Last‑Minute Plans</p>
-<p class="text-3xl font-bold box-border caret-transparent tracking-[-0.75px] leading-9 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4">$59</p>
+<p id="digital-only-price" class="text-3xl font-bold box-border caret-transparent tracking-[-0.75px] leading-9 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4 transition-all duration-300">$59</p>
 <a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=digital_button" class="text-zinc-50 text-sm font-semibold items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] caret-transparent inline-flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-5 px-4 py-3 rounded-[2px]">Start application</a>
 </div>
 <div class="flex-shrink-0">
@@ -710,6 +710,91 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Footer Component -->
 <div data-component="footer"></div>
 </div>
+  
+<script> 
+// Pricing configuration
+const pricingData = {
+  '3': { printDigital: 79, digitalOnly: 59 },
+  '2': { printDigital: 75, digitalOnly: 55 },
+  '1': { printDigital: 69, digitalOnly: 49 }
+};
+
+// Get all pricing tab buttons
+const pricingTabs = document.querySelectorAll('.pricing-tab');
+const printDigitalPrice = document.getElementById('print-digital-price');
+const digitalOnlyPrice = document.getElementById('digital-only-price');
+
+// Active button classes
+const activeClasses = 'text-neutral-50 bg-[linear-gradient(rgb(40,164,106)_0%,oklab(0.638374_-0.127061_0.0523999_/_0.8)_100%)] border-transparent';
+const inactiveClasses = 'border-gray-200 hover:border-primary-300';
+
+// Function to update prices with animation
+function updatePrices(duration) {
+  const prices = pricingData[duration];
+  
+  // Add scale animation
+  printDigitalPrice.style.transform = 'scale(1.1)';
+  digitalOnlyPrice.style.transform = 'scale(1.1)';
+  
+  // Update prices
+  setTimeout(() => {
+    printDigitalPrice.textContent = `$${prices.printDigital}`;
+    digitalOnlyPrice.textContent = `$${prices.digitalOnly}`;
+    
+    // Reset scale
+    setTimeout(() => {
+      printDigitalPrice.style.transform = 'scale(1)';
+      digitalOnlyPrice.style.transform = 'scale(1)';
+    }, 150);
+  }, 150);
+}
+
+// Function to update active button styling
+function updateActiveButton(selectedButton) {
+  pricingTabs.forEach(tab => {
+    // Remove active classes
+    tab.classList.remove(...activeClasses.split(' '));
+    // Add inactive classes
+    if (!tab.classList.contains('border-gray-200')) {
+      tab.classList.add(...inactiveClasses.split(' '));
+    }
+    
+    // Update text color for spans and p tags inside
+    const spans = tab.querySelectorAll('span, p');
+    spans.forEach(span => {
+      span.classList.remove('text-neutral-50', 'text-gray-100');
+      if (span.tagName === 'P') {
+        span.classList.add('text-slate-600');
+      }
+    });
+  });
+  
+  // Add active classes to selected button
+  selectedButton.classList.remove(...inactiveClasses.split(' '));
+  selectedButton.classList.add(...activeClasses.split(' '));
+  
+  // Update text color for selected button
+  const selectedSpans = selectedButton.querySelectorAll('span, p');
+  selectedSpans.forEach(span => {
+    span.classList.remove('text-slate-600');
+    if (span.tagName === 'P') {
+      span.classList.add('text-gray-100');
+    } else {
+      span.classList.add('text-neutral-50');
+    }
+  });
+}
+
+// Add click event listeners to all pricing tabs
+pricingTabs.forEach(tab => {
+  tab.addEventListener('click', function() {
+    const duration = this.getAttribute('data-duration');
+    updatePrices(duration);
+    updateActiveButton(this);
+  });
+});
+</script>
+  
 </body>
 
 </html>
