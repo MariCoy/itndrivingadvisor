@@ -21,3 +21,12 @@
   outline: none !important;
 }
 
+/* Smooth scroll with offset for fixed header */
+html {
+  scroll-padding-top: 100px;
+}
+
+#works, #pricing {
+  scroll-margin-top: 100px;
+}
+

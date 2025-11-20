@@ -416,7 +416,56 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+// Smooth scroll with offset for fixed header
+document.addEventListener('DOMContentLoaded', function() {
+  // Handle anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#' || href === '') return;
+      
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        e.preventDefault();
+        const headerHeight = document.querySelector('header').offsetHeight || 80;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+  
+  // Handle hash in URL on page load
+  if (window.location.hash) {
+    setTimeout(() => {
+      const targetId = window.location.hash.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const headerHeight = document.querySelector('header').offsetHeight || 80;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
+  }
+});
 </script>
+<style>
+  html {
+    scroll-padding-top: 100px;
+  }
+  #works, #pricing {
+    scroll-margin-top: 100px;
+  }
+</style>
 </head>
 <body class="fill-white text-base not-italic normal-nums font-normal accent-auto bg-white box-border caret-transparent flex h-full tracking-[normal] leading-6 list-outside list-disc min-h-[1000px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none text-start indent-[0px] normal-case visible w-full overflow-auto border-separate font-inter_var"><div class="box-border caret-transparent h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none w-full"><div class="bg-white box-border caret-transparent min-h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full"><header class="sticky backdrop-blur bg-[oklab(0.999994_0.0000455677_0.0000200868_/_0.8)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] z-20 border-gray-200 border-b border-solid top-0"><div class="items-center box-border caret-transparent flex justify-between max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto px-4 py-3"><div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2">
 <img src="images/Advisor_Logo.svg" alt="International Driving Advisor" class="box-border caret-transparent h-6 md:h-8 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-auto" />
