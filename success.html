@@ -34,15 +34,6 @@
       };
     </script>
     <style>
-      /* Custom scrollbar for chat */
-      .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-      }
-      .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-      }
-      
       @keyframes fade-in-up {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
@@ -58,13 +49,6 @@
         animation: fade-in-down 0.6s ease-out forwards;
       }
     </style>
-    <script type="importmap">
-    {
-      "imports": {
-        "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
-      }
-    }
-    </script>
   </head>
   <body class="bg-gray-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col relative">
     
@@ -105,13 +89,12 @@
 
         <!-- Product Item -->
         <div class="flex flex-col sm:flex-row gap-4 mb-6">
-          <div class="flex-shrink-0 relative group cursor-help" onclick="askQuestion('What does the physical booklet look like?')">
+          <div class="flex-shrink-0 relative group">
              <img 
-              src="https://picsum.photos/100/140" 
+              src="https://internationaldrivingadvisor.com/images/print-pricing-card-idd.png" 
               alt="International Driving Permit Booklet" 
-              class="w-20 h-28 object-cover rounded-md border border-slate-200 shadow-sm transition-transform transform group-hover:scale-105"
+              class="w-20 h-28 object-cover rounded-md border border-slate-200 shadow-sm"
              />
-             <div class="absolute inset-0 bg-black/5 rounded-md group-hover:bg-transparent transition-colors"></div>
           </div>
           
           <div class="flex-grow flex flex-col justify-between">
@@ -160,14 +143,11 @@
         </div>
         
         <div class="mt-6 text-center">
-           <button 
-             onclick="askQuestion('When will I receive the confirmation email?')"
-             class="text-xs text-slate-400 hover:text-indigo-600 flex items-center justify-center gap-1 mx-auto transition-colors"
-           >
+           <a href="mailto:support@internationaldrivingadvisor.com" class="text-xs text-slate-400 hover:text-indigo-600 flex items-center justify-center gap-1 mx-auto transition-colors">
              <!-- Info Icon -->
              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-             Haven't received an email?
-           </button>
+             Haven't received an email? Contact Support
+           </a>
         </div>
       </div>
 
@@ -190,95 +170,8 @@
       </div>
     </div>
 
-    <!-- Chat Widget -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none">
-      <!-- Chat Window -->
-      <div id="chat-window" class="pointer-events-auto bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-80 sm:w-96 mb-4 flex flex-col overflow-hidden transition-all duration-300 ease-in-out origin-bottom-right transform scale-0 opacity-0 hidden">
-        <div class="bg-indigo-600 p-4 flex justify-between items-center">
-          <div class="flex items-center gap-2 text-white">
-            <!-- Sparkles Icon -->
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L12 3Z"/></svg>
-            <span class="font-semibold">Support Assistant</span>
-          </div>
-          <button id="btn-close-chat" class="text-white/80 hover:text-white transition-colors">
-            <!-- X Icon -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-          </button>
-        </div>
-        
-        <div id="chat-messages" class="h-80 overflow-y-auto p-4 bg-slate-50 dark:bg-slate-900/50 space-y-4 scrollbar-hide">
-          <!-- Messages will be inserted here -->
-          <div class="flex justify-start">
-            <div class="max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-100 dark:border-slate-600 rounded-bl-none shadow-sm">
-              Hi! I can help you with questions about your order or your new IDP.
-            </div>
-          </div>
-        </div>
-
-        <!-- Loading Indicator -->
-        <div id="chat-loading" class="hidden px-4 pb-2 bg-slate-50 dark:bg-slate-900/50">
-             <div class="flex justify-start">
-                <div class="bg-white dark:bg-slate-700 rounded-2xl rounded-bl-none px-4 py-3 border border-slate-100 dark:border-slate-600 shadow-sm">
-                  <!-- Loader Icon -->
-                  <svg class="animate-spin text-indigo-600 dark:text-indigo-400" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-                </div>
-             </div>
-        </div>
-
-        <div class="p-3 bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700">
-          <form id="chat-form" class="flex items-center gap-2">
-            <input 
-              type="text" 
-              id="chat-input"
-              placeholder="Ask about your order..."
-              class="flex-1 bg-slate-100 dark:bg-slate-900 border-0 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 dark:text-white outline-none"
-            />
-            <button 
-              type="submit" 
-              id="btn-send"
-              class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <!-- Send Icon -->
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Toggle Button -->
-      <button 
-        id="btn-toggle-chat"
-        class="pointer-events-auto bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 group"
-      >
-        <!-- MessageSquare Icon -->
-        <svg id="icon-msg" class="group-hover:scale-110 transition-transform block" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <!-- X Icon -->
-        <svg id="icon-close-fab" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-      </button>
-    </div>
-
     <!-- App Logic -->
-    <script type="module">
-      import { GoogleGenAI } from "@google/genai";
-
-      // SECURITY WARNING:
-      // Because this file runs in the browser, this API Key is visible to anyone who views the source code.
-      // To prevent unauthorized use, you MUST restrict this key in the Google Cloud Console to only work 
-      // from your specific website domains (e.g., https://internationaldrivingadvisor.com).
-      const API_KEY = "YOUR_GEMINI_API_KEY_HERE"; 
-      
-      // Initialize Gemini
-      let ai;
-      try {
-        if (!API_KEY || API_KEY.includes('YOUR_GEMINI_API_KEY')) {
-           console.warn("Gemini API Key is missing. Chat will not function.");
-        } else {
-           ai = new GoogleGenAI({ apiKey: API_KEY });
-        }
-      } catch (e) {
-        console.error("Gemini AI failed to initialize.", e);
-      }
-
+    <script>
       // --- 1. Data Logic & URL Parsing ---
       const params = new URLSearchParams(window.location.search);
       
@@ -327,117 +220,6 @@
         }
       }
       themeBtn.addEventListener('click', toggleTheme);
-
-      // --- 4. Chat Logic ---
-      const chatWindow = document.getElementById('chat-window');
-      const messagesContainer = document.getElementById('chat-messages');
-      const chatForm = document.getElementById('chat-form');
-      const chatInput = document.getElementById('chat-input');
-      const loadingIndicator = document.getElementById('chat-loading');
-      const fabBtn = document.getElementById('btn-toggle-chat');
-      const iconMsg = document.getElementById('icon-msg');
-      const iconCloseFab = document.getElementById('icon-close-fab');
-      const btnCloseChat = document.getElementById('btn-close-chat');
-      
-      let isChatOpen = false;
-
-      function toggleChat() {
-        isChatOpen = !isChatOpen;
-        if (isChatOpen) {
-          chatWindow.classList.remove('hidden');
-          // Small delay to allow display:block to apply before transition
-          setTimeout(() => {
-             chatWindow.classList.remove('scale-0', 'opacity-0');
-          }, 10);
-          iconMsg.classList.add('hidden');
-          iconCloseFab.classList.remove('hidden');
-        } else {
-          chatWindow.classList.add('scale-0', 'opacity-0');
-          setTimeout(() => {
-            chatWindow.classList.add('hidden');
-          }, 300);
-          iconCloseFab.classList.add('hidden');
-          iconMsg.classList.remove('hidden');
-        }
-      }
-
-      fabBtn.addEventListener('click', toggleChat);
-      btnCloseChat.addEventListener('click', toggleChat);
-
-      // Helper to add message to UI
-      function addMessage(text, sender) {
-        const wrapperDiv = document.createElement('div');
-        wrapperDiv.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
-        
-        const bubbleDiv = document.createElement('div');
-        bubbleDiv.className = `max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-          sender === 'user' 
-            ? 'bg-indigo-600 text-white rounded-br-none' 
-            : 'bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-100 dark:border-slate-600 rounded-bl-none shadow-sm'
-        }`;
-        bubbleDiv.textContent = text;
-        
-        wrapperDiv.appendChild(bubbleDiv);
-        messagesContainer.appendChild(wrapperDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      }
-
-      // Send Logic
-      async function handleSend(text) {
-        if (!text.trim()) return;
-        
-        addMessage(text, 'user');
-        chatInput.value = '';
-        loadingIndicator.classList.remove('hidden');
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-        try {
-          const orderContext = `Item: ${order.name}. Description: ${order.desc.replace(/\n/g, ' ')}. Price: $${order.total.toFixed(2)}. Shipping: $${order.shipping.toFixed(2)}. Order ID: ${order.id}. Status: Paid.`;
-          
-          const systemInstruction = `You are a helpful and polite customer support agent for 'International Driving Advisor'. 
-            The user has just completed a purchase. Here are the order details:
-            ${orderContext}
-            
-            Your goal is to reassure the customer, explain the next steps (e.g., shipping usually takes 5-7 days for physical copies, digital is instant), and answer questions about the International Driving Permit (IDP).
-            Keep your answers concise, friendly, and helpful. Do not make up fake tracking numbers.`;
-
-          if (!ai) {
-             throw new Error("AI not initialized (Missing API Key)");
-          }
-
-          const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
-            contents: text,
-            config: { systemInstruction: systemInstruction }
-          });
-          
-          addMessage(response.text, 'bot');
-        } catch (error) {
-          console.error(error);
-          let errorMessage = "I'm having trouble connecting to the server. Please try again later.";
-          
-          // Provide more specific error for the developer if key is missing/invalid
-          if (error.message && (error.message.includes("API Key") || error.message.includes("403"))) {
-             errorMessage = "Configuration Error: The Chat Assistant cannot connect. Please check the API Key settings in the code.";
-          }
-          
-          addMessage(errorMessage, 'bot');
-        } finally {
-          loadingIndicator.classList.add('hidden');
-          messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-      }
-
-      chatForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        handleSend(chatInput.value);
-      });
-
-      // Expose function for clickable receipt items
-      window.askQuestion = function(text) {
-        if (!isChatOpen) toggleChat();
-        handleSend(text);
-      };
     </script>
   </body>
 </html>
