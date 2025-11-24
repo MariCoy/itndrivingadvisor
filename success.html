@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You - International Driving Advisor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              indigo: {
+                50: '#eef2ff',
+                100: '#e0e7ff',
+                500: '#6366f1',
+                600: '#4f46e5',
+                700: '#4338ca',
+                900: '#312e81',
+              }
+            }
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Custom scrollbar for chat */
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+      
+      @keyframes fade-in-up {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fade-in-down {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in-up {
+        animation: fade-in-up 0.6s ease-out forwards;
+      }
+      .animate-fade-in-down {
+        animation: fade-in-down 0.6s ease-out forwards;
+      }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
+      }
+    }
+    </script>
+  </head>
+  <body class="bg-gray-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col relative">
+    
+    <!-- Navbar -->
+    <nav class="absolute top-0 left-0 right-0 p-4 sm:p-6 flex justify-between items-center z-10">
+      <button id="theme-toggle" class="flex items-center gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-2 rounded-full shadow-sm hover:shadow-md transition-all text-sm font-medium text-slate-700 dark:text-slate-200">
+        <!-- Sun Icon -->
+        <svg id="icon-sun" class="hidden w-4 h-4 text-amber-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <!-- Moon Icon -->
+        <svg id="icon-moon" class="block w-4 h-4 text-slate-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <span>Theme</span>
+      </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center px-4 pt-20 pb-24 sm:pb-32 w-full max-w-7xl mx-auto">
+      
+      <!-- Success Header -->
+      <div class="text-center mb-10 animate-fade-in-down">
+        <div class="inline-flex items-center justify-center p-3 bg-indigo-100 dark:bg-indigo-900/40 rounded-full mb-6 shadow-sm">
+          <!-- Check Icon -->
+          <svg class="w-8 h-8 text-indigo-600 dark:text-indigo-400" stroke-width="3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h1 class="text-4xl font-bold text-slate-900 dark:text-white mb-3 tracking-tight">
+          Thank you
+        </h1>
+        <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto text-lg leading-relaxed">
+          Your payment has been received! A confirmation has been sent to your email.
+        </p>
+      </div>
+
+      <!-- Receipt Card -->
+      <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm p-6 w-full max-w-lg mx-auto animate-fade-in-up">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Payment receipt</h2>
+          <span id="receipt-id" class="text-xs font-mono text-slate-400 bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded">#IDA-8834</span>
+        </div>
+
+        <!-- Product Item -->
+        <div class="flex flex-col sm:flex-row gap-4 mb-6">
+          <div class="flex-shrink-0 relative group cursor-help" onclick="askQuestion('What does the physical booklet look like?')">
+             <img 
+              src="https://picsum.photos/100/140" 
+              alt="International Driving Permit Booklet" 
+              class="w-20 h-28 object-cover rounded-md border border-slate-200 shadow-sm transition-transform transform group-hover:scale-105"
+             />
+             <div class="absolute inset-0 bg-black/5 rounded-md group-hover:bg-transparent transition-colors"></div>
+          </div>
+          
+          <div class="flex-grow flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start">
+                  <div>
+                      <h3 id="product-name" class="font-bold text-slate-900 dark:text-white text-lg">Print + Digital</h3>
+                      <p id="product-desc" class="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-snug whitespace-pre-line">Print IDP with Digital Booklet</p>
+                  </div>
+                  <span id="total-price-top" class="font-semibold text-slate-900 dark:text-white">$79.00</span>
+              </div>
+              
+              <div class="flex items-center gap-2 mt-3 text-xs text-indigo-600 dark:text-indigo-400">
+                  <span id="badge-shipping" class="flex items-center gap-1 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-1 rounded-full hidden">
+                      <!-- Package Icon -->
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22v-9"/></svg>
+                      Free Shipping
+                  </span>
+                  <span class="flex items-center gap-1 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-1 rounded-full">
+                      <!-- Download Icon -->
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                      Instant Digital
+                  </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="border-slate-100 dark:border-slate-700 mb-4" />
+
+        <!-- Totals -->
+        <div class="space-y-2">
+          <div class="flex justify-between text-slate-500 dark:text-slate-400 text-sm">
+            <span>Subtotal</span>
+            <span id="subtotal-price">$79.00</span>
+          </div>
+          <div class="flex justify-between text-slate-500 dark:text-slate-400 text-sm">
+            <span>Shipping Fee</span>
+            <span id="shipping-price">$0.00</span>
+          </div>
+          
+          <div class="flex justify-between items-center pt-3 mt-2 border-t border-slate-100 dark:border-slate-700">
+            <span class="text-lg font-bold text-slate-900 dark:text-white">Total</span>
+            <span id="total-price-bottom" class="text-lg font-bold text-slate-900 dark:text-white">$79.00</span>
+          </div>
+        </div>
+        
+        <div class="mt-6 text-center">
+           <button 
+             onclick="askQuestion('When will I receive the confirmation email?')"
+             class="text-xs text-slate-400 hover:text-indigo-600 flex items-center justify-center gap-1 mx-auto transition-colors"
+           >
+             <!-- Info Icon -->
+             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+             Haven't received an email?
+           </button>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Sticky Bottom Bar CTA -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-indigo-100 dark:border-slate-700 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] p-4 z-40">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="hidden sm:flex items-center gap-3 text-slate-500 dark:text-slate-400">
+           <!-- LayoutDashboard Icon -->
+           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+           <span class="text-sm font-medium">Order <span id="footer-order-id">#IDA-8834</span> Confirmed</span>
+        </div>
+        
+        <button class="w-full sm:w-auto bg-indigo-700 hover:bg-indigo-800 text-white font-medium px-8 py-3 rounded-lg shadow-lg shadow-indigo-200 dark:shadow-none transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2 group">
+          Go to your Dashboard
+          <!-- ArrowRight Icon -->
+          <svg class="group-hover:translate-x-1 transition-transform" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none">
+      <!-- Chat Window -->
+      <div id="chat-window" class="pointer-events-auto bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-80 sm:w-96 mb-4 flex flex-col overflow-hidden transition-all duration-300 ease-in-out origin-bottom-right transform scale-0 opacity-0 hidden">
+        <div class="bg-indigo-600 p-4 flex justify-between items-center">
+          <div class="flex items-center gap-2 text-white">
+            <!-- Sparkles Icon -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            <span class="font-semibold">Support Assistant</span>
+          </div>
+          <button id="btn-close-chat" class="text-white/80 hover:text-white transition-colors">
+            <!-- X Icon -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+        
+        <div id="chat-messages" class="h-80 overflow-y-auto p-4 bg-slate-50 dark:bg-slate-900/50 space-y-4 scrollbar-hide">
+          <!-- Messages will be inserted here -->
+          <div class="flex justify-start">
+            <div class="max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-100 dark:border-slate-600 rounded-bl-none shadow-sm">
+              Hi! I can help you with questions about your order or your new IDP.
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="chat-loading" class="hidden px-4 pb-2 bg-slate-50 dark:bg-slate-900/50">
+             <div class="flex justify-start">
+                <div class="bg-white dark:bg-slate-700 rounded-2xl rounded-bl-none px-4 py-3 border border-slate-100 dark:border-slate-600 shadow-sm">
+                  <!-- Loader Icon -->
+                  <svg class="animate-spin text-indigo-600 dark:text-indigo-400" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+                </div>
+             </div>
+        </div>
+
+        <div class="p-3 bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700">
+          <form id="chat-form" class="flex items-center gap-2">
+            <input 
+              type="text" 
+              id="chat-input"
+              placeholder="Ask about your order..."
+              class="flex-1 bg-slate-100 dark:bg-slate-900 border-0 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-indigo-500 dark:text-white outline-none"
+            />
+            <button 
+              type="submit" 
+              id="btn-send"
+              class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <!-- Send Icon -->
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Toggle Button -->
+      <button 
+        id="btn-toggle-chat"
+        class="pointer-events-auto bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 group"
+      >
+        <!-- MessageSquare Icon -->
+        <svg id="icon-msg" class="group-hover:scale-110 transition-transform block" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <!-- X Icon -->
+        <svg id="icon-close-fab" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- App Logic -->
+    <script type="module">
+      import { GoogleGenAI } from "@google/genai";
+
+      const API_KEY = process.env.API_KEY || '';
+      const ai = new GoogleGenAI({ apiKey: API_KEY });
+
+      // --- 1. Data Logic & URL Parsing ---
+      const params = new URLSearchParams(window.location.search);
+      
+      const order = {
+        id: params.get('spid') || 'IDA-8834',
+        name: params.get('pdname') || 'Print + Digital',
+        desc: params.get('pddesc') || 'Print IDP with Digital Booklet\nValidity: 3 Years',
+        total: parseFloat(params.get('tprice') || '') || 79.00,
+        shipping: parseFloat(params.get('ships') || '') || 0.00
+      };
+      
+      order.subtotal = order.total - order.shipping;
+      // Ensure Validity is on a new line if squashed
+      if (order.desc.includes('Validity:') && !order.desc.includes('\nValidity:')) {
+          order.desc = order.desc.replace(/Validity:/i, '\nValidity:');
+      }
+
+      // --- 2. UI Updates ---
+      document.getElementById('receipt-id').textContent = '#' + order.id;
+      document.getElementById('footer-order-id').textContent = '#' + order.id;
+      document.getElementById('product-name').textContent = order.name;
+      document.getElementById('product-desc').textContent = order.desc;
+      document.getElementById('total-price-top').textContent = '$' + order.total.toFixed(2);
+      document.getElementById('total-price-bottom').textContent = '$' + order.total.toFixed(2);
+      document.getElementById('subtotal-price').textContent = '$' + (order.subtotal > 0 ? order.subtotal : order.total).toFixed(2);
+      document.getElementById('shipping-price').textContent = '$' + order.shipping.toFixed(2);
+
+      if (order.shipping === 0) {
+        document.getElementById('badge-shipping').classList.remove('hidden');
+      }
+
+      // --- 3. Theme Logic ---
+      const themeBtn = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      const iconSun = document.getElementById('icon-sun');
+      const iconMoon = document.getElementById('icon-moon');
+
+      function toggleTheme() {
+        const isDark = html.classList.toggle('dark');
+        if (isDark) {
+          iconMoon.classList.add('hidden');
+          iconSun.classList.remove('hidden');
+        } else {
+          iconSun.classList.add('hidden');
+          iconMoon.classList.remove('hidden');
+        }
+      }
+      themeBtn.addEventListener('click', toggleTheme);
+
+      // --- 4. Chat Logic ---
+      const chatWindow = document.getElementById('chat-window');
+      const messagesContainer = document.getElementById('chat-messages');
+      const chatForm = document.getElementById('chat-form');
+      const chatInput = document.getElementById('chat-input');
+      const loadingIndicator = document.getElementById('chat-loading');
+      const fabBtn = document.getElementById('btn-toggle-chat');
+      const iconMsg = document.getElementById('icon-msg');
+      const iconCloseFab = document.getElementById('icon-close-fab');
+      const btnCloseChat = document.getElementById('btn-close-chat');
+      
+      let isChatOpen = false;
+
+      function toggleChat() {
+        isChatOpen = !isChatOpen;
+        if (isChatOpen) {
+          chatWindow.classList.remove('hidden');
+          // Small delay to allow display:block to apply before transition
+          setTimeout(() => {
+             chatWindow.classList.remove('scale-0', 'opacity-0');
+          }, 10);
+          iconMsg.classList.add('hidden');
+          iconCloseFab.classList.remove('hidden');
+        } else {
+          chatWindow.classList.add('scale-0', 'opacity-0');
+          setTimeout(() => {
+            chatWindow.classList.add('hidden');
+          }, 300);
+          iconCloseFab.classList.add('hidden');
+          iconMsg.classList.remove('hidden');
+        }
+      }
+
+      fabBtn.addEventListener('click', toggleChat);
+      btnCloseChat.addEventListener('click', toggleChat);
+
+      // Helper to add message to UI
+      function addMessage(text, sender) {
+        const wrapperDiv = document.createElement('div');
+        wrapperDiv.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+        
+        const bubbleDiv = document.createElement('div');
+        bubbleDiv.className = `max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+          sender === 'user' 
+            ? 'bg-indigo-600 text-white rounded-br-none' 
+            : 'bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-100 dark:border-slate-600 rounded-bl-none shadow-sm'
+        }`;
+        bubbleDiv.textContent = text;
+        
+        wrapperDiv.appendChild(bubbleDiv);
+        messagesContainer.appendChild(wrapperDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+
+      // Send Logic
+      async function handleSend(text) {
+        if (!text.trim()) return;
+        
+        addMessage(text, 'user');
+        chatInput.value = '';
+        loadingIndicator.classList.remove('hidden');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        try {
+          const orderContext = `Item: ${order.name}. Description: ${order.desc.replace(/\n/g, ' ')}. Price: $${order.total.toFixed(2)}. Shipping: $${order.shipping.toFixed(2)}. Order ID: ${order.id}. Status: Paid.`;
+          
+          const systemInstruction = `You are a helpful and polite customer support agent for 'International Driving Advisor'. 
+            The user has just completed a purchase. Here are the order details:
+            ${orderContext}
+            
+            Your goal is to reassure the customer, explain the next steps (e.g., shipping usually takes 5-7 days for physical copies, digital is instant), and answer questions about the International Driving Permit (IDP).
+            Keep your answers concise, friendly, and helpful. Do not make up fake tracking numbers.`;
+
+          const response = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: text,
+            config: { systemInstruction: systemInstruction }
+          });
+          
+          addMessage(response.text, 'bot');
+        } catch (error) {
+          console.error(error);
+          addMessage("I'm having trouble connecting to the server. Please try again later.", 'bot');
+        } finally {
+          loadingIndicator.classList.add('hidden');
+          messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+      }
+
+      chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleSend(chatInput.value);
+      });
+
+      // Expose function for clickable receipt items
+      window.askQuestion = function(text) {
+        if (!isChatOpen) toggleChat();
+        handleSend(text);
+      };
+    </script>
+  </body>
+</html>
