@@ -6,6 +6,114 @@ const LANGUAGES = {
   it: { code: 'IT', flag: '🇮🇹', name: 'Italiano', path: '/it' }
 };
 
+// Translations for header and footer
+const TRANSLATIONS = {
+  en: {
+    nav: {
+      howItWorks: 'How it works',
+      pricing: 'Pricing',
+      faq: 'FAQ',
+      contact: 'Contact Us',
+      getYourIdp: 'Get Your IDP'
+    },
+    footer: {
+      tagline: 'Your trusted partner for international driving translations.',
+      support: 'Support',
+      company: 'Company',
+      legal: 'Legal',
+      aboutUs: 'About Us',
+      contact: 'Contact',
+      faq: 'FAQ',
+      privacyPolicy: 'Privacy Policy',
+      cookiePolicy: 'Cookie Policy',
+      termsConditions: 'Terms & Conditions',
+      legalDisclaimer: 'Legal Disclaimer',
+      refundPolicy: 'Refund Policy',
+      shippingDelivery: 'Shipping & Delivery',
+      copyright: '© 2025 International Driving Advisor. All rights reserved.',
+      disclaimer: 'Legal Disclaimer: The document from International Driving Advisor is a private translation of your national driver\'s license — not a government-issued IDP and does not grant legal driving rights. It is also not affiliated with or endorsed by American Automobile Association (AAA) or any official licensing authority. When driving abroad, always carry your original license.'
+    }
+  },
+  es: {
+    nav: {
+      howItWorks: 'Cómo funciona',
+      pricing: 'Precios',
+      faq: 'Preguntas Frecuentes',
+      contact: 'Contáctenos',
+      getYourIdp: 'Obtenga su PCI'
+    },
+    footer: {
+      tagline: 'Su socio de confianza para traducciones de licencias de conducir internacionales.',
+      support: 'Soporte',
+      company: 'Empresa',
+      legal: 'Legal',
+      aboutUs: 'Sobre Nosotros',
+      contact: 'Contacto',
+      faq: 'Preguntas Frecuentes',
+      privacyPolicy: 'Política de Privacidad',
+      cookiePolicy: 'Política de Cookies',
+      termsConditions: 'Términos y Condiciones',
+      legalDisclaimer: 'Aviso Legal',
+      refundPolicy: 'Política de Reembolso',
+      shippingDelivery: 'Envío y Entrega',
+      copyright: '© 2025 International Driving Advisor. Todos los derechos reservados.',
+      disclaimer: 'Aviso Legal: El documento de International Driving Advisor es una traducción privada de su licencia de conducir nacional — no es un PCI emitido por el gobierno y no otorga derechos legales de conducción. Tampoco está afiliado ni respaldado por la American Automobile Association (AAA) ni ninguna autoridad oficial de licencias. Al conducir en el extranjero, siempre lleve su licencia original.'
+    }
+  },
+  fr: {
+    nav: {
+      howItWorks: 'Comment ça marche',
+      pricing: 'Tarifs',
+      faq: 'FAQ',
+      contact: 'Contactez-nous',
+      getYourIdp: 'Obtenez votre PCI'
+    },
+    footer: {
+      tagline: 'Votre partenaire de confiance pour les traductions de permis de conduire internationaux.',
+      support: 'Support',
+      company: 'Entreprise',
+      legal: 'Mentions Légales',
+      aboutUs: 'À Propos',
+      contact: 'Contact',
+      faq: 'FAQ',
+      privacyPolicy: 'Politique de Confidentialité',
+      cookiePolicy: 'Politique des Cookies',
+      termsConditions: 'Conditions Générales',
+      legalDisclaimer: 'Avertissement Juridique',
+      refundPolicy: 'Politique de Remboursement',
+      shippingDelivery: 'Expédition et Livraison',
+      copyright: '© 2025 International Driving Advisor. Tous droits réservés.',
+      disclaimer: 'Avertissement Juridique : Le document d\'International Driving Advisor est une traduction privée de votre permis de conduire national — ce n\'est pas un PCI délivré par le gouvernement et n\'accorde pas de droits de conduite légaux. Il n\'est pas non plus affilié ni approuvé par l\'American Automobile Association (AAA) ou toute autorité officielle de délivrance de permis. Lorsque vous conduisez à l\'étranger, gardez toujours votre permis original.'
+    }
+  },
+  it: {
+    nav: {
+      howItWorks: 'Come funziona',
+      pricing: 'Prezzi',
+      faq: 'FAQ',
+      contact: 'Contattaci',
+      getYourIdp: 'Ottieni la tua PCI'
+    },
+    footer: {
+      tagline: 'Il tuo partner di fiducia per le traduzioni di patenti di guida internazionali.',
+      support: 'Supporto',
+      company: 'Azienda',
+      legal: 'Legale',
+      aboutUs: 'Chi Siamo',
+      contact: 'Contatti',
+      faq: 'FAQ',
+      privacyPolicy: 'Informativa sulla Privacy',
+      cookiePolicy: 'Politica sui Cookie',
+      termsConditions: 'Termini e Condizioni',
+      legalDisclaimer: 'Disclaimer Legale',
+      refundPolicy: 'Politica Rimborsi',
+      shippingDelivery: 'Spedizione e Consegna',
+      copyright: '© 2025 International Driving Advisor. Tutti i diritti riservati.',
+      disclaimer: 'Disclaimer Legale: Il documento di International Driving Advisor è una traduzione privata della Sua patente di guida nazionale — non è una PCI rilasciata dal governo e non concede diritti legali di guida. Non è inoltre affiliato né approvato dall\'American Automobile Association (AAA) o da qualsiasi autorità ufficiale di rilascio patenti. Quando guida all\'estero, porti sempre la Sua patente originale.'
+    }
+  }
+};
+
 // Detect current language from URL path
 function detectLanguage() {
   const path = window.location.pathname;
@@ -45,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
           initLanguageSelector(currentLang, basePath);
           updateNavigationLinks(currentLang, basePath);
+          translateHeader(currentLang, basePath);
         }, 0);
       })
       .catch(error => {
@@ -62,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update footer links for current language
         setTimeout(() => {
           updateFooterLinks(currentLang, basePath);
+          translateFooter(currentLang, basePath);
         }, 0);
       })
       .catch(error => {
@@ -223,19 +333,141 @@ function updateNavigationLinks(currentLang, basePath) {
   });
 }
 
-// Update footer links for current language
+// Translate header text based on current language
+function translateHeader(currentLang, basePath) {
+  const t = TRANSLATIONS[currentLang].nav;
+  const header = document.querySelector('header');
+  if (!header) return;
+
+  // Translate navigation links
+  const navLinks = header.querySelectorAll('[data-nav-link]');
+  navLinks.forEach(link => {
+    const linkType = link.getAttribute('data-nav-link');
+    switch (linkType) {
+      case 'works':
+        link.childNodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            node.textContent = t.howItWorks;
+          }
+        });
+        if (link.childNodes.length === 1) link.textContent = t.howItWorks;
+        break;
+      case 'pricing':
+        link.childNodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            node.textContent = t.pricing;
+          }
+        });
+        if (link.childNodes.length === 1) link.textContent = t.pricing;
+        break;
+      case 'faq':
+        link.childNodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            node.textContent = t.faq;
+          }
+        });
+        if (link.childNodes.length === 1) link.textContent = t.faq;
+        break;
+      case 'contact':
+        link.childNodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            node.textContent = t.contact;
+          }
+        });
+        if (link.childNodes.length === 1) link.textContent = t.contact;
+        break;
+      case 'cta':
+        // Update CTA button text (preserve the icon)
+        const ctaText = link.childNodes[0];
+        if (ctaText && ctaText.nodeType === Node.TEXT_NODE) {
+          ctaText.textContent = t.getYourIdp + ' ';
+        } else {
+          // Find first text node
+          for (let i = 0; i < link.childNodes.length; i++) {
+            if (link.childNodes[i].nodeType === Node.TEXT_NODE) {
+              link.childNodes[i].textContent = t.getYourIdp + ' ';
+              break;
+            }
+          }
+        }
+        break;
+    }
+  });
+}
+
+// Update footer links and translate text for current language
 function updateFooterLinks(currentLang, basePath) {
   const footer = document.querySelector('footer');
   if (!footer) return;
 
-  // Update logo image path only (needs basePath for subdirectories)
+  // Update logo image path (needs basePath for subdirectories)
   if (basePath) {
-    const logo = footer.querySelector('img[src*="Advisor_Logo"]');
-    if (logo) {
-      logo.src = `${basePath}/images/Advisor_Logo.svg`;
-    }
+    const logos = footer.querySelectorAll('img');
+    logos.forEach(img => {
+      const src = img.getAttribute('src');
+      if (src && src.includes('Advisor_Logo')) {
+        img.src = `${basePath}/images/Advisor_Logo.svg`;
+      }
+    });
   }
 
   // Note: Footer page links (privacy.html, terms.html, etc.) should NOT be modified
   // They are relative links that work correctly within each language directory
+}
+
+// Translate footer text based on current language
+function translateFooter(currentLang, basePath) {
+  const t = TRANSLATIONS[currentLang].footer;
+  const footer = document.querySelector('footer');
+  if (!footer) return;
+
+  // Get all paragraph elements and links
+  const allElements = footer.querySelectorAll('p, a');
+
+  allElements.forEach(el => {
+    const text = el.textContent.trim();
+
+    // Translate section headers
+    if (text === 'Support' || text === 'Soporte' || text === 'Supporto') {
+      el.textContent = t.support;
+    } else if (text === 'Company' || text === 'Empresa' || text === 'Entreprise' || text === 'Azienda') {
+      el.textContent = t.company;
+    } else if (text === 'Legal' || text === 'Mentions Légales' || text === 'Legale') {
+      el.textContent = t.legal;
+    }
+    // Translate tagline
+    else if (text.includes('trusted partner') || text.includes('socio de confianza') || text.includes('partenaire de confiance') || text.includes('partner di fiducia')) {
+      el.textContent = t.tagline;
+    }
+    // Translate company links
+    else if (text === 'About Us' || text === 'Sobre Nosotros' || text === 'À Propos' || text === 'Chi Siamo') {
+      el.textContent = t.aboutUs;
+    } else if (text === 'Contact' || text === 'Contacto' || text === 'Contatti') {
+      el.textContent = t.contact;
+    } else if (text === 'FAQ' || text === 'Preguntas Frecuentes') {
+      el.textContent = t.faq;
+    }
+    // Translate legal links
+    else if (text === 'Privacy Policy' || text === 'Política de Privacidad' || text === 'Politique de Confidentialité' || text === 'Informativa sulla Privacy') {
+      el.textContent = t.privacyPolicy;
+    } else if (text === 'Cookie Policy' || text === 'Política de Cookies' || text === 'Politique des Cookies' || text === 'Politica sui Cookie') {
+      el.textContent = t.cookiePolicy;
+    } else if (text === 'Terms & Conditions' || text === 'Términos y Condiciones' || text === 'Conditions Générales' || text === 'Termini e Condizioni') {
+      el.textContent = t.termsConditions;
+    } else if (text === 'Legal Disclaimer' || text === 'Aviso Legal' || text === 'Avertissement Juridique' || text === 'Disclaimer Legale') {
+      el.textContent = t.legalDisclaimer;
+    } else if (text === 'Refund Policy' || text === 'Política de Reembolso' || text === 'Politique de Remboursement' || text === 'Politica Rimborsi') {
+      el.textContent = t.refundPolicy;
+    } else if (text === 'Shipping & Delivery' || text === 'Envío y Entrega' || text === 'Expédition et Livraison' || text === 'Spedizione e Consegna') {
+      el.textContent = t.shippingDelivery;
+    }
+    // Translate copyright
+    else if (text.includes('© 2025') || text.includes('All rights reserved') || text.includes('Todos los derechos') || text.includes('Tous droits') || text.includes('Tutti i diritti')) {
+      el.textContent = t.copyright;
+    }
+    // Translate disclaimer
+    else if (text.includes('Legal Disclaimer:') || text.includes('Aviso Legal:') || text.includes('Avertissement Juridique:') || text.includes('Disclaimer Legale:')) {
+      el.textContent = t.disclaimer;
+    }
+  });
 }
