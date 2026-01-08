@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Components</title>
+  <link rel="icon" type="image/svg+xml" href="images/fav.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/components.js"></script>
+</head>
+<body>
+  <div class="min-h-screen bg-gray-50">
+    <main class="container mx-auto px-4 py-8">
+      <h1 class="text-3xl font-bold text-center mb-8">Тест системы компонентов</h1>
+      <p class="text-center text-gray-600 mb-8">Эта страница демонстрирует работу системы компонентов</p>
+      
+      <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+        <h2 class="text-xl font-semibold mb-4">Как это работает:</h2>
+        <ul class="list-disc list-inside space-y-2 text-gray-700">
+          <li>Компонент футера загружается автоматически через JavaScript</li>
+          <li>Код футера написан один раз в <code class="bg-gray-100 px-2 py-1 rounded">components/footer.html</code></li>
+          <li>На каждой странице только одна строка: <code class="bg-gray-100 px-2 py-1 rounded">&lt;div data-component="footer"&gt;&lt;/div&gt;</code></li>
+          <li>При изменении компонента обновляются все страницы автоматически</li>
+        </ul>
+      </div>
+    </main>
+    
+    <!-- Footer Component -->
+    <div data-component="footer"></div>
+  </div>
+</body>
+</html>

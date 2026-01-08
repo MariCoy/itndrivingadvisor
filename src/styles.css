@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Font fallback for better cross-browser compatibility */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+/* Ensure font loading with fallbacks */
+.font-heading {
+  font-family: 'Instrument Serif', ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+  font-display: swap; /* Improves loading performance */
+}
+
+/* Force primary-300 focus colors for form inputs */
+#firstName:focus,
+#lastName:focus,
+#email:focus,
+#countryTravel:focus {
+  border-color: #7D80C7 !important;
+  box-shadow: 0 0 0 1px #7D80C7 !important;
+  outline: none !important;
+}
+
+/* Smooth scroll with offset for fixed header */
+html {
+  scroll-padding-top: 100px;
+}
+
+#works, #pricing {
+  scroll-margin-top: 100px;
+}
+

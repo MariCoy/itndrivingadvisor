@@ -4,12 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terms and Conditions - International Driving Advisor</title>
+  <link rel="icon" type="image/svg+xml" href="images/fav.svg">
 <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/components.js"></script>
 <script>
   tailwind.config = {
   content: [],
   theme: {
     extend: {
+      borderRadius: {
+        'DEFAULT': '2px',
+      },
       fontFamily: {
         inter_var: [
           'Inter var',
@@ -27,13 +32,100 @@
           'Apple Color Emoji',
           'Segoe UI Emoji',
           'Segoe UI Symbol',
-          'Noto Color Emoji'
-        ]
-      }
-    }
-  }
+          'Noto Color Emoji',
+        ],
+        heading: [
+          'Instrument Serif',
+          'Georgia',
+          'Times New Roman',
+          'serif',
+        ],
+      },
+      colors: {
+        primary: {
+          50: '#E4E5F4',
+          100: '#D0D1EB',
+          200: '#A7A9D9',
+          300: '#7D80C7',
+          400: '#5458B5',
+          500: '#2B30A3',
+          600: '#222682',
+          700: '#1A1D62',
+          800: '#111341',
+          900: '#090A21',
+        },
+        secondary: {
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+          300: '#cbd5e1',
+          400: '#94a3b8',
+          500: '#64748b',
+          600: '#475569',
+          700: '#334155',
+          800: '#1e293b',
+          900: '#0f172a',
+        },
+        neutral: {
+          50: '#fafafa',
+          100: '#f4f4f5',
+          200: '#e4e4e7',
+          300: '#d4d4d8',
+          400: '#a1a1aa',
+          500: '#71717a',
+          600: '#52525b',
+          700: '#3f3f46',
+          800: '#27272a',
+          900: '#18181b',
+        },
+        gray: {
+          50: '#f9fafb',
+          100: '#f3f4f6',
+          200: '#e5e7eb',
+          300: '#d1d5db',
+          400: '#9ca3af',
+          500: '#6b7280',
+          600: '#4b5563',
+          700: '#374151',
+          800: '#1f2937',
+          900: '#111827',
+        },
+        success: {
+          50: '#CDE7CF',
+          100: '#BCDBBD',
+          200: '#98C49A',
+          300: '#75AC78',
+          400: '#519555',
+          500: '#2E7D32',
+          600: '#256428',
+          700: '#1C4B1E',
+          800: '#123214',
+          900: '#09190A',
+        },
+        error: {
+          50: '#fef2f2',
+          100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#ef4444',
+          600: '#dc2626',
+          700: '#b91c1c',
+          800: '#991b1b',
+          900: '#7f1d1d',
+        },
+      },
+    },
+  },
 };
 </script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TH623PVZ');</script>
+<!-- End Google Tag Manager -->
 </head>
 <body class="text-zinc-900 text-base not-italic normal-nums font-normal accent-auto bg-white box-border caret-transparent flex h-full tracking-[normal] leading-6 list-outside list-disc min-h-[1000px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none text-start indent-[0px] normal-case visible w-full overflow-auto border-separate font-inter_var">
   <div class="box-border caret-transparent h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none w-full">
@@ -41,20 +133,19 @@
       
       <!-- Header -->
       <header class="sticky backdrop-blur bg-[oklab(0.999994_0.0000455677_0.0000200868_/_0.8)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] z-20 border-gray-200 border-b border-solid top-0">
-        <div class="items-center box-border caret-transparent flex justify-between max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto px-6 py-3">
+        <div class="items-center box-border caret-transparent flex justify-between max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto px-4 py-3">
           <div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2">
-            <svg class="text-green-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
-            </svg>
-            <a href="index.html" class="font-semibold box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">International Driving Advisor</a>
+            <a href="index.html" class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
+              <img src="images/Advisor_Logo.svg" alt="International Driving Advisor" class="box-border caret-transparent h-6 md:h-8 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-auto" />
+            </a>
           </div>
           <nav class="text-sm items-center box-border caret-transparent gap-x-6 hidden leading-5 min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 md:flex md:min-h-[auto] md:min-w-[auto]">
-            <a href="index.html#features" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Features</a>
-            <a href="index.html#how" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">How it works</a>
+            <a href="index.html#works" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">How it works</a>
+            <a href="index.html#pricing" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Pricing</a>
             <a href="faq.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">FAQ</a>
-            <a href="contact.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Contact</a>
+            <a href="contact.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Contact Us</a>
           </nav>
-          <a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=header_button" class="text-zinc-50 text-sm items-center bg-green-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] box-border caret-transparent gap-x-2 flex leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 px-4 py-2 rounded-[14px]">
+          <a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=header_button" class="text-zinc-50 text-sm items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] box-border caret-transparent gap-x-2 flex leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 px-4 py-2 rounded-[2px]">
             Get Your IDP
             <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-3.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
           </a>
@@ -63,11 +154,11 @@
 
       <!-- Main Content -->
       <main class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-        <div class="max-w-4xl mx-auto px-6 py-12">
+        <div class="max-w-4xl mx-auto px-4 py-12">
           
           <!-- Page Header -->
           <div class="text-center mb-12">
-            <h1 class="text-4xl font-semibold box-border caret-transparent leading-[45px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-5xl md:leading-[60px] mb-4">Terms and Conditions</h1>
+            <h1 class="font-heading text-4xl font-semibold box-border caret-transparent leading-[45px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-5xl md:leading-[60px] mb-4">Terms and Conditions</h1>
             <p class="text-slate-600 text-lg">Please read these terms carefully before using our service</p>
           </div>
 
@@ -76,8 +167,8 @@
             
             <!-- Service Description -->
             <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Service Description</h2>
-              <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+              <h2 class="font-heading text-2xl font-semibold mb-6 text-zinc-900">Service Description</h2>
+              <div class="bg-blue-50 rounded-[2px] p-6 mb-6">
                 <p class="mb-4">International Driving Advisor provides <strong>translation services</strong> for domestic driver's licenses.</p>
                 <p class="mb-4">We are a <strong>private service provider</strong> and are <strong>not affiliated with any government agency</strong>.</p>
                 <p class="mb-0">Our International Driving Permit (IDP) is a <strong>translation document</strong> that must be used alongside your valid domestic driver's license.</p>
@@ -86,15 +177,15 @@
 
             <!-- Acceptance of Terms -->
             <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Acceptance of Terms</h2>
+              <h2 class="font-heading text-2xl font-semibold mb-6 text-zinc-900">Acceptance of Terms</h2>
               <p class="mb-4 text-slate-600">By using our website and services, you agree to these Terms and Conditions. If you do not agree, please do not use our services.</p>
               <p class="text-slate-600">These terms may be updated from time to time. Continued use of our services constitutes acceptance of any changes.</p>
             </section>
 
             <!-- Service Limitations -->
             <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Service Limitations</h2>
-              <div class="bg-amber-50 border border-amber-200 rounded-lg p-6">
+              <h2 class="font-heading text-2xl font-semibold mb-6 text-zinc-900">Service Limitations</h2>
+              <div class="bg-amber-50 rounded-[2px] p-6">
                 <ul class="list-disc pl-6 text-slate-600 space-y-2">
                   <li>Our IDP is <strong>not a replacement</strong> for your domestic driver's license</li>
                   <li>You must <strong>always carry both documents</strong> when driving internationally</li>
@@ -107,18 +198,18 @@
 
             <!-- Payment and Refunds -->
             <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Payment and Refunds</h2>
+              <h2 class="font-heading text-2xl font-semibold mb-6 text-zinc-900">Payment and Refunds</h2>
               <div class="grid gap-6 md:grid-cols-2">
-                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <h3 class="font-semibold text-zinc-900 mb-2">Payment</h3>
+                <div class="bg-success-50 rounded-[2px] p-4">
+                  <h3 class="font-heading font-semibold text-zinc-900 mb-2 text-lg md:text-xl">Payment</h3>
                   <ul class="text-sm text-slate-600 space-y-1">
                     <li>• Payment is due at time of order</li>
                     <li>• We accept major credit cards</li>
                     <li>• All prices are in USD</li>
                   </ul>
                 </div>
-                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <h3 class="font-semibold text-zinc-900 mb-2">Money-Back Guarantee</h3>
+                <div class="bg-success-50 rounded-[2px] p-4">
+                  <h3 class="font-heading font-semibold text-zinc-900 mb-2 text-lg md:text-xl">Money-Back Guarantee</h3>
                   <ul class="text-sm text-slate-600 space-y-1">
                     <li>• 100% refund if not approved</li>
                     <li>• Refund if not accepted anywhere</li>
@@ -130,7 +221,7 @@
 
             <!-- User Responsibilities -->
             <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">User Responsibilities</h2>
+              <h2 class="font-heading text-2xl font-semibold mb-6 text-zinc-900">User Responsibilities</h2>
               <p class="mb-4 text-slate-600">When using our service, you agree to:</p>
               <ul class="list-disc pl-6 mb-4 text-slate-600 space-y-2">
                 <li>Provide accurate and truthful information</li>
@@ -143,15 +234,15 @@
 
             <!-- Intellectual Property -->
             <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Intellectual Property</h2>
+              <h2 class="font-heading text-2xl font-semibold mb-6 text-zinc-900">Intellectual Property</h2>
               <p class="mb-4 text-slate-600">All content on this website, including text, graphics, logos, and software, is owned by International Driving Advisor and protected by copyright laws.</p>
               <p class="text-slate-600">You may not reproduce, distribute, or create derivative works without our written permission.</p>
             </section>
 
             <!-- Limitation of Liability -->
             <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Limitation of Liability</h2>
-              <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+              <h2 class="font-heading text-2xl font-semibold mb-6 text-zinc-900">Limitation of Liability</h2>
+              <div class="bg-red-50 rounded-[2px] p-6">
                 <p class="mb-4 text-slate-600">International Driving Advisor shall not be liable for:</p>
                 <ul class="list-disc pl-6 text-slate-600 space-y-2">
                   <li>Rejection of the IDP by authorities or rental agencies</li>
@@ -165,7 +256,7 @@
 
             <!-- Prohibited Uses -->
             <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Prohibited Uses</h2>
+              <h2 class="font-heading text-2xl font-semibold mb-6 text-zinc-900">Prohibited Uses</h2>
               <p class="mb-4 text-slate-600">You may not use our service to:</p>
               <ul class="list-disc pl-6 mb-4 text-slate-600 space-y-2">
                 <li>Submit false or fraudulent information</li>
@@ -178,22 +269,22 @@
 
             <!-- Governing Law -->
             <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Governing Law</h2>
+              <h2 class="font-heading text-2xl font-semibold mb-6 text-zinc-900">Governing Law</h2>
               <p class="text-slate-600">These Terms and Conditions are governed by the laws of the United States. Any disputes will be resolved in the appropriate courts of the United States.</p>
             </section>
 
             <!-- Contact Information -->
             <section class="mb-12">
-              <h2 class="text-2xl font-semibold mb-6 text-zinc-900">Contact Information</h2>
+              <h2 class="font-heading text-2xl font-semibold mb-6 text-zinc-900">Contact Information</h2>
               <p class="text-slate-600">If you have questions about these Terms and Conditions, please contact us:</p>
-              <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+              <div class="mt-4 p-4 bg-gray-50 rounded-[2px]">
                 <p class="text-slate-600">📧 Email: <strong>hello@internationaldrivingadvisor.com</strong></p>
               </div>
             </section>
 
             <!-- Effective Date -->
             <section class="mb-12">
-              <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center">
+              <div class="bg-gray-50 rounded-[2px] p-4 text-center">
                 <p class="text-slate-600"><strong>Effective Date:</strong> January 1, 2025</p>
                 <p class="text-slate-600 text-sm mt-2">Last updated: January 1, 2025</p>
               </div>
@@ -203,46 +294,8 @@
         </div>
       </main>
 
-      <!-- Footer -->
-      <footer class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border-gray-200 border-t border-solid">
-        <div class="box-border caret-transparent gap-x-8 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-8 mx-auto px-6 py-10 md:grid-cols-[repeat(3,minmax(0px,1fr))]">
-          <div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-            <div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2">
-              <svg class="text-green-500 box-border caret-transparent h-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
-              </svg>
-              <a href="index.html" class="font-semibold box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">International Driving Advisor</a>
-            </div>
-            <p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Your trusted partner for international driving translations.</p>
-          </div>
-          <div class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-            <p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Support</p>
-            <a href="mailto:hello@internationaldrivingadvisor.com" class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-2">
-              <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-17.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-              hello@internationaldrivingadvisor.com
-            </a>
-            <a href="tel:+10000000000" class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-2">
-              <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-18.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-              +1 (000) 000-0000
-            </a>
-          </div>
-          <div class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
-            <p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Legal</p>
-            <p class="text-slate-600 box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">The IDP is a translation of your license and must be used with your valid driver's license.</p>
-            <div class="mt-2 space-y-1">
-              <a href="privacy.html" class="text-green-500 hover:text-green-600 block">Privacy Policy</a>
-              <a href="cookies.html" class="text-green-500 hover:text-green-600 block">Cookie Policy</a>
-              <a href="terms.html" class="text-green-500 hover:text-green-600 block">Terms & Conditions</a>
-              <a href="legal.html" class="text-green-500 hover:text-green-600 block">Legal Disclaimer</a>
-              <a href="refund.html" class="text-green-500 hover:text-green-600 block">Refund Policy</a>
-              <a href="shipping.html" class="text-green-500 hover:text-green-600 block">Shipping & Delivery</a>
-              <a href="about.html" class="text-green-500 hover:text-green-600 block">About Us</a>
-              <a href="faq.html" class="text-green-500 hover:text-green-600 block">FAQ</a>
-            </div>
-          </div>
-        </div>
-        <div class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center border-gray-200 px-6 py-4 border-t border-solid">© 2025 International Driving Advisor. All rights reserved.</div>
-      </footer>
+      <!-- Footer Component -->
+      <div data-component="footer"></div>
     </div>
   </div>
 </body>
