@@ -152,12 +152,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (basePath) {
           html = html.replace(/src="images\//g, `src="${basePath}/images/`);
         }
+        // Translate header content before inserting
+        html = translateHeaderHtml(html, currentLang);
         element.outerHTML = html;
         // After header loads, initialize language features
         setTimeout(() => {
           initLanguageSelector(currentLang, basePath);
           updateNavigationLinks(currentLang, basePath);
-          translateHeader(currentLang, basePath);
         }, 0);
       })
       .catch(error => {
@@ -175,11 +176,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (basePath) {
           html = html.replace(/src="images\//g, `src="${basePath}/images/`);
         }
+        // Translate footer content before inserting
+        html = translateFooterHtml(html, currentLang);
         element.outerHTML = html;
-        // Update footer for current language
-        setTimeout(() => {
-          translateFooter(currentLang, basePath);
-        }, 0);
       })
       .catch(error => {
         console.error('Error loading footer component:', error);
@@ -340,121 +339,56 @@ function updateNavigationLinks(currentLang, basePath) {
   });
 }
 
-// Translate header text based on current language
-function translateHeader(currentLang, basePath) {
-  const t = TRANSLATIONS[currentLang].nav;
-  const header = document.querySelector('header');
-  if (!header) return;
+// Translate header HTML string before insertion (more reliable than DOM manipulation)
+function translateHeaderHtml(html, currentLang) {
+  if (currentLang === 'en') return html; // No translation needed for English
 
-  // Translate navigation links
-  const navLinks = header.querySelectorAll('[data-nav-link]');
-  navLinks.forEach(link => {
-    const linkType = link.getAttribute('data-nav-link');
-    switch (linkType) {
-      case 'works':
-        link.childNodes.forEach(node => {
-          if (node.nodeType === Node.TEXT_NODE) {
-            node.textContent = t.howItWorks;
-          }
-        });
-        if (link.childNodes.length === 1) link.textContent = t.howItWorks;
-        break;
-      case 'pricing':
-        link.childNodes.forEach(node => {
-          if (node.nodeType === Node.TEXT_NODE) {
-            node.textContent = t.pricing;
-          }
-        });
-        if (link.childNodes.length === 1) link.textContent = t.pricing;
-        break;
-      case 'faq':
-        link.childNodes.forEach(node => {
-          if (node.nodeType === Node.TEXT_NODE) {
-            node.textContent = t.faq;
-          }
-        });
-        if (link.childNodes.length === 1) link.textContent = t.faq;
-        break;
-      case 'contact':
-        link.childNodes.forEach(node => {
-          if (node.nodeType === Node.TEXT_NODE) {
-            node.textContent = t.contact;
-          }
-        });
-        if (link.childNodes.length === 1) link.textContent = t.contact;
-        break;
-      case 'cta':
-        // Update CTA button text (preserve the icon)
-        const ctaText = link.childNodes[0];
-        if (ctaText && ctaText.nodeType === Node.TEXT_NODE) {
-          ctaText.textContent = t.getYourIdp + ' ';
-        } else {
-          // Find first text node
-          for (let i = 0; i < link.childNodes.length; i++) {
-            if (link.childNodes[i].nodeType === Node.TEXT_NODE) {
-              link.childNodes[i].textContent = t.getYourIdp + ' ';
-              break;
-            }
-          }
-        }
-        break;
-    }
-  });
+  const t = TRANSLATIONS[currentLang].nav;
+
+  // Navigation links
+  html = html.replace('>How it works</a>', `>${t.howItWorks}</a>`);
+  html = html.replace('>Pricing</a>', `>${t.pricing}</a>`);
+  html = html.replace('>FAQ</a>', `>${t.faq}</a>`);
+  html = html.replace('>Contact Us</a>', `>${t.contact}</a>`);
+
+  // CTA button - need to preserve the icon
+  html = html.replace(/Get Your IDP\s*<img/g, `${t.getYourIdp} <img`);
+
+  return html;
 }
 
-// Translate footer text based on current language
-function translateFooter(currentLang, basePath) {
+// Translate footer HTML string before insertion (more reliable than DOM manipulation)
+function translateFooterHtml(html, currentLang) {
+  if (currentLang === 'en') return html; // No translation needed for English
+
   const t = TRANSLATIONS[currentLang].footer;
-  const footer = document.querySelector('footer');
-  if (!footer) return;
 
-  // Get all paragraph elements and links
-  const allElements = footer.querySelectorAll('p, a');
+  // Section headers
+  html = html.replace('>Support</p>', `>${t.support}</p>`);
+  html = html.replace('>Company</p>', `>${t.company}</p>`);
+  html = html.replace('>Legal</p>', `>${t.legal}</p>`);
 
-  allElements.forEach(el => {
-    const text = el.textContent.trim();
+  // Tagline
+  html = html.replace('>Your trusted partner for international driving translations.</p>', `>${t.tagline}</p>`);
 
-    // Translate section headers
-    if (text === 'Support' || text === 'Soporte' || text === 'Supporto') {
-      el.textContent = t.support;
-    } else if (text === 'Company' || text === 'Empresa' || text === 'Entreprise' || text === 'Azienda') {
-      el.textContent = t.company;
-    } else if (text === 'Legal' || text === 'Mentions Légales' || text === 'Legale') {
-      el.textContent = t.legal;
-    }
-    // Translate tagline
-    else if (text.includes('trusted partner') || text.includes('socio de confianza') || text.includes('partenaire de confiance') || text.includes('partner di fiducia')) {
-      el.textContent = t.tagline;
-    }
-    // Translate company links
-    else if (text === 'About Us' || text === 'Sobre Nosotros' || text === 'À Propos' || text === 'Chi Siamo') {
-      el.textContent = t.aboutUs;
-    } else if (text === 'Contact' || text === 'Contacto' || text === 'Contatti') {
-      el.textContent = t.contact;
-    } else if (text === 'FAQ' || text === 'Preguntas Frecuentes') {
-      el.textContent = t.faq;
-    }
-    // Translate legal links
-    else if (text === 'Privacy Policy' || text === 'Política de Privacidad' || text === 'Politique de Confidentialité' || text === 'Informativa sulla Privacy') {
-      el.textContent = t.privacyPolicy;
-    } else if (text === 'Cookie Policy' || text === 'Política de Cookies' || text === 'Politique des Cookies' || text === 'Politica sui Cookie') {
-      el.textContent = t.cookiePolicy;
-    } else if (text === 'Terms & Conditions' || text === 'Términos y Condiciones' || text === 'Conditions Générales' || text === 'Termini e Condizioni') {
-      el.textContent = t.termsConditions;
-    } else if (text === 'Legal Disclaimer' || text === 'Aviso Legal' || text === 'Avertissement Juridique' || text === 'Disclaimer Legale') {
-      el.textContent = t.legalDisclaimer;
-    } else if (text === 'Refund Policy' || text === 'Política de Reembolso' || text === 'Politique de Remboursement' || text === 'Politica Rimborsi') {
-      el.textContent = t.refundPolicy;
-    } else if (text === 'Shipping & Delivery' || text === 'Envío y Entrega' || text === 'Expédition et Livraison' || text === 'Spedizione e Consegna') {
-      el.textContent = t.shippingDelivery;
-    }
-    // Translate copyright
-    else if (text.includes('© 2025') || text.includes('All rights reserved') || text.includes('Todos los derechos') || text.includes('Tous droits') || text.includes('Tutti i diritti')) {
-      el.textContent = t.copyright;
-    }
-    // Translate disclaimer
-    else if (text.includes('Legal Disclaimer:') || text.includes('Aviso Legal:') || text.includes('Avertissement Juridique:') || text.includes('Disclaimer Legale:')) {
-      el.textContent = t.disclaimer;
-    }
-  });
+  // Company links
+  html = html.replace('>About Us</a>', `>${t.aboutUs}</a>`);
+  html = html.replace('>Contact</a>', `>${t.contact}</a>`);
+  html = html.replace('>FAQ</a>', `>${t.faq}</a>`);
+
+  // Legal links
+  html = html.replace('>Privacy Policy</a>', `>${t.privacyPolicy}</a>`);
+  html = html.replace('>Cookie Policy</a>', `>${t.cookiePolicy}</a>`);
+  html = html.replace('>Terms & Conditions</a>', `>${t.termsConditions}</a>`);
+  html = html.replace('>Legal Disclaimer</a>', `>${t.legalDisclaimer}</a>`);
+  html = html.replace('>Refund Policy</a>', `>${t.refundPolicy}</a>`);
+  html = html.replace('>Shipping & Delivery</a>', `>${t.shippingDelivery}</a>`);
+
+  // Copyright
+  html = html.replace('>© 2025 International Driving Advisor. All rights reserved.</p>', `>${t.copyright}</p>`);
+
+  // Disclaimer (use a regex to handle the long text)
+  html = html.replace(/Legal Disclaimer: The document from International Driving Advisor[^<]+/g, t.disclaimer);
+
+  return html;
 }
