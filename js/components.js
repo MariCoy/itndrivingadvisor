@@ -225,24 +225,17 @@ function updateNavigationLinks(currentLang, basePath) {
 
 // Update footer links for current language
 function updateFooterLinks(currentLang, basePath) {
-  if (!basePath) return; // No changes needed for root level
-
   const footer = document.querySelector('footer');
   if (!footer) return;
 
-  // Update all relative links in footer
-  const links = footer.querySelectorAll('a[href]');
-  links.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('mailto:')) {
-      // Prepend basePath to relative links
-      link.href = `${basePath}/${href}`;
+  // Update logo image path only (needs basePath for subdirectories)
+  if (basePath) {
+    const logo = footer.querySelector('img[src*="Advisor_Logo"]');
+    if (logo) {
+      logo.src = `${basePath}/images/Advisor_Logo.svg`;
     }
-  });
-
-  // Update logo image
-  const logo = footer.querySelector('img[src*="Advisor_Logo"]');
-  if (logo) {
-    logo.src = `${basePath}/images/Advisor_Logo.svg`;
   }
+
+  // Note: Footer page links (privacy.html, terms.html, etc.) should NOT be modified
+  // They are relative links that work correctly within each language directory
 }
