@@ -1,19 +1,49 @@
 <header class="sticky backdrop-blur bg-[oklab(0.999994_0.0000455677_0.0000200868_/_0.8)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] z-20 border-gray-200 border-b border-solid top-0">
   <div class="items-center box-border caret-transparent flex justify-between max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto px-4 py-3">
           <div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2">
-            <a href="index.html" class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
+            <a data-nav-link="home" href="index.html" class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">
               <img src="images/Advisor_Logo.svg" alt="International Driving Advisor" class="box-border caret-transparent h-6 md:h-8 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-auto" />
             </a>
           </div>
     <nav class="text-sm items-center box-border caret-transparent gap-x-6 hidden leading-5 min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 md:flex md:min-h-[auto] md:min-w-[auto]">
-      <a href="index.html#works" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">How it works</a>
-      <a href="index.html#pricing" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Pricing</a>
-      <a href="faq.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">FAQ</a>
-      <a href="contact.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Contact Us</a>
+      <a data-nav-link="works" href="index.html#works" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]" data-i18n="nav.howItWorks">How it works</a>
+      <a data-nav-link="pricing" href="index.html#pricing" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]" data-i18n="nav.pricing">Pricing</a>
+      <a data-nav-link="faq" href="faq.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]" data-i18n="nav.faq">FAQ</a>
+      <a data-nav-link="contact" href="contact.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]" data-i18n="nav.contact">Contact Us</a>
     </nav>
-    <a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=header_button" class="text-zinc-50 text-sm items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] box-border caret-transparent gap-x-2 flex leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 px-4 py-2 rounded-[2px]">
-      Get Your IDP
-      <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-3.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-    </a>
+    <div class="flex items-center gap-x-4">
+      <!-- Language Selector Dropdown -->
+      <div class="relative" id="language-selector">
+        <button type="button" id="language-toggle" class="flex items-center gap-x-1 text-sm text-gray-700 hover:text-primary-500 transition-colors px-2 py-1 rounded hover:bg-gray-100">
+          <span id="current-lang-flag">🇬🇧</span>
+          <span id="current-lang-code" class="hidden sm:inline">EN</span>
+          <svg class="w-4 h-4 transition-transform" id="language-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg border border-gray-200 py-1 z-50">
+          <a href="#" data-lang="en" data-lang-path="" class="flex items-center gap-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary-500">
+            <span>🇬🇧</span>
+            <span>English</span>
+          </a>
+          <a href="#" data-lang="es" data-lang-path="/es" class="flex items-center gap-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary-500">
+            <span>🇪🇸</span>
+            <span>Español</span>
+          </a>
+          <a href="#" data-lang="fr" data-lang-path="/fr" class="flex items-center gap-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary-500">
+            <span>🇫🇷</span>
+            <span>Français</span>
+          </a>
+          <a href="#" data-lang="it" data-lang-path="/it" class="flex items-center gap-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary-500">
+            <span>🇮🇹</span>
+            <span>Italiano</span>
+          </a>
+        </div>
+      </div>
+      <a data-nav-link="cta" href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=header_button" class="text-zinc-50 text-sm items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] box-border caret-transparent gap-x-2 flex leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 px-4 py-2 rounded-[2px]" data-i18n="nav.getYourIdp">
+        Get Your IDP
+        <img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-3.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+      </a>
+    </div>
   </div>
 </header>
