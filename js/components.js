@@ -148,6 +148,10 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(`${componentsPath}/header.html`)
       .then(response => response.text())
       .then(html => {
+        // Fix asset paths in HTML before inserting
+        if (basePath) {
+          html = html.replace(/src="images\//g, `src="${basePath}/images/`);
+        }
         element.outerHTML = html;
         // After header loads, initialize language features
         setTimeout(() => {
@@ -167,10 +171,13 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(`${componentsPath}/footer.html`)
       .then(response => response.text())
       .then(html => {
+        // Fix asset paths in HTML before inserting
+        if (basePath) {
+          html = html.replace(/src="images\//g, `src="${basePath}/images/`);
+        }
         element.outerHTML = html;
-        // Update footer links for current language
+        // Update footer for current language
         setTimeout(() => {
-          updateFooterLinks(currentLang, basePath);
           translateFooter(currentLang, basePath);
         }, 0);
       })
@@ -393,26 +400,6 @@ function translateHeader(currentLang, basePath) {
         break;
     }
   });
-}
-
-// Update footer links and translate text for current language
-function updateFooterLinks(currentLang, basePath) {
-  const footer = document.querySelector('footer');
-  if (!footer) return;
-
-  // Update logo image path (needs basePath for subdirectories)
-  if (basePath) {
-    const logos = footer.querySelectorAll('img');
-    logos.forEach(img => {
-      const src = img.getAttribute('src');
-      if (src && src.includes('Advisor_Logo')) {
-        img.src = `${basePath}/images/Advisor_Logo.svg`;
-      }
-    });
-  }
-
-  // Note: Footer page links (privacy.html, terms.html, etc.) should NOT be modified
-  // They are relative links that work correctly within each language directory
 }
 
 // Translate footer text based on current language
