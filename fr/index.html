@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obtenez votre Traduction Certifiée en Quelques Minutes ! - International Driving Advisor</title>
+  <link rel="icon" type="image/svg+xml" href="../images/fav.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+  <script src="../js/components.js"></script>
+<script>
+  tailwind.config = {
+  content: [],
+  theme: {
+    extend: {
+      borderRadius: {
+        'DEFAULT': '2px',
+      },
+      fontFamily: {
+        inter_var: [
+          'Inter var',
+          'Inter',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'Noto Sans',
+          'sans-serif',
+          'Apple Color Emoji',
+          'Segoe UI Emoji',
+          'Segoe UI Symbol',
+          'Noto Color Emoji',
+        ],
+        heading: [
+          'Instrument Serif',
+          'ui-serif',
+          'Georgia',
+          'Cambria',
+          'Times New Roman',
+          'serif',
+        ],
+      },
+      colors: {
+        primary: {
+          50: '#E4E5F4',
+          100: '#D0D1EB',
+          200: '#A7A9D9',
+          300: '#7D80C7',
+          400: '#5458B5',
+          500: '#2B30A3',
+          600: '#222682',
+          700: '#1A1D62',
+          800: '#111341',
+          900: '#090A21',
+        },
+        secondary: {
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+          300: '#cbd5e1',
+          400: '#94a3b8',
+          500: '#64748b',
+          600: '#475569',
+          700: '#334155',
+          800: '#1e293b',
+          900: '#0f172a',
+        },
+        neutral: {
+          50: '#fafafa',
+          100: '#f4f4f5',
+          200: '#e4e4e7',
+          300: '#d4d4d8',
+          400: '#a1a1aa',
+          500: '#71717a',
+          600: '#52525b',
+          700: '#3f3f46',
+          800: '#27272a',
+          900: '#18181b',
+        },
+        gray: {
+          50: '#f9fafb',
+          100: '#f3f4f6',
+          200: '#e5e7eb',
+          300: '#d1d5db',
+          400: '#9ca3af',
+          500: '#6b7280',
+          600: '#4b5563',
+          700: '#374151',
+          800: '#1f2937',
+          900: '#111827',
+        },
+        success: {
+          50: '#CDE7CF',
+          100: '#BCDBBD',
+          200: '#98C49A',
+          300: '#75AC78',
+          400: '#519555',
+          500: '#2E7D32',
+          600: '#256428',
+          700: '#1C4B1E',
+          800: '#123214',
+          900: '#09190A',
+        },
+        error: {
+          50: '#fef2f2',
+          100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#ef4444',
+          600: '#dc2626',
+          700: '#b91c1c',
+          800: '#991b1b',
+          900: '#7f1d1d',
+        },
+      },
+    },
+  },
+};
+</script>
+
+<script>
+function validateForm() {
+  let isValid = true;
+
+  // Get form field values
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const countryTravel = document.getElementById('countryTravel').value;
+
+  // Reset error states
+  document.getElementById('firstNameError').classList.add('hidden');
+  document.getElementById('lastNameError').classList.add('hidden');
+  document.getElementById('emailError').classList.add('hidden');
+  document.getElementById('countryError').classList.add('hidden');
+
+  // Reset field styles
+  document.getElementById('firstName').classList.remove('border-red-500');
+  document.getElementById('lastName').classList.remove('border-red-500');
+  document.getElementById('email').classList.remove('border-red-500');
+  document.getElementById('countryTravel').classList.remove('border-red-500');
+
+  // Validate first name
+  if (!firstName || firstName.length < 2) {
+    document.getElementById('firstNameError').classList.remove('hidden');
+    document.getElementById('firstName').classList.add('border-red-500');
+    isValid = false;
+  }
+
+  // Validate last name
+  if (!lastName || lastName.length < 2) {
+    document.getElementById('lastNameError').classList.remove('hidden');
+    document.getElementById('lastName').classList.add('border-red-500');
+    isValid = false;
+  }
+
+  // Validate email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email || !emailRegex.test(email)) {
+    document.getElementById('emailError').classList.remove('hidden');
+    document.getElementById('email').classList.add('border-red-500');
+    isValid = false;
+  }
+
+  // Validate country
+  if (!countryTravel || !countries.includes(countryTravel)) {
+    document.getElementById('countryError').classList.remove('hidden');
+    document.getElementById('countryTravel').classList.add('border-red-500');
+    isValid = false;
+  }
+
+  return isValid;
+}
+
+function submitForm() {
+  // Validate form first
+  if (!validateForm()) {
+    // Scroll to first error
+    const firstError = document.querySelector('.border-red-500');
+    if (firstError) {
+      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstError.focus();
+    }
+    return;
+  }
+
+  // Get form field values
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const countryTravel = document.getElementById('countryTravel').value;
+
+  // Build the URL with parameters
+  const baseUrl = 'https://idpcheckout.fillout.com/t/2ESX5foenCus';
+  const params = new URLSearchParams({
+    first_name: firstName,
+    last_name: lastName,
+    email: email,
+    country_travel: countryTravel
+  });
+
+  // Redirect to external form with parameters
+  window.open(`${baseUrl}?${params.toString()}`, '_blank');
+}
+
+// Countries list for autocomplete
+const countries = [
+  "Afghanistan", "Albania", "Algeria", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
+  "Bahrain", "Bangladesh", "Belarus", "Belgium", "Benin", "Bolivia", "Bosnia and Herzegovina", "Botswana",
+  "Brazil", "Bulgaria", "Cambodia", "Canada", "Chile", "China", "Colombia", "Costa Rica", "Croatia",
+  "Cyprus", "Czech Republic", "Denmark", "Dominican Republic", "Ecuador", "Egypt", "Estonia", "Finland",
+  "France", "Georgia", "Germany", "Ghana", "Greece", "Guatemala", "Haiti", "Hungary", "Iceland", "India",
+  "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan",
+  "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Lithuania",
+  "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Mali", "Malta", "Mexico", "Moldova", "Monaco",
+  "Mongolia", "Montenegro", "Morocco", "Namibia", "Nepal", "Netherlands", "New Zealand", "Niger", "Nigeria",
+  "North Macedonia", "Norway", "Pakistan", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Romania",
+  "Russia", "Rwanda", "San Marino", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone",
+  "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sri Lanka", "Sweden",
+  "Switzerland", "Syria", "Tajikistan", "Thailand", "Togo", "Tunisia", "Turkey", "Turkmenistan", "Uganda",
+  "Ukraine", "United Arab Emirates", "United Kingdom", "Uruguay", "Uzbekistan", "Vatican City", "Venezuela",
+  "Vietnam", "Zimbabwe"
+];
+
+// Country autocomplete functionality
+function initCountryAutocomplete() {
+  const input = document.getElementById('countryTravel');
+  const dropdown = document.getElementById('countryDropdown');
+  let selectedIndex = -1;
+  let filteredCountries = [];
+
+  function filterCountries(query) {
+    if (!query) return countries;
+    return countries.filter(country =>
+      country.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
+  function showDropdown(countries) {
+    dropdown.innerHTML = '';
+    if (countries.length === 0) {
+      dropdown.classList.add('hidden');
+      return;
+    }
+
+    countries.forEach((country, index) => {
+      const option = document.createElement('div');
+      option.className = 'px-3 py-2 cursor-pointer hover:bg-gray-100 text-sm';
+      option.textContent = country;
+      option.addEventListener('click', () => selectCountry(country));
+      dropdown.appendChild(option);
+    });
+
+    dropdown.classList.remove('hidden');
+  }
+
+  function selectCountry(country) {
+    input.value = country;
+    dropdown.classList.add('hidden');
+    input.classList.remove('border-red-500');
+    document.getElementById('countryError').classList.add('hidden');
+    selectedIndex = -1;
+  }
+
+  function highlightOption(index) {
+    const options = dropdown.querySelectorAll('div');
+    options.forEach((option, i) => {
+      if (i === index) {
+        option.classList.add('bg-primary-50', 'text-primary-600');
+      } else {
+        option.classList.remove('bg-primary-50', 'text-primary-600');
+      }
+    });
+  }
+
+  input.addEventListener('input', function() {
+    const query = this.value.trim();
+    filteredCountries = filterCountries(query);
+    showDropdown(filteredCountries);
+    selectedIndex = -1;
+
+    // Real-time validation
+    if (query && countries.includes(query)) {
+      this.classList.remove('border-red-500');
+      document.getElementById('countryError').classList.add('hidden');
+    }
+  });
+
+  input.addEventListener('keydown', function(e) {
+    if (!dropdown.classList.contains('hidden')) {
+      switch(e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          selectedIndex = Math.min(selectedIndex + 1, filteredCountries.length - 1);
+          highlightOption(selectedIndex);
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          selectedIndex = Math.max(selectedIndex - 1, -1);
+          highlightOption(selectedIndex);
+          break;
+        case 'Enter':
+          e.preventDefault();
+          if (selectedIndex >= 0 && filteredCountries[selectedIndex]) {
+            selectCountry(filteredCountries[selectedIndex]);
+          }
+          break;
+        case 'Escape':
+          dropdown.classList.add('hidden');
+          selectedIndex = -1;
+          break;
+      }
+    }
+  });
+
+  // Hide dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.classList.add('hidden');
+      selectedIndex = -1;
+    }
+  });
+
+  // Focus handling
+  input.addEventListener('focus', function() {
+    if (this.value.trim()) {
+      filteredCountries = filterCountries(this.value.trim());
+      showDropdown(filteredCountries);
+    }
+  });
+}
+
+// Add real-time validation
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize country autocomplete
+  initCountryAutocomplete();
+
+  // Add input event listeners for real-time validation
+  document.getElementById('firstName').addEventListener('input', function() {
+    if (this.value.trim().length >= 2) {
+      this.classList.remove('border-red-500');
+      document.getElementById('firstNameError').classList.add('hidden');
+    }
+  });
+
+  document.getElementById('lastName').addEventListener('input', function() {
+    if (this.value.trim().length >= 2) {
+      this.classList.remove('border-red-500');
+      document.getElementById('lastNameError').classList.add('hidden');
+    }
+  });
+
+  document.getElementById('email').addEventListener('input', function() {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(this.value.trim())) {
+      this.classList.remove('border-red-500');
+      document.getElementById('emailError').classList.add('hidden');
+    }
+  });
+
+  document.getElementById('countryTravel').addEventListener('input', function() {
+    if (this.value && countries.includes(this.value)) {
+      this.classList.remove('border-red-500');
+      document.getElementById('countryError').classList.add('hidden');
+    }
+  });
+});
+
+// Carousel functionality removed - now using static image
+
+// Initialize page when loads
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Pricing tabs functionality
+  const pricingTabs = document.querySelectorAll('.pricing-tab');
+
+  pricingTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      // Remove selected state from all tabs
+      pricingTabs.forEach(t => {
+        t.classList.remove('text-neutral-50', 'bg-[linear-gradient(rgb(40,164,106)_0%,oklab(0.638374_-0.127061_0.0523999_/_0.8)_100%)]', 'border-transparent');
+        t.classList.add('border-gray-200');
+
+        // Reset text colors
+        const spans = t.querySelectorAll('span, p');
+        spans.forEach(span => {
+          span.classList.remove('text-neutral-50', 'text-gray-100');
+          span.classList.add('text-slate-600');
+        });
+      });
+
+      // Add selected state to clicked tab
+      this.classList.add('text-neutral-50', 'bg-[linear-gradient(rgb(40,164,106)_0%,oklab(0.638374_-0.127061_0.0523999_/_0.8)_100%)]', 'border-transparent');
+      this.classList.remove('border-gray-200');
+
+      // Update text colors for selected tab
+      const spans = this.querySelectorAll('span, p');
+      spans.forEach(span => {
+        span.classList.remove('text-slate-600');
+        span.classList.add('text-neutral-50');
+      });
+
+      // Update the second paragraph to gray-100
+      const secondP = this.querySelector('p:last-child');
+      if (secondP) {
+        secondP.classList.remove('text-neutral-50');
+        secondP.classList.add('text-gray-100');
+      }
+    });
+  });
+});
+
+// Smooth scroll with offset for fixed header
+document.addEventListener('DOMContentLoaded', function() {
+  // Handle anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#' || href === '') return;
+
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        e.preventDefault();
+        const headerHeight = document.querySelector('header').offsetHeight || 80;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Handle hash in URL on page load
+  if (window.location.hash) {
+    setTimeout(() => {
+      const targetId = window.location.hash.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const headerHeight = document.querySelector('header').offsetHeight || 80;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
+  }
+});
+</script>
+<style>
+  html {
+    scroll-padding-top: 100px;
+  }
+  #works, #pricing {
+    scroll-margin-top: 100px;
+  }
+</style>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TH623PVZ');</script>
+<!-- End Google Tag Manager -->
+</head>
+<body class="fill-white text-base not-italic normal-nums font-normal accent-auto bg-white box-border caret-transparent flex h-full tracking-[normal] leading-6 list-outside list-disc min-h-[1000px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none text-start indent-[0px] normal-case visible w-full overflow-auto border-separate font-inter_var">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TH623PVZ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="box-border caret-transparent h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none w-full"><div class="bg-white box-border caret-transparent min-h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full"><header class="sticky backdrop-blur bg-[oklab(0.999994_0.0000455677_0.0000200868_/_0.8)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] z-20 border-gray-200 border-b border-solid top-0"><div class="items-center box-border caret-transparent flex justify-between max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto px-4 py-3"><div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2">
+<img src="../images/Advisor_Logo.svg" alt="International Driving Advisor" class="box-border caret-transparent h-6 md:h-8 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-auto" />
+</div>
+<nav class="text-sm items-center box-border caret-transparent gap-x-6 hidden leading-5 min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 md:flex md:min-h-[auto] md:min-w-[auto]"><a href="#works" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Comment ça marche</a>
+<a href="#pricing" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Tarifs</a>
+<a href="faq.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">FAQ</a>
+<a href="contact.html" class="box-border caret-transparent inline min-h-0 min-w-0 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:block md:min-h-[auto] md:min-w-[auto]">Contactez-Nous</a>
+</nav>
+<a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=header_button" class="text-zinc-50 text-sm items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] box-border caret-transparent gap-x-2 flex leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 px-4 py-2 rounded-[2px]">Obtenez votre PCI<img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-3.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+</a>
+</div>
+</header>
+<main class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><section class="relative box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overflow-hidden bg-primary-50"><div class="absolute bg-[url('https://storage.googleapis.com/storage.magicpath.ai/user/321092292427538432/assets/world-dots-hero.png')] bg-no-repeat bg-cover box-border caret-transparent opacity-25 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] -z-10 bg-center inset-0 md:opacity-30"></div>
+<div class="absolute bg-[linear-gradient(rgba(234,244,240,1)_0%,rgba(234,244,240,0.7)_50%,rgba(234,244,240,1)_100%)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] -z-10 inset-0"></div>
+<div class="items-start box-border caret-transparent gap-x-10 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-10 mx-auto pt-[40px] md:pt-[65px] pb-[40px] md:pb-[50px] px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h1 class="font-heading text-[40px] font-semibold box-border caret-transparent leading-[45px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-[64px] md:leading-[72px]">Conduisez en toute confiance à l'étranger. Obtenez votre Traduction Certifiée en Quelques Minutes !</h1>
+<p class="text-slate-600 box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-3"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Reconnu dans plus de 190 pays, nos traductions certifiées de permis de conduire rendent la conduite internationale simple, sûre et sans stress.</span>
+</p>
+<div class="box-border caret-transparent gap-x-3 flex flex-col outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3 mt-6 md:flex-row"><a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=hero_button" class="text-zinc-50 text-sm items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.1)_0px_4px_6px_-4px] box-border caret-transparent flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] px-5 py-3 rounded-[2px]"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Postuler en 3 Minutes</span>
+</a>
+<a href="#what-you-receive" class="text-sm items-center box-border caret-transparent flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] bg-white border border-gray-200 px-5 py-3 rounded-[2px] border-solid shadow-sm"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Voir les Fonctionnalités</span>
+</a>
+</div>
+<div class="text-slate-600 text-xs items-center box-border caret-transparent gap-x-2 flex flex-wrap justify-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-6 md:text-sm md:leading-5 md:gap-x-4 md:justify-start md:flex-nowrap"><div class="items-center box-border caret-transparent gap-x-1 flex justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent whitespace-nowrap outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Garantie satisfait ou remboursé</span>
+</div>
+<div class="items-center box-border caret-transparent gap-x-1 flex justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent whitespace-nowrap outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Aucuns frais cachés</span>
+</div>
+<div class="items-center box-border caret-transparent gap-x-1 flex justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent whitespace-nowrap outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Support 24/7</span>
+</div>
+</div>
+</div>
+<aside class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-[2px] border-solid"><div class="items-center box-border caret-transparent flex justify-between outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><h2 class="font-heading text-lg font-semibold box-border caret-transparent leading-7 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Démarrer la Demande</h2>
+</div>
+<span class="text-xs box-border caret-transparent block leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-2 py-1 rounded-[3.35544e+07px] border-solid">Étape 1 de 3</span>
+</div>
+<form aria-label="IDP application step 1" class="box-border caret-transparent gap-x-4 grid outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 mt-4"><div class="text-sm box-border caret-transparent gap-x-2 grid grid-cols-2 leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2">
+<label class="box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Prénom <span class="text-red-500">*</span></span>
+<input id="firstName" aria-label="First Name" placeholder="Marie" required class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[2px] border-solid focus:border-primary-300 focus:ring-1 focus:ring-primary-300" />
+<span id="firstNameError" class="text-red-500 text-xs hidden">Le prénom est requis</span>
+</label>
+<label class="box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Nom <span class="text-red-500">*</span></span>
+<input id="lastName" aria-label="Last Name" placeholder="Dupont" required class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[2px] border-solid focus:border-primary-300 focus:ring-1 focus:ring-primary-300" />
+<span id="lastNameError" class="text-red-500 text-xs hidden">Le nom est requis</span>
+</label>
+</div>
+<label class="text-sm box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">E-mail <span class="text-red-500">*</span></span>
+<input id="email" aria-label="Email" placeholder="marie@exemple.fr" type="email" required class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[2px] border-solid focus:border-primary-300 focus:ring-1 focus:ring-primary-300" />
+<span id="emailError" class="text-red-500 text-xs hidden">Veuillez entrer une adresse e-mail valide</span>
+<span class="text-slate-600 text-xs box-border caret-transparent block leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Nous vous enverrons votre PCI numérique ici.</span>
+</label>
+<label class="text-sm box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Pays de Destination <span class="text-red-500">*</span></span>
+<div class="relative">
+<input id="countryTravel" aria-label="Country of Travel" placeholder="Tapez pour rechercher des pays..." required class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-[2px] border-solid focus:border-primary-300 focus:ring-1 focus:ring-primary-300 bg-white" autocomplete="off" />
+<div id="countryDropdown" class="absolute z-50 w-full bg-white border border-gray-200 rounded-[2px] shadow-lg max-h-60 overflow-y-auto hidden">
+</div>
+</div>
+<span id="countryError" class="text-red-500 text-xs hidden">Veuillez sélectionner un pays de destination valide</span>
+</label>
+<button type="button" onclick="submitForm()" class="text-zinc-50 text-sm items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] caret-transparent flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-2 px-4 py-3 rounded-[2px]">Démarrer la Demande</button>
+<div class="text-slate-600 text-xs items-center box-border caret-transparent flex flex-wrap justify-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-x-4 gap-y-2 md:gap-x-6"><div class="items-center box-border caret-transparent gap-x-1 flex justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><div class="box-border caret-transparent h-3.5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-3.5" style="mask: url('https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-6.svg') no-repeat center; mask-size: contain; -webkit-mask: url('https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-6.svg') no-repeat center; -webkit-mask-size: contain; background-color: #2E7D32;"></div>
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Vos données sont sécurisées</span>
+</div>
+<div class="items-center box-border caret-transparent gap-x-1 flex justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-7.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-3.5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-3.5" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">100% Garantie Satisfait ou Remboursé</span>
+</div>
+</div>
+</form>
+</aside>
+</div>
+</section>
+<section aria-label="key benefits" class="box-border caret-transparent max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto pt-5 pb-[90px] px-4"><div class="box-border caret-transparent gap-x-4 grid grid-cols-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[2px] border-solid"><div class="items-start box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-8.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" />
+<div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h3 class="font-heading text-[20px] md:text-[24px] font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Légalement Reconnu</h3>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Accepté dans plus de 150 pays en complément de votre permis de conduire valide.</p>
+</div>
+</div>
+</div>
+<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[2px] border-solid"><div class="items-start box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-9.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" />
+<div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h3 class="font-heading text-[20px] md:text-[24px] font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Traitement Rapide</h3>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Postulez en quelques minutes. Copie numérique livrée en 2 heures.</p>
+</div>
+</div>
+</div>
+<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[2px] border-solid"><div class="items-start box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-10.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" />
+<div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h3 class="font-heading text-[20px] md:text-[24px] font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Plus de 20 Langues</h3>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Traductions professionnelles pour des locations de voiture sans tracas à l'étranger.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="how and languages" class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-start box-border caret-transparent gap-x-10 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-10 mx-auto pt-[60px] pb-[55px] px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h2 id="works" class="font-heading text-[32px] font-semibold box-border caret-transparent leading-[40px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-[40px] md:leading-[48px]">Comment ça Marche</h2>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Nous avons simplifié le processus pour que vous puissiez prendre la route plus rapidement.</span>
+</p>
+<ol class="box-border caret-transparent list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-6 pl-0"><li class="items-center box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3 text-left mb-4"><span class="text-success-500 text-xs font-semibold items-center bg-[oklab(0.638374_-0.127061_0.0523999_/_0.1)] box-border caret-transparent grid shrink-0 h-7 justify-items-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-7 rounded-[3.35544e+07px]">1</span>
+<p class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Complétez la demande de 3 minutes</span>
+</p>
+</li>
+<li class="items-center box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3 text-left mb-4"><span class="text-success-500 text-xs font-semibold items-center bg-[oklab(0.638374_-0.127061_0.0523999_/_0.1)] box-border caret-transparent grid shrink-0 h-7 justify-items-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-7 rounded-[3.35544e+07px]">2</span>
+<p class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Téléchargez votre permis de conduire valide</span>
+</p>
+</li>
+<li class="items-center box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3 text-left"><span class="text-success-500 text-xs font-semibold items-center bg-[oklab(0.638374_-0.127061_0.0523999_/_0.1)] box-border caret-transparent grid shrink-0 h-7 justify-items-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-7 rounded-[3.35544e+07px]">3</span>
+<p class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Recevez votre PCI numérique par e-mail</span>
+</p>
+</li>
+</ol>
+</div>
+<aside class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-[2px] border-solid"><h4 class="font-heading font-semibold text-[24px] leading-[32px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Langues Prises en Charge</h4>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Anglais, espagnol, français, allemand, italien, portugais, arabe, chinois, japonais, coréen et plus encore.</span>
+</p>
+<ul class="box-border caret-transparent gap-x-2 flex flex-wrap list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-4 pl-0"><li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇺🇸</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">en</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇪🇸</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">es</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇫🇷</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">fr</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇩🇪</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">de</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇮🇹</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">it</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇵🇹</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">pt</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇸🇦</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">ar</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇯🇵</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">ja</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇰🇷</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">ko</span>
+</li>
+<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇨🇳</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">zh</span>
+</li>
+</ul>
+</aside>
+</div>
+</section>
+<section aria-label="what you receive" class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-center box-border caret-transparent gap-x-10 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-10 mx-auto px-4 py-12 md:grid-cols-[repeat(2,minmax(0px,1fr))] md:py-16"><figure class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="aspect-[4_/_3] bg-[oklab(0.984579_-0.000600815_-0.00156349_/_0.4)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full overflow-hidden rounded-[2px]"><div class="box-border caret-transparent h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full"><picture class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><img alt="Couverture et pages intérieures du livret PCI sur un bureau" src="https://internationaldrivingadvisor.com/images/advisor-booklet.png" class="box-border caret-transparent h-full max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full rounded-[2px]" /></picture></div></div><figcaption class="text-secondary-500 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-3">Aperçu du document international de conduite numérique que vous recevrez.</figcaption></figure>
+<div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h2 id="what-you-receive" class="font-heading text-[32px] font-semibold box-border caret-transparent leading-[40px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-[40px] md:leading-[48px]">Ce que vous recevrez</h2>
+<ul class="text-sm box-border caret-transparent leading-5 list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4 pl-0"><li class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Valide dans plus de 150 pays</span>
+</li>
+<li class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Disponible dans votre langue</span>
+</li>
+<li class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Validité : 12 mois à partir de l'émission</span>
+</li>
+</ul>
+<div class="text-slate-600 text-xs items-center box-border caret-transparent gap-x-2 flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-4"><span class="box-border caret-transparent flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overflow-hidden"><span class="bg-[oklab(0.214881_-0.00419383_-0.00736864_/_0.1)] box-border caret-transparent hidden h-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]"></span>
+<img sizes="20px" alt="Drapeau des États-Unis" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/Flag_of_the_United_States.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]" />
+<img sizes="20px" alt="Drapeau de la France" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/Flag_of_France.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]" />
+<img sizes="20px" alt="Drapeau de l'Allemagne" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/Flag_of_Germany.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]" />
+<img sizes="20px" alt="Drapeau de l'Italie" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/Flag_of_Italy.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]" />
+<img sizes="20px" alt="Drapeau de l'Espagne" src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/Flag_of_Spain.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 rounded-[3.35544e+07px]" />
+</span>
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Les drapeaux représentent la couverture. Liste exacte fournie après l'achat.</span>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="pricing options" class="box-border caret-transparent max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto pt-16 pb-12 px-4 md:pb-16"><header class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mb-6"><p class="text-slate-600 text-xs font-semibold box-border caret-transparent justify-center tracking-[0.3px] leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center uppercase"><span id="pricing" class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Tarification Sans Risque :</span>
+</p>
+<h2 class="font-heading text-[32px] font-semibold box-border caret-transparent justify-center leading-[40px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-1 md:text-[40px] md:leading-[48px]"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Garantie Satisfait ou Remboursé à 100%</span>
+</h2>
+<p class="text-slate-600 text-sm box-border caret-transparent justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-2"><span class="box-border caret-transparent justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Remboursement complet si non accepté n'importe où, plus remplacements gratuits illimités.</span>
+</p>
+</header>
+<div class="text-xs box-border caret-transparent gap-x-2 grid grid-cols-[repeat(3,minmax(0px,1fr))] leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-center mb-4 md:text-sm md:leading-5"><button type="button" class="pricing-tab text-xs text-neutral-50 bg-[linear-gradient(rgb(40,164,106)_0%,oklab(0.638374_-0.127061_0.0523999_/_0.8)_100%)] box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-transparent px-3 py-2 rounded-[3.35544e+07px] border-solid md:text-sm md:leading-5 cursor-pointer transition-all duration-200" data-duration="3"><span class="text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">3 ans</span>
+<p class="text-gray-100 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">Expire en 2028</p>
+</button>
+<button type="button" class="pricing-tab text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-3 py-2 rounded-[3.35544e+07px] border-solid md:text-sm md:leading-5 cursor-pointer transition-all duration-200 hover:border-primary-300" data-duration="2"><span class="text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">2 ans</span>
+<p class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">Expire en 2027</p>
+</button>
+<button type="button" class="pricing-tab text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-3 py-2 rounded-[3.35544e+07px] border-solid md:text-sm md:leading-5 cursor-pointer transition-all duration-200 hover:border-primary-300" data-duration="1"><span class="text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">1 an</span>
+<p class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">Expire en 2026</p>
+</button>
+</div>
+<div class="box-border caret-transparent gap-x-6 grid grid-cols-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 pt-[19px] md:grid-cols-[repeat(2,minmax(0px,1fr))]"><article class="relative text-zinc-50 bg-primary-600 box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-[2px] border-solid"><p class="absolute text-gray-800 text-xs font-semibold bg-white box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid left-4 -top-3">Meilleure valeur avec le forfait complet</p>
+<div class="flex items-start gap-4">
+<div class="flex-1">
+<h3 class="font-heading text-[24px] md:text-[32px] font-semibold box-border caret-transparent leading-[32px] md:leading-[40px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">IMPRIMÉ <span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">+ NUMÉRIQUE GRATUIT</span>
+</h3>
+<p class="text-[oklab(0.985059_0.0000448823_0.0000197291_/_0.9)] text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Idéal pour les Voyageurs Longue Durée et les Voyageurs Fréquents</p>
+<p id="print-digital-price" class="text-3xl font-bold box-border caret-transparent tracking-[-0.75px] leading-9 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4 transition-all duration-300">$79</p>
+<p class="text-[oklab(0.985059_0.0000448823_0.0000197291_/_0.8)] text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Expédition calculée au paiement</p>
+<a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=print_digital_button" class="text-gray-900 text-sm font-semibold items-center bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] caret-transparent inline-flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-5 px-4 py-3 rounded-[2px]">Commencer la demande</a>
+</div>
+<div class="flex-shrink-0">
+<img src="../images/print pricing card.png" alt="Carte tarifaire imprimée" class="h-20 md:h-32 w-auto object-contain" />
+</div>
+</div>
+<ul class="text-sm box-border caret-transparent leading-5 list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-6 pl-0"><li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-12.svg" alt="Icon" class="fill-white box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" style="filter: brightness(0) invert(1);" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Accès gratuit à tous les avantages du format PCI numérique inclus</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-12.svg" alt="Icon" class="fill-white box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" style="filter: brightness(0) invert(1);" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Accepté dans plus de 150 pays — Voyagez sans souci</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-12.svg" alt="Icon" class="fill-white box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" style="filter: brightness(0) invert(1);" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Comprend une carte d'identité gratuite avec les détails du permis en anglais</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-12.svg" alt="Icon" class="fill-white box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" style="filter: brightness(0) invert(1);" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Reconnu mondialement et conforme aux normes internationales</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-12.svg" alt="Icon" class="fill-white box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" style="filter: brightness(0) invert(1);" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Essentiel pour les pays non anglophones</span>
+</li>
+</ul>
+</article>
+<article class="relative bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-[2px] border-solid"><p class="absolute text-success-500 text-xs font-semibold bg-white box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid right-4 -top-3">Commencez votre aventure en quelques minutes</p>
+<div class="flex items-start gap-4">
+<div class="flex-1">
+<h3 class="font-heading text-[24px] md:text-[32px] font-semibold box-border caret-transparent leading-[32px] md:leading-[40px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">NUMÉRIQUE SEULEMENT</h3>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Idéal pour les Courts Voyages ou les Plans de Dernière Minute</p>
+<p id="digital-only-price" class="text-3xl font-bold box-border caret-transparent tracking-[-0.75px] leading-9 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4 transition-all duration-300">$59</p>
+<a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=digital_button" class="text-zinc-50 text-sm font-semibold items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] caret-transparent inline-flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-5 px-4 py-3 rounded-[2px]">Commencer la demande</a>
+</div>
+<div class="flex-shrink-0">
+<img src="../images/digital pricing card.png" alt="Carte tarifaire numérique" class="h-20 md:h-32 w-auto object-contain" />
+</div>
+</div>
+<ul class="text-sm box-border caret-transparent leading-5 list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-6 pl-0"><li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Format numérique facilement accessible, accepté dans de nombreux pays</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Peut être obtenu en ligne, processus rapide et facile</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex opacity-60 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-13.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Largement accepté, mais pas dans tous les pays</span>
+</li>
+<li class="items-start box-border caret-transparent gap-x-2 flex opacity-60 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-13.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">N'inclut pas le livret imprimé et la carte plastique complémentaire</span>
+</li>
+</ul>
+</article>
+</div>
+</section>
+<section aria-label="social proof" class="box-border caret-transparent max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto px-4 py-12 md:py-16"><header class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mb-6"><h2 class="font-heading text-[32px] font-semibold box-border caret-transparent justify-center leading-[40px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-1 md:text-[40px] md:leading-[48px]">Ce Que Disent Nos Clients</h2>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2 md:text-base md:leading-6">Découvrez ce que des centaines de clients satisfaits disent de leur expérience de conduite internationale fluide</p></header>
+<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-[2px] border-solid"><div class="[align-items:normal] box-border caret-transparent gap-x-4 flex flex-col justify-normal outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 md:items-center md:flex-row md:justify-between"><div class="text-sm items-center box-border caret-transparent gap-x-2 flex leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><div class="text-[oklch(0.795_0.184_86.047)] items-center box-border caret-transparent flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-14.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-14.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-14.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-14.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<img src="https://c.animaapp.com/mg0i0vr6NJhMuk/assets/icon-15.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+</div>
+<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">4.8 (341 avis)</span>
+</div>
+<p class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Sarah du Texas a reçu son PCI il y a 2 heures</p>
+</div>
+<div class="box-border caret-transparent gap-x-4 grid grid-cols-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><blockquote class="text-sm bg-white box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-4 rounded-[2px] border-solid"><p class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">"Si rapide ! Soumis au déjeuner et reçu mon PCI avant mon vol."</p>
+<footer class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Sarah, US • Voyageuse vérifiée</footer>
+</blockquote>
+<blockquote class="text-sm bg-white box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-4 rounded-[2px] border-solid"><p class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">"Location de voiture au Japon sans accroc. Processus en 2 minutes."</p>
+<footer class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Marco, IT • A conduit au Japon</footer>
+</blockquote>
+<blockquote class="text-sm bg-white box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-4 rounded-[2px] border-solid"><p class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">"Étapes claires, tarification équitable, excellent support sur WhatsApp."</p>
+<footer class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Aisha, AE • Voyage urgent</footer>
+</blockquote>
+</div>
+</div>
+</section>
+<section class="box-border caret-transparent max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto px-4 py-12 md:py-16"><h2 class="font-heading text-[32px] font-semibold box-border caret-transparent justify-center leading-[40px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-1 md:text-[40px] md:leading-[48px]">Questions Fréquemment Posées</h2>
+<div class="box-border caret-transparent gap-x-6 grid grid-cols-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[2px] border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Qu'est-ce qu'un Document de Conduite International ?</p>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Un Document de Conduite International (PCI) est un document qui traduit votre permis de conduire existant dans plusieurs langues. Il agit comme un complément, et non comme un remplacement, de votre permis de conduire valide.</p>
+</div>
+<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[2px] border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Ai-je besoin d'un PCI ?</p>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Cela dépend de votre destination. De nombreux pays exigent légalement un PCI pour conduire, et la plupart des agences de location de voitures à l'étranger en demanderont un. Il est fortement recommandé pour les voyages internationaux afin d'éviter les pénalités et problèmes potentiels.</p>
+</div>
+<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[2px] border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Quelle est la durée de validité de mon PCI ?</p>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Un PCI est généralement valable un an à compter de la date d'émission, ou jusqu'à l'expiration de votre permis de conduire national, selon ce qui se produit en premier. Certains PCI délivrés selon différents accords internationaux peuvent être valables jusqu'à trois ans.</p>
+</div>
+<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[2px] border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Quels pays acceptent le PCI ?</p>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Plus de 150 pays dans le monde acceptent le Document de Conduite International. Il est reconnu dans la plupart des Amériques, d'Europe, d'Asie, d'Afrique et d'Australie.</p>
+</div>
+<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[2px] border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">À quelle vitesse puis-je obtenir mon PCI ?</p>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Les demandes en personne à votre bureau d'émission local peuvent souvent être traitées en moins d'une heure. Les demandes en ligne et par courrier peuvent prendre de quelques jours à plusieurs semaines, selon le fournisseur et les options d'expédition sélectionnées.</p>
+</div>
+<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-[2px] border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Dans quels pays est-il valide ?</p>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Ce PCI est valide dans plus de 150 pays qui ont signé la Convention de Genève de 1949 et/ou la Convention de Vienne de 1968 sur la circulation routière, y compris des destinations populaires comme l'Europe, l'Asie, l'Afrique et l'Amérique du Sud.</p>
+</div>
+</div>
+</section>
+<section aria-label="final cta" class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-center box-border caret-transparent gap-x-6 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 mx-auto px-4 py-12 md:grid-cols-[repeat(3,minmax(0px,1fr))] md:py-16"><div class="box-border caret-transparent col-end-auto col-start-auto outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:col-end-[span_2] md:col-start-[span_2]"><h2 class="font-heading text-[32px] font-semibold box-border caret-transparent leading-[40px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-[40px] md:leading-[48px]">Obtenez Votre Document de Conduite International Maintenant</h2>
+<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Traitez avant votre voyage — obtenez l'approbation aujourd'hui.</p>
+</div>
+<div class="box-border caret-transparent justify-self-auto outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:justify-self-end"><a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=footer_button" class="text-zinc-50 text-sm items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.1)_0px_4px_6px_-4px] box-border caret-transparent inline-flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] px-5 py-3 rounded-[2px]">Obtenez l'Approbation en 2 Heures</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<div data-component="footer"></div>
+</div>
+
+<script>
+// Pricing configuration
+const pricingData = {
+  '3': { printDigital: 79, digitalOnly: 59 },
+  '2': { printDigital: 75, digitalOnly: 55 },
+  '1': { printDigital: 69, digitalOnly: 49 }
+};
+
+// Get all pricing tab buttons
+const pricingTabs = document.querySelectorAll('.pricing-tab');
+const printDigitalPrice = document.getElementById('print-digital-price');
+const digitalOnlyPrice = document.getElementById('digital-only-price');
+
+// Active button classes
+const activeClasses = 'text-neutral-50 bg-[linear-gradient(rgb(40,164,106)_0%,oklab(0.638374_-0.127061_0.0523999_/_0.8)_100%)] border-transparent';
+const inactiveClasses = 'border-gray-200 hover:border-primary-300';
+
+// Function to update prices with animation
+function updatePrices(duration) {
+  const prices = pricingData[duration];
+
+  // Add scale animation
+  printDigitalPrice.style.transform = 'scale(1.1)';
+  digitalOnlyPrice.style.transform = 'scale(1.1)';
+
+  // Update prices
+  setTimeout(() => {
+    printDigitalPrice.textContent = `$${prices.printDigital}`;
+    digitalOnlyPrice.textContent = `$${prices.digitalOnly}`;
+
+    // Reset scale
+    setTimeout(() => {
+      printDigitalPrice.style.transform = 'scale(1)';
+      digitalOnlyPrice.style.transform = 'scale(1)';
+    }, 150);
+  }, 150);
+}
+
+// Function to update active button styling
+function updateActiveButton(selectedButton) {
+  pricingTabs.forEach(tab => {
+    // Remove active classes
+    tab.classList.remove(...activeClasses.split(' '));
+    // Add inactive classes
+    if (!tab.classList.contains('border-gray-200')) {
+      tab.classList.add(...inactiveClasses.split(' '));
+    }
+
+    // Update text color for spans and p tags inside
+    const spans = tab.querySelectorAll('span, p');
+    spans.forEach(span => {
+      span.classList.remove('text-neutral-50', 'text-gray-100');
+      if (span.tagName === 'P') {
+        span.classList.add('text-slate-600');
+      }
+    });
+  });
+
+  // Add active classes to selected button
+  selectedButton.classList.remove(...inactiveClasses.split(' '));
+  selectedButton.classList.add(...activeClasses.split(' '));
+
+  // Update text color for selected button
+  const selectedSpans = selectedButton.querySelectorAll('span, p');
+  selectedSpans.forEach(span => {
+    span.classList.remove('text-slate-600');
+    if (span.tagName === 'P') {
+      span.classList.add('text-gray-100');
+    } else {
+      span.classList.add('text-neutral-50');
+    }
+  });
+}
+
+// Add click event listeners to all pricing tabs
+pricingTabs.forEach(tab => {
+  tab.addEventListener('click', function() {
+    const duration = this.getAttribute('data-duration');
+    updatePrices(duration);
+    updateActiveButton(this);
+  });
+});
+</script>
+
+</body>
+
+</html>
