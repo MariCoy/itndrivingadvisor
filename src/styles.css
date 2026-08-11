@@ -321,6 +321,7 @@
     border-radius: var(--radius-full);
   }
 
+  /* color-mix(in oklab, ...) is intentional — not Figma export noise */
   .pricing-tab-active {
     @apply text-neutral-50 border-transparent;
     background-image: linear-gradient(

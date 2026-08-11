@@ -166,7 +166,7 @@ itndrivingadvisor/
 #### tailwind.config.js (Key Settings)
 - **Content scanning:** All HTML files in root directory
 - **Custom colors:** Primary (blue-purple), Secondary (slate), Success (green), Error (red)
-- **Custom fonts:** Google Sans (body), Instrument Serif (headings)
+- **Custom fonts:** Google Sans (body + headings), Instrument Serif (accent via `.font-instrument`)
 - **Default border radius:** 2px
 
 ### JavaScript
@@ -201,8 +201,9 @@ Tokens and CSS variables live in `src/styles.css`. Key token groups:
 
 | Type | Font Family | Weights |
 |------|-------------|---------|
-| Body | Google Sans | 300, 400, 500, 600, 700 |
-| Headings | Instrument Serif | 400 |
+| Body | Google Sans (`--font-sans`) | 300, 400, 500, 600, 700 |
+| Headings (`.heading-*`, `.font-heading`) | Google Sans (`--font-heading`) | 300, 400, 500, 600, 700 |
+| Accent (`.font-instrument`, optional) | Instrument Serif (`--font-serif`) | 400 |
 
 ### UI Components
 
@@ -352,8 +353,8 @@ Redirect to success.html
 ```
 
 **Fonts loaded:**
-- Instrument Serif (headings)
-- Google Sans (body — preferred via Google Fonts or self-host)
+- Google Sans (body and headings via `--font-sans` / `--font-heading`)
+- Instrument Serif (optional accent via `.font-instrument`)
 
 ---
 
