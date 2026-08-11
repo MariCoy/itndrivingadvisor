@@ -230,28 +230,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize smooth scroll after components are loaded
   setTimeout(initSmoothScroll, 500);
-
-  // Add CSS for smooth scroll offset
-  if (!document.getElementById('smooth-scroll-styles')) {
-    const style = document.createElement('style');
-    style.id = 'smooth-scroll-styles';
-    style.textContent = `
-      html {
-        scroll-padding-top: 100px;
-      }
-      #works, #pricing {
-        scroll-margin-top: 100px;
-      }
-      /* Google Sans reads larger than Instrument Serif at the same px */
-      .font-heading {
-        letter-spacing: -0.025em;
-      }
-      .font-instrument {
-        letter-spacing: 0;
-      }
-    `;
-    document.head.appendChild(style);
-  }
 });
 
 // Initialize language selector dropdown
