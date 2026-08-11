@@ -14,7 +14,7 @@ const TRANSLATIONS = {
       pricing: 'Pricing',
       faq: 'FAQ',
       contact: 'Contact Us',
-      getYourIdp: 'Get Your IDP'
+      getYourIdp: 'Get Your Translation'
     },
     footer: {
       tagline: 'Your trusted partner for international driving translations.',
@@ -40,7 +40,7 @@ const TRANSLATIONS = {
       pricing: 'Precios',
       faq: 'Preguntas Frecuentes',
       contact: 'Contáctenos',
-      getYourIdp: 'Obtenga su PCI'
+      getYourIdp: 'Obtenga su traducción'
     },
     footer: {
       tagline: 'Su socio de confianza para traducciones de licencias de conducir internacionales.',
@@ -66,7 +66,7 @@ const TRANSLATIONS = {
       pricing: 'Tarifs',
       faq: 'FAQ',
       contact: 'Contactez-nous',
-      getYourIdp: 'Obtenez votre PCI'
+      getYourIdp: 'Obtenez votre traduction'
     },
     footer: {
       tagline: 'Votre partenaire de confiance pour les traductions de permis de conduire internationaux.',
@@ -92,7 +92,7 @@ const TRANSLATIONS = {
       pricing: 'Prezzi',
       faq: 'FAQ',
       contact: 'Contattaci',
-      getYourIdp: 'Ottieni la tua PCI'
+      getYourIdp: 'Ottieni la tua traduzione'
     },
     footer: {
       tagline: 'Il tuo partner di fiducia per le traduzioni di patenti di guida internazionali.',
@@ -352,7 +352,7 @@ function translateHeaderHtml(html, currentLang) {
   html = html.replace('>Contact Us</a>', `>${t.contact}</a>`);
 
   // CTA button - need to preserve the icon
-  html = html.replace(/Get Your IDP\s*<img/g, `${t.getYourIdp} <img`);
+  html = html.replace(/Get Your Translation\s*<img/g, `${t.getYourIdp} <img`);
 
   return html;
 }
