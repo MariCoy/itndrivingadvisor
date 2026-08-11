@@ -1,36 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    './src/**/*.css',
     './*.html',
     './es/**/*.html',
     './fr/**/*.html',
     './it/**/*.html',
     './components/**/*.html',
     './js/**/*.js',
-  ],
-  safelist: [
-    'container-page',
-    'section',
-    'section-tight',
-    'site-header',
-    'nav-link',
-    'btn',
-    'btn-primary',
-    'btn-secondary',
-    'btn-on-dark',
-    'label',
-    'input',
-    'input-error',
-    'field-error',
-    'card',
-    'heading-hero',
-    'heading-1',
-    'heading-2',
-    'heading-3',
-    'badge',
-    'pricing-tab',
-    'pricing-tab-active',
-    'legal-prose',
   ],
   theme: {
     extend: {
