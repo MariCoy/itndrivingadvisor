@@ -63,7 +63,7 @@ The website includes a legal disclaimer clarifying that this is a **private cert
 | HTML5 | - | Page structure and semantic markup |
 | Tailwind CSS | 3.4.13 | Utility-first CSS framework |
 | Vanilla JavaScript | ES6+ | Interactivity and component loading |
-| Google Fonts | - | Typography (Inter, Instrument Serif) |
+| Google Fonts | - | Typography (Google Sans, Instrument Serif) |
 
 ### Build Tools
 
@@ -182,6 +182,11 @@ Handles:
 
 ## Design System
 
+Tokens and CSS variables live in `src/styles.css`. Key token groups:
+- Color tokens: `--color-primary-*`, `--color-secondary-*`, `--color-neutral-*`, `--color-success-*`, `--color-error-*`
+- Typography tokens: `--font-sans`, `--font-heading`, `--font-serif`, `--text-*`, `--leading-*`
+- Layout & shape: `--radius-*`, `--container-max`, `--space-section-y`, `--focus-ring`
+
 ### Color Palette
 
 | Name | Base Color | Usage |
@@ -196,7 +201,7 @@ Handles:
 
 | Type | Font Family | Weights |
 |------|-------------|---------|
-| Body | Inter (variable) | 300, 400, 500, 600, 700 |
+| Body | Google Sans | 300, 400, 500, 600, 700 |
 | Headings | Instrument Serif | 400 |
 
 ### UI Components
@@ -348,7 +353,7 @@ Redirect to success.html
 
 **Fonts loaded:**
 - Instrument Serif (headings)
-- Inter is loaded via @font-face or CDN
+- Google Sans (body — preferred via Google Fonts or self-host)
 
 ---
 
@@ -392,8 +397,8 @@ npm run build
 2. Include standard head elements:
    ```html
    <link href="dist/styles.css" rel="stylesheet">
-   <script src="https://cdn.tailwindcss.com"></script>
    ```
+   Do NOT include the Tailwind CDN in production; use the compiled `dist/styles.css`.
 3. Add component placeholders:
    ```html
    <header data-component="header"></header>
@@ -450,7 +455,7 @@ npm run build
 
 | Aspect | Implementation |
 |--------|----------------|
-| CSS Delivery | CDN Tailwind + compiled dist/styles.css |
+| CSS Delivery | Compiled `dist/styles.css` (no CDN) |
 | Font Loading | Google Fonts with `display=swap` |
 | JavaScript | Vanilla JS, no frameworks (~3KB) |
 | Images | Unoptimized PNGs (some large - 2.1MB) |
