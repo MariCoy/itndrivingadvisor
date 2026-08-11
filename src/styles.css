@@ -2,40 +2,145 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Font fallback for better cross-browser compatibility */
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap');
+:root {
+  /* Primary */
+  --color-primary-50: #E4E5F4;
+  --color-primary-100: #D0D1EB;
+  --color-primary-200: #A7A9D9;
+  --color-primary-300: #7D80C7;
+  --color-primary-400: #5458B5;
+  --color-primary-500: #2B30A3;
+  --color-primary-600: #222682;
+  --color-primary-700: #1A1D62;
+  --color-primary-800: #111341;
+  --color-primary-900: #090A21;
 
-/* Ensure font loading with fallbacks */
+  /* Secondary (slate) */
+  --color-secondary-50: #f8fafc;
+  --color-secondary-100: #f1f5f9;
+  --color-secondary-200: #e2e8f0;
+  --color-secondary-300: #cbd5e1;
+  --color-secondary-400: #94a3b8;
+  --color-secondary-500: #64748b;
+  --color-secondary-600: #475569;
+  --color-secondary-700: #334155;
+  --color-secondary-800: #1e293b;
+  --color-secondary-900: #0f172a;
+
+  /* Neutral (zinc) */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f4f4f5;
+  --color-neutral-200: #e4e4e7;
+  --color-neutral-300: #d4d4d8;
+  --color-neutral-400: #a1a1aa;
+  --color-neutral-500: #71717a;
+  --color-neutral-600: #52525b;
+  --color-neutral-700: #3f3f46;
+  --color-neutral-800: #27272a;
+  --color-neutral-900: #18181b;
+
+  /* Gray */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* Success */
+  --color-success-50: #CDE7CF;
+  --color-success-100: #BCDBBD;
+  --color-success-200: #98C49A;
+  --color-success-300: #75AC78;
+  --color-success-400: #519555;
+  --color-success-500: #2E7A4F;
+  --color-success-600: #256428;
+  --color-success-700: #1C4B1E;
+  --color-success-800: #123214;
+  --color-success-900: #09190A;
+
+  /* Error */
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-200: #fecaca;
+  --color-error-300: #fca5a5;
+  --color-error-400: #f87171;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
+  --color-error-800: #991b1b;
+  --color-error-900: #7f1d1d;
+
+  /* Semantic */
+  --color-bg: #ffffff;
+  --color-fg: var(--color-neutral-900);
+  --color-muted: var(--color-secondary-600);
+  --color-border: var(--color-gray-200);
+  --color-focus: var(--color-primary-300);
+
+  /* Typography */
+  --font-sans: 'Google Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  --font-heading: var(--font-sans);
+  --font-serif: 'Instrument Serif', ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+  --tracking-heading: -0.025em;
+
+  --text-hero: 34px;
+  --text-hero-lg: 56px;
+  --leading-hero: 40px;
+  --leading-hero-lg: 62px;
+  --text-h1: 28px;
+  --text-h1-lg: 34px;
+  --leading-h1: 36px;
+  --leading-h1-lg: 40px;
+  --text-h2: 21px;
+  --text-h2-lg: 28px;
+  --leading-h2: 28px;
+  --leading-h2-lg: 34px;
+  --text-h3: 18px;
+  --text-body: 16px;
+  --text-sm: 14px;
+
+  /* Shape / elevation / layout */
+  --radius-sm: 2px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-cta: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --container-max: 72rem;
+  --space-section-y: 3rem;
+  --space-section-y-lg: 4rem;
+  --header-offset: 100px;
+  --focus-ring: var(--color-focus);
+}
+
+@layer base {
+  html {
+    scroll-padding-top: var(--header-offset);
+  }
+
+  #works,
+  #pricing {
+    scroll-margin-top: var(--header-offset);
+  }
+}
+
+/* Keep utility class names used in HTML */
 .font-heading {
-  font-family: 'Google Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-  letter-spacing: -0.025em;
+  font-family: var(--font-heading);
+  letter-spacing: var(--tracking-heading);
 }
 
 .font-instrument {
-  font-family: 'Instrument Serif', ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+  font-family: var(--font-serif);
   letter-spacing: 0;
 }
 
 .font-google_sans {
-  font-family: 'Google Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  font-family: var(--font-sans);
 }
-
-/* Force primary-300 focus colors for form inputs */
-#firstName:focus,
-#lastName:focus,
-#email:focus,
-#countryTravel:focus {
-  border-color: #7D80C7 !important;
-  box-shadow: 0 0 0 1px #7D80C7 !important;
-  outline: none !important;
-}
-
-/* Smooth scroll with offset for fixed header */
-html {
-  scroll-padding-top: 100px;
-}
-
-#works, #pricing {
-  scroll-margin-top: 100px;
-}
-
