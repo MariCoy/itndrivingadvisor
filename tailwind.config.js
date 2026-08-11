@@ -9,9 +9,8 @@ module.exports = {
         'DEFAULT': '2px',
       },
       fontFamily: {
-        inter_var: [
-          'Inter var',
-          'Inter',
+        google_sans: [
+          'Google Sans',
           'ui-sans-serif',
           'system-ui',
           '-apple-system',
@@ -28,6 +27,19 @@ module.exports = {
           'Noto Color Emoji',
         ],
         heading: [
+          'Google Sans',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'Noto Sans',
+          'sans-serif',
+        ],
+        instrument: [
           'Instrument Serif',
           'ui-serif',
           'Georgia',
@@ -91,7 +103,7 @@ module.exports = {
           200: '#98C49A',
           300: '#75AC78',
           400: '#519555',
-          500: '#2E7D32', // main success
+          500: '#2E7A4F', // main success
           600: '#256428',
           700: '#1C4B1E',
           800: '#123214',

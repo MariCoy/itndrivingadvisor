@@ -242,6 +242,13 @@ document.addEventListener('DOMContentLoaded', function() {
       #works, #pricing {
         scroll-margin-top: 100px;
       }
+      /* Google Sans reads larger than Instrument Serif at the same px */
+      .font-heading {
+        letter-spacing: -0.025em;
+      }
+      .font-instrument {
+        letter-spacing: 0;
+      }
     `;
     document.head.appendChild(style);
   }
