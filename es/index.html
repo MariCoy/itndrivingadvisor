@@ -28,22 +28,22 @@ function validateForm() {
   document.getElementById('countryError').classList.add('hidden');
   
   // Reset field styles
-  document.getElementById('firstName').classList.remove('border-red-500');
-  document.getElementById('lastName').classList.remove('border-red-500');
-  document.getElementById('email').classList.remove('border-red-500');
-  document.getElementById('countryTravel').classList.remove('border-red-500');
+  document.getElementById('firstName').classList.remove('input-error');
+  document.getElementById('lastName').classList.remove('input-error');
+  document.getElementById('email').classList.remove('input-error');
+  document.getElementById('countryTravel').classList.remove('input-error');
   
   // Validate first name
   if (!firstName || firstName.length < 2) {
     document.getElementById('firstNameError').classList.remove('hidden');
-    document.getElementById('firstName').classList.add('border-red-500');
+    document.getElementById('firstName').classList.add('input-error');
     isValid = false;
   }
   
   // Validate last name
   if (!lastName || lastName.length < 2) {
     document.getElementById('lastNameError').classList.remove('hidden');
-    document.getElementById('lastName').classList.add('border-red-500');
+    document.getElementById('lastName').classList.add('input-error');
     isValid = false;
   }
   
@@ -51,14 +51,14 @@ function validateForm() {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email || !emailRegex.test(email)) {
     document.getElementById('emailError').classList.remove('hidden');
-    document.getElementById('email').classList.add('border-red-500');
+    document.getElementById('email').classList.add('input-error');
     isValid = false;
   }
   
   // Validate country
   if (!countryTravel || !countries.includes(countryTravel)) {
     document.getElementById('countryError').classList.remove('hidden');
-    document.getElementById('countryTravel').classList.add('border-red-500');
+    document.getElementById('countryTravel').classList.add('input-error');
     isValid = false;
   }
   
@@ -69,7 +69,7 @@ function submitForm() {
   // Validate form first
   if (!validateForm()) {
     // Scroll to first error
-    const firstError = document.querySelector('.border-red-500');
+    const firstError = document.querySelector('.input-error');
     if (firstError) {
       firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
       firstError.focus();
@@ -150,7 +150,7 @@ function initCountryAutocomplete() {
   function selectCountry(country) {
     input.value = country;
     dropdown.classList.add('hidden');
-    input.classList.remove('border-red-500');
+    input.classList.remove('input-error');
     document.getElementById('countryError').classList.add('hidden');
     selectedIndex = -1;
   }
@@ -174,7 +174,7 @@ function initCountryAutocomplete() {
     
     // Real-time validation
     if (query && countries.includes(query)) {
-      this.classList.remove('border-red-500');
+      this.classList.remove('input-error');
       document.getElementById('countryError').classList.add('hidden');
     }
   });
@@ -231,14 +231,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add input event listeners for real-time validation
   document.getElementById('firstName').addEventListener('input', function() {
     if (this.value.trim().length >= 2) {
-      this.classList.remove('border-red-500');
+      this.classList.remove('input-error');
       document.getElementById('firstNameError').classList.add('hidden');
     }
   });
   
   document.getElementById('lastName').addEventListener('input', function() {
     if (this.value.trim().length >= 2) {
-      this.classList.remove('border-red-500');
+      this.classList.remove('input-error');
       document.getElementById('lastNameError').classList.add('hidden');
     }
   });
@@ -246,14 +246,14 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('email').addEventListener('input', function() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (emailRegex.test(this.value.trim())) {
-      this.classList.remove('border-red-500');
+      this.classList.remove('input-error');
       document.getElementById('emailError').classList.add('hidden');
     }
   });
   
   document.getElementById('countryTravel').addEventListener('input', function() {
     if (this.value && countries.includes(this.value)) {
-      this.classList.remove('border-red-500');
+      this.classList.remove('input-error');
       document.getElementById('countryError').classList.add('hidden');
     }
   });
@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
     tab.addEventListener('click', function() {
       // Remove selected state from all tabs
       pricingTabs.forEach(t => {
-        t.classList.remove('text-neutral-50', 'bg-[linear-gradient(rgb(46,122,79)_0%,oklab(0.638374_-0.127061_0.0523999_/_0.8)_100%)]');
+        t.classList.remove('pricing-tab-active');
         t.classList.add('border-transparent');
         
         // Reset text colors
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       
       // Add selected state to clicked tab
-      this.classList.add('text-neutral-50', 'bg-[linear-gradient(rgb(46,122,79)_0%,oklab(0.638374_-0.127061_0.0523999_/_0.8)_100%)]', 'border-transparent');
+      this.classList.add('pricing-tab-active');
       this.classList.remove('bg-gray-100');
       
       // Update text colors for selected tab
@@ -360,283 +360,283 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-TH623PVZ');</script>
 <!-- End Google Tag Manager -->
 </head>
-<body class="fill-white text-base not-italic normal-nums font-normal accent-auto bg-white box-border caret-transparent flex h-full tracking-[normal] leading-6 list-outside list-disc min-h-[1000px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none text-start indent-[0px] normal-case visible w-full overflow-auto border-separate font-google_sans">
+<body class="fill-white text-base not-italic normal-nums font-normal accent-auto bg-white flex h-full tracking-[normal] leading-6 list-outside list-disc min-h-[1000px] overscroll-x-none text-start indent-[0px] normal-case visible w-full overflow-auto border-separate font-google_sans">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TH623PVZ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<div class="box-border caret-transparent h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overscroll-x-none w-full"><div class="bg-white box-border caret-transparent min-h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full">
+<div class="h-full overscroll-x-none w-full"><div class="bg-white min-h-full w-full">
 <!-- Header Component -->
 <div data-component="header"></div>
-<main class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><section class="relative box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overflow-hidden bg-primary-50"><div class="absolute bg-[url('../images/world-dots-hero.svg')] bg-no-repeat bg-cover box-border caret-transparent opacity-25 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] -z-10 bg-center inset-0 md:opacity-30"></div>
-<div class="absolute bg-[linear-gradient(rgba(234,244,240,1)_0%,rgba(234,244,240,0.7)_50%,rgba(234,244,240,1)_100%)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] -z-10 inset-0"></div>
-<div class="items-start box-border caret-transparent gap-x-10 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-10 mx-auto pt-[40px] md:pt-[65px] pb-[40px] md:pb-[50px] px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h1 class="font-heading text-[34px] font-medium box-border caret-transparent leading-[40px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-[56px] md:leading-[62px]">Conduzca con confianza en el extranjero. ¡Obtenga su traducción certificada en minutos!</h1>
-<p class="text-slate-600 box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-3"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Reconocido en más de 190 países, nuestras traducciones certificadas de licencias de conducir hacen que conducir internacionalmente sea simple, seguro y sin estrés.</span>
+<main class=""><section class="relative overflow-hidden bg-primary-50"><div class="absolute bg-[url('../images/world-dots-hero.svg')] bg-no-repeat bg-cover opacity-25 -z-10 bg-center inset-0 md:opacity-30"></div>
+<div class="absolute bg-[linear-gradient(rgba(234,244,240,1)_0%,rgba(234,244,240,0.7)_50%,rgba(234,244,240,1)_100%)] -z-10 inset-0"></div>
+<div class="items-start gap-x-10 grid grid-cols-none max-w-6xl gap-y-10 mx-auto pt-[40px] md:pt-[65px] pb-[40px] md:pb-[50px] px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div class=""><h1 class="heading-hero">Conduzca con confianza en el extranjero. ¡Obtenga su traducción certificada en minutos!</h1>
+<p class="text-slate-600 mt-3"><span class="">Reconocido en más de 190 países, nuestras traducciones certificadas de licencias de conducir hacen que conducir internacionalmente sea simple, seguro y sin estrés.</span>
 </p>
-<div class="box-border caret-transparent gap-x-3 flex flex-col outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3 mt-6 md:flex-row"><a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=hero_button" class="text-zinc-50 text-sm items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.1)_0px_4px_6px_-4px] box-border caret-transparent flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] px-5 py-3 rounded-full"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Solicitar en 3 Minutos</span>
+<div class="gap-x-3 flex flex-col gap-y-3 mt-6 md:flex-row"><a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=hero_button" class="btn btn-primary"><span class="block">Solicitar en 3 Minutos</span>
 </a>
-<a href="#what-you-receive" class="text-sm items-center box-border caret-transparent flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] bg-white border border-gray-200 px-5 py-3 rounded-full border-solid shadow-sm"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Ver Características</span>
+<a href="#what-you-receive" class="btn btn-secondary"><span class="block">Ver Características</span>
 </a>
 </div>
-<div class="text-slate-600 text-xs items-center box-border caret-transparent gap-x-2 flex flex-wrap justify-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-6 md:text-sm md:leading-5 md:gap-x-4 md:justify-start md:flex-nowrap"><div class="items-center box-border caret-transparent gap-x-1 flex justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<span class="box-border caret-transparent whitespace-nowrap outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Garantía de devolución de dinero</span>
+<div class="text-slate-600 text-xs items-center gap-x-2 flex flex-wrap justify-center leading-4 gap-y-2 mt-6 md:text-sm md:leading-5 md:gap-x-4 md:justify-start md:flex-nowrap"><div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
+<span class="whitespace-nowrap">Garantía de devolución de dinero</span>
 </div>
-<div class="items-center box-border caret-transparent gap-x-1 flex justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<span class="box-border caret-transparent whitespace-nowrap outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Sin tarifas ocultas</span>
+<div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
+<span class="whitespace-nowrap">Sin tarifas ocultas</span>
 </div>
-<div class="items-center box-border caret-transparent gap-x-1 flex justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<span class="box-border caret-transparent whitespace-nowrap outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Soporte 24/7</span>
+<div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
+<span class="whitespace-nowrap">Soporte 24/7</span>
 </div>
 </div>
 </div>
-<aside class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-2xl border-solid"><div class="items-center box-border caret-transparent flex justify-between outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><h2 class="font-heading text-base font-medium box-border caret-transparent leading-7 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Iniciar solicitud</h2>
+<aside class="card"><div class="items-center flex justify-between"><div class="items-center gap-x-2 flex gap-y-2"><h2 class="font-heading text-base font-medium leading-7">Iniciar solicitud</h2>
 </div>
-<span class="text-xs box-border caret-transparent block leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-2 py-1 rounded-[3.35544e+07px] border-solid">Paso 1 de 3</span>
+<span class="text-xs block leading-4 border border-gray-200 px-2 py-1 border-solid">Paso 1 de 3</span>
 </div>
-<form aria-label="Solicitud de PCI paso 1" class="box-border caret-transparent gap-x-4 grid outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 mt-4"><div class="text-sm box-border caret-transparent gap-x-2 grid grid-cols-2 leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2">
-<label class="box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Nombre <span class="text-red-500">*</span></span>
-<input id="firstName" aria-label="Nombre" placeholder="María" obligatorio class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-xl border-solid focus:border-primary-300 focus:ring-1 focus:ring-primary-300" />
+<form aria-label="Solicitud de PCI paso 1" class="gap-x-4 grid gap-y-4 mt-4"><div class="text-sm gap-x-2 grid grid-cols-2 leading-5 gap-y-2">
+<label class="gap-x-2 grid leading-5 gap-y-2"><span class="block">Nombre <span class="text-red-500">*</span></span>
+<input id="firstName" aria-label="Nombre" placeholder="María" obligatorio class="input" />
 <span id="firstNameError" class="text-red-500 text-xs hidden">El nombre es obligatorio</span>
 </label>
-<label class="box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Apellido <span class="text-red-500">*</span></span>
-<input id="lastName" aria-label="Apellido" placeholder="García" obligatorio class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-xl border-solid focus:border-primary-300 focus:ring-1 focus:ring-primary-300" />
+<label class="gap-x-2 grid leading-5 gap-y-2"><span class="block">Apellido <span class="text-red-500">*</span></span>
+<input id="lastName" aria-label="Apellido" placeholder="García" obligatorio class="input" />
 <span id="lastNameError" class="text-red-500 text-xs hidden">El apellido es obligatorio</span>
 </label>
 </div>
-<label class="text-sm box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Email <span class="text-red-500">*</span></span>
-<input id="email" aria-label="Correo electrónico" placeholder="maria@ejemplo.com" type="email" obligatorio class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-xl border-solid focus:border-primary-300 focus:ring-1 focus:ring-primary-300" />
+<label class="text-sm gap-x-2 grid leading-5 gap-y-2"><span class="block">Email <span class="text-red-500">*</span></span>
+<input id="email" aria-label="Correo electrónico" placeholder="maria@ejemplo.com" type="email" obligatorio class="input" />
 <span id="emailError" class="text-red-500 text-xs hidden">Por favor ingrese una dirección de correo electrónico válida</span>
-<span class="text-slate-600 text-xs box-border caret-transparent block leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Le enviaremos su PCI digital aquí.</span>
+<span class="text-slate-600 text-xs block leading-4">Le enviaremos su PCI digital aquí.</span>
 </label>
-<label class="text-sm box-border caret-transparent gap-x-2 grid leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">País de Destino <span class="text-red-500">*</span></span>
+<label class="text-sm gap-x-2 grid leading-5 gap-y-2"><span class="block">País de Destino <span class="text-red-500">*</span></span>
 <div class="relative">
-<input id="countryTravel" aria-label="País de destino" placeholder="Escriba para buscar países..." obligatorio class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full border border-gray-200 px-3 py-2 rounded-xl border-solid focus:border-primary-300 focus:ring-1 focus:ring-primary-300 bg-white" autocomplete="off" />
+<input id="countryTravel" aria-label="País de destino" placeholder="Escriba para buscar países..." obligatorio class="input" autocomplete="off" />
 <div id="countryDropdown" class="absolute z-50 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-60 overflow-y-auto hidden">
 </div>
 </div>
 <span id="countryError" class="text-red-500 text-xs hidden">Por favor seleccione un país de destino válido</span>
 </label>
-<button type="button" onclick="submitForm()" class="text-zinc-50 text-sm items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] caret-transparent flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-2 px-4 py-3 rounded-full">Iniciar Solicitud</button>
-<div class="text-slate-600 text-xs items-center box-border caret-transparent flex flex-wrap justify-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-x-4 gap-y-2 md:gap-x-6"><div class="items-center box-border caret-transparent gap-x-1 flex justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="../images/icons/icon-7.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-3.5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-3.5" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Sus datos están seguros</span>
+<button type="button" onclick="submitForm()" class="btn btn-primary mt-2">Iniciar Solicitud</button>
+<div class="text-slate-600 text-xs items-center flex flex-wrap justify-center leading-4 gap-x-4 gap-y-2 md:gap-x-6"><div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="../images/icons/icon-7.svg" alt="Icon" class="text-success-500 h-3.5 w-3.5" />
+<span class="block">Sus datos están seguros</span>
 </div>
-<div class="items-center box-border caret-transparent gap-x-1 flex justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-1"><img src="../images/icons/icon-7.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-3.5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-3.5" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Garantía de devolución de dinero del 100%</span>
+<div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="../images/icons/icon-7.svg" alt="Icon" class="text-success-500 h-3.5 w-3.5" />
+<span class="block">Garantía de devolución de dinero del 100%</span>
 </div>
 </div>
 </form>
 </aside>
 </div>
 </section>
-<section aria-label="beneficios clave" class="box-border caret-transparent max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto pt-5 pb-[90px] px-4"><div class="box-border caret-transparent gap-x-4 grid grid-cols-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-2xl border-solid"><div class="items-start box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3"><img src="../images/icons/icon-8.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" />
-<div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h3 class="font-heading text-[18px] font-medium box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Legalmente reconocido</h3>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Aceptado en más de 150 países junto con su licencia de conducir válida.</p>
+<section aria-label="beneficios clave" class="max-w-6xl mx-auto pt-5 pb-[90px] px-4"><div class="gap-x-4 grid grid-cols-none gap-y-4 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="card"><div class="items-start gap-x-3 flex gap-y-3"><img src="../images/icons/icon-8.svg" alt="Icon" class="text-success-500 h-6 w-6" />
+<div class=""><h3 class="font-heading text-[18px] font-medium">Legalmente reconocido</h3>
+<p class="text-slate-600 text-sm leading-5 mt-1">Aceptado en más de 150 países junto con su licencia de conducir válida.</p>
 </div>
 </div>
 </div>
-<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-2xl border-solid"><div class="items-start box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3"><img src="../images/icons/icon-9.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" />
-<div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h3 class="font-heading text-[18px] font-medium box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Entrega rápida</h3>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Solicite en minutos. Copia digital entregada en 2 horas.</p>
+<div class="card"><div class="items-start gap-x-3 flex gap-y-3"><img src="../images/icons/icon-9.svg" alt="Icon" class="text-success-500 h-6 w-6" />
+<div class=""><h3 class="font-heading text-[18px] font-medium">Entrega rápida</h3>
+<p class="text-slate-600 text-sm leading-5 mt-1">Solicite en minutos. Copia digital entregada en 2 horas.</p>
 </div>
 </div>
 </div>
-<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-2xl border-solid"><div class="items-start box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3"><img src="../images/icons/icon-10.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-6 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-6" />
-<div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h3 class="font-heading text-[18px] font-medium box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Más de 20 idiomas</h3>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Traducciones profesionales para alquileres de autos sin problemas en el extranjero.</p>
+<div class="card"><div class="items-start gap-x-3 flex gap-y-3"><img src="../images/icons/icon-10.svg" alt="Icon" class="text-success-500 h-6 w-6" />
+<div class=""><h3 class="font-heading text-[18px] font-medium">Más de 20 idiomas</h3>
+<p class="text-slate-600 text-sm leading-5 mt-1">Traducciones profesionales para alquileres de autos sin problemas en el extranjero.</p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section aria-label="cómo funciona e idiomas" class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-start box-border caret-transparent gap-x-10 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-10 mx-auto pt-[60px] pb-[55px] px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h2 id="works" class="font-heading text-[28px] font-medium box-border caret-transparent leading-[36px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-[34px] md:leading-[40px]">Cómo funciona</h2>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Simplificamos el proceso para que pueda ponerse en marcha más rápido.</span>
+<section aria-label="cómo funciona e idiomas" class="bg-white"><div class="items-start gap-x-10 grid grid-cols-none max-w-6xl gap-y-10 mx-auto pt-[60px] pb-[55px] px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div class=""><h2 id="works" class="heading-1">Cómo funciona</h2>
+<p class="text-slate-600 text-sm leading-5 mt-2"><span class="">Simplificamos el proceso para que pueda ponerse en marcha más rápido.</span>
 </p>
-<ol class="box-border caret-transparent list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-6 pl-0"><li class="items-center box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3 text-left mb-4"><span class="text-success-500 text-xs font-semibold items-center bg-[oklab(0.638374_-0.127061_0.0523999_/_0.1)] box-border caret-transparent grid shrink-0 h-7 justify-items-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-7 rounded-[3.35544e+07px]">1</span>
-<p class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Complete la solicitud de 3 minutos</span>
-</p>
-</li>
-<li class="items-center box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3 text-left mb-4"><span class="text-success-500 text-xs font-semibold items-center bg-[oklab(0.638374_-0.127061_0.0523999_/_0.1)] box-border caret-transparent grid shrink-0 h-7 justify-items-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-7 rounded-[3.35544e+07px]">2</span>
-<p class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Cargue su licencia de conducir válida</span>
+<ol class="list-none mt-6 pl-0"><li class="items-center gap-x-3 flex gap-y-3 text-left mb-4"><span class="text-success-500 text-xs font-semibold items-center grid shrink-0 h-7 justify-items-center leading-4 w-7">1</span>
+<p class="text-sm leading-5"><span class="">Complete la solicitud de 3 minutos</span>
 </p>
 </li>
-<li class="items-center box-border caret-transparent gap-x-3 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-3 text-left"><span class="text-success-500 text-xs font-semibold items-center bg-[oklab(0.638374_-0.127061_0.0523999_/_0.1)] box-border caret-transparent grid shrink-0 h-7 justify-items-center leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-7 rounded-[3.35544e+07px]">3</span>
-<p class="text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Reciba su PCI digital por correo electrónico</span>
+<li class="items-center gap-x-3 flex gap-y-3 text-left mb-4"><span class="text-success-500 text-xs font-semibold items-center grid shrink-0 h-7 justify-items-center leading-4 w-7">2</span>
+<p class="text-sm leading-5"><span class="">Cargue su licencia de conducir válida</span>
+</p>
+</li>
+<li class="items-center gap-x-3 flex gap-y-3 text-left"><span class="text-success-500 text-xs font-semibold items-center grid shrink-0 h-7 justify-items-center leading-4 w-7">3</span>
+<p class="text-sm leading-5"><span class="">Reciba su PCI digital por correo electrónico</span>
 </p>
 </li>
 </ol>
 </div>
-<aside class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-2xl border-solid"><h4 class="font-heading font-medium text-[21px] leading-[28px] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Idiomas admitidos</h4>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Inglés, español, francés, alemán, italiano, portugués, árabe, chino, japonés, coreano y más.</span>
+<aside class="card"><h4 class="font-heading font-medium text-[21px] leading-[28px]">Idiomas admitidos</h4>
+<p class="text-slate-600 text-sm leading-5 mt-2"><span class="">Inglés, español, francés, alemán, italiano, portugués, árabe, chino, japonés, coreano y más.</span>
 </p>
-<ul class="box-border caret-transparent gap-x-2 flex flex-wrap list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-4 pl-0"><li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇺🇸</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">en</span>
+<ul class="gap-x-2 flex flex-wrap list-none gap-y-2 mt-4 pl-0"><li class="text-xs items-center bg-white flex leading-4 text-left border border-gray-200 px-3 py-1 border-solid gap-x-1"><span class="text-base">🇺🇸</span><span class="font-medium block tracking-[0.3px] uppercase">en</span>
 </li>
-<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇪🇸</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">es</span>
+<li class="text-xs items-center bg-white flex leading-4 text-left border border-gray-200 px-3 py-1 border-solid gap-x-1"><span class="text-base">🇪🇸</span><span class="font-medium block tracking-[0.3px] uppercase">es</span>
 </li>
-<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇫🇷</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">fr</span>
+<li class="text-xs items-center bg-white flex leading-4 text-left border border-gray-200 px-3 py-1 border-solid gap-x-1"><span class="text-base">🇫🇷</span><span class="font-medium block tracking-[0.3px] uppercase">fr</span>
 </li>
-<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇩🇪</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">de</span>
+<li class="text-xs items-center bg-white flex leading-4 text-left border border-gray-200 px-3 py-1 border-solid gap-x-1"><span class="text-base">🇩🇪</span><span class="font-medium block tracking-[0.3px] uppercase">de</span>
 </li>
-<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇮🇹</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">it</span>
+<li class="text-xs items-center bg-white flex leading-4 text-left border border-gray-200 px-3 py-1 border-solid gap-x-1"><span class="text-base">🇮🇹</span><span class="font-medium block tracking-[0.3px] uppercase">it</span>
 </li>
-<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇵🇹</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">pt</span>
+<li class="text-xs items-center bg-white flex leading-4 text-left border border-gray-200 px-3 py-1 border-solid gap-x-1"><span class="text-base">🇵🇹</span><span class="font-medium block tracking-[0.3px] uppercase">pt</span>
 </li>
-<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇸🇦</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">ar</span>
+<li class="text-xs items-center bg-white flex leading-4 text-left border border-gray-200 px-3 py-1 border-solid gap-x-1"><span class="text-base">🇸🇦</span><span class="font-medium block tracking-[0.3px] uppercase">ar</span>
 </li>
-<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇯🇵</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">ja</span>
+<li class="text-xs items-center bg-white flex leading-4 text-left border border-gray-200 px-3 py-1 border-solid gap-x-1"><span class="text-base">🇯🇵</span><span class="font-medium block tracking-[0.3px] uppercase">ja</span>
 </li>
-<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇰🇷</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">ko</span>
+<li class="text-xs items-center bg-white flex leading-4 text-left border border-gray-200 px-3 py-1 border-solid gap-x-1"><span class="text-base">🇰🇷</span><span class="font-medium block tracking-[0.3px] uppercase">ko</span>
 </li>
-<li class="text-xs items-center bg-white box-border caret-transparent flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-left border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid gap-x-1"><span class="text-base">🇨🇳</span><span class="font-medium box-border caret-transparent block tracking-[0.3px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] uppercase">zh</span>
+<li class="text-xs items-center bg-white flex leading-4 text-left border border-gray-200 px-3 py-1 border-solid gap-x-1"><span class="text-base">🇨🇳</span><span class="font-medium block tracking-[0.3px] uppercase">zh</span>
 </li>
 </ul>
 </aside>
 </div>
 </section>
-<section aria-label="qué recibirá" class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-center box-border caret-transparent gap-x-10 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-10 mx-auto px-4 py-12 md:grid-cols-[repeat(2,minmax(0px,1fr))] md:py-16"><figure class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="aspect-[4_/_3] bg-[oklab(0.984579_-0.000600815_-0.00156349_/_0.4)] box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full overflow-hidden rounded-2xl"><div class="box-border caret-transparent h-full outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full"><picture class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><img alt="Portada y páginas interiores del folleto PCI en un escritorio" src="https://internationaldrivingadvisor.com/images/advisor-booklet.png" class="box-border caret-transparent h-full max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-full rounded-2xl" /></picture></div></div><figcaption class="text-secondary-500 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-3">Vista previa del Documento de Conducir Internacional digital que recibirá.</figcaption></figure>
-<div class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><h2 id="what-you-receive" class="font-heading text-[28px] font-medium box-border caret-transparent leading-[36px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-[34px] md:leading-[40px]">Qué recibirá</h2>
-<ul class="text-sm box-border caret-transparent leading-5 list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4 pl-0"><li class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Válido en más de 150 países</span>
+<section aria-label="qué recibirá" class="bg-white"><div class="items-center gap-x-10 grid grid-cols-none max-w-6xl gap-y-10 mx-auto px-4 py-12 md:grid-cols-[repeat(2,minmax(0px,1fr))] md:py-16"><figure class=""><div class="aspect-[4_/_3] w-full overflow-hidden rounded-2xl"><div class="h-full w-full"><picture class=""><img alt="Portada y páginas interiores del folleto PCI en un escritorio" src="https://internationaldrivingadvisor.com/images/advisor-booklet.png" class="h-full max-w-full object-cover w-full rounded-2xl" /></picture></div></div><figcaption class="text-secondary-500 text-xs leading-4 mt-3">Vista previa del Documento de Conducir Internacional digital que recibirá.</figcaption></figure>
+<div class=""><h2 id="what-you-receive" class="heading-1">Qué recibirá</h2>
+<ul class="text-sm leading-5 list-none mt-4 pl-0"><li class="items-center gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
+<span class="block">Válido en más de 150 países</span>
 </li>
-<li class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Disponible en su idioma</span>
+<li class="items-center gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
+<span class="block">Disponible en su idioma</span>
 </li>
-<li class="items-center box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Validez: 12 meses desde la emisión</span>
+<li class="items-center gap-x-2 flex gap-y-2 text-left"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
+<span class="block">Validez: 12 meses desde la emisión</span>
 </li>
 </ul>
-<div class="text-slate-600 text-xs items-center box-border caret-transparent gap-x-2 flex leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 mt-4"><span class="box-border caret-transparent flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] overflow-hidden"><span class="bg-[oklab(0.214881_-0.00419383_-0.00736864_/_0.1)] box-border caret-transparent hidden h-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]"></span>
-<img sizes="20px" alt="Bandera de Estados Unidos" src="../images/flags/Flag_of_the_United_States.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]" />
-<img sizes="20px" alt="Bandera de Francia" src="../images/flags/Flag_of_France.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]" />
-<img sizes="20px" alt="Bandera de Alemania" src="../images/flags/Flag_of_Germany.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]" />
-<img sizes="20px" alt="Bandera de Italia" src="../images/flags/Flag_of_Italy.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 -mr-1 rounded-[3.35544e+07px]" />
-<img sizes="20px" alt="Bandera de España" src="../images/flags/Flag_of_Spain.svg" class="shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgb(225,230,234)_0px_0px_0px_1px,rgba(0,0,0,0)_0px_0px_0px_0px] box-border caret-transparent h-5 max-w-full object-cover outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-5 rounded-[3.35544e+07px]" />
+<div class="text-slate-600 text-xs items-center gap-x-2 flex leading-4 gap-y-2 mt-4"><span class="flex overflow-hidden"><span class="hidden h-5 w-5 -mr-1"></span>
+<img sizes="20px" alt="Bandera de Estados Unidos" src="../images/flags/Flag_of_the_United_States.svg" class="h-5 max-w-full object-cover w-5 -mr-1" />
+<img sizes="20px" alt="Bandera de Francia" src="../images/flags/Flag_of_France.svg" class="h-5 max-w-full object-cover w-5 -mr-1" />
+<img sizes="20px" alt="Bandera de Alemania" src="../images/flags/Flag_of_Germany.svg" class="h-5 max-w-full object-cover w-5 -mr-1" />
+<img sizes="20px" alt="Bandera de Italia" src="../images/flags/Flag_of_Italy.svg" class="h-5 max-w-full object-cover w-5 -mr-1" />
+<img sizes="20px" alt="Bandera de España" src="../images/flags/Flag_of_Spain.svg" class="h-5 max-w-full object-cover w-5" />
 </span>
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Las banderas representan la cobertura. Lista exacta proporcionada después de la compra.</span>
+<span class="block">Las banderas representan la cobertura. Lista exacta proporcionada después de la compra.</span>
 </div>
 </div>
 </div>
 </section>
-<section aria-label="opciones de precios" class="box-border caret-transparent max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto pt-16 pb-12 px-4 md:pb-16" id="pricing"><header class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mb-6"><h2 class="font-heading text-[28px] font-medium box-border caret-transparent justify-center leading-[36px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center md:text-[34px] md:leading-[40px]"><span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Garantía de devolución de dinero del 100%</span></h2>
-<p class="text-slate-600 text-sm box-border caret-transparent justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-2"><span class="box-border caret-transparent justify-center outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Reembolso completo si no es aceptado en ningún lugar, además de reemplazos gratuitos ilimitados.</span>
+<section aria-label="opciones de precios" class="max-w-6xl mx-auto pt-16 pb-12 px-4 md:pb-16" id="pricing"><header class="mb-6"><h2 class="heading-1 text-center"><span class="">Garantía de devolución de dinero del 100%</span></h2>
+<p class="text-slate-600 text-sm justify-center leading-5 text-center mt-2"><span class="justify-center">Reembolso completo si no es aceptado en ningún lugar, además de reemplazos gratuitos ilimitados.</span>
 </p>
 </header>
-<div class="text-xs box-border caret-transparent gap-x-2 grid grid-cols-[repeat(3,minmax(0px,1fr))] leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-center mb-4 md:text-sm md:leading-5 max-w-[540px] w-full mx-auto bg-gray-100 p-1 rounded-full"><button type="button" class="pricing-tab text-xs text-neutral-50 bg-[linear-gradient(rgb(46,122,79)_0%,oklab(0.638374_-0.127061_0.0523999_/_0.8)_100%)] box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-transparent px-4 py-3 rounded-[3.35544e+07px] border-solid md:text-sm md:leading-5 cursor-pointer transition-all duration-200" data-duration="3"><span class="text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">3 años</span>
-<p class="text-gray-100 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">Vence en 2028</p>
+<div class="text-xs gap-x-2 grid grid-cols-[repeat(3,minmax(0px,1fr))] leading-4 gap-y-2 text-center mb-4 md:text-sm md:leading-5 max-w-[540px] w-full mx-auto bg-gray-100 p-1 rounded-full"><button type="button" class="pricing-tab pricing-tab-active" data-duration="3"><span class="text-xs leading-4 md:text-sm md:leading-5">3 años</span>
+<p class="text-gray-100 text-xs leading-4 md:text-sm md:leading-5">Vence en 2028</p>
 </button>
-<button type="button" class="pricing-tab text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-transparent px-4 py-3 rounded-[3.35544e+07px] border-solid md:text-sm md:leading-5 cursor-pointer transition-all duration-200" data-duration="2"><span class="text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">2 años</span>
-<p class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">Vence en 2027</p>
+<button type="button" class="pricing-tab" data-duration="2"><span class="text-xs leading-4 md:text-sm md:leading-5">2 años</span>
+<p class="text-slate-600 text-xs leading-4 md:text-sm md:leading-5">Vence en 2027</p>
 </button>
-<button type="button" class="pricing-tab text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-transparent px-4 py-3 rounded-[3.35544e+07px] border-solid md:text-sm md:leading-5 cursor-pointer transition-all duration-200" data-duration="1"><span class="text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">1 año</span>
-<p class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-sm md:leading-5">Vence en 2026</p>
+<button type="button" class="pricing-tab" data-duration="1"><span class="text-xs leading-4 md:text-sm md:leading-5">1 año</span>
+<p class="text-slate-600 text-xs leading-4 md:text-sm md:leading-5">Vence en 2026</p>
 </button>
 </div>
-<div class="box-border caret-transparent gap-x-6 grid grid-cols-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 pt-[19px] md:grid-cols-[repeat(2,minmax(0px,1fr))]"><article class="relative text-zinc-50 bg-primary-600 box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-2xl border-solid"><p class="absolute text-gray-800 text-xs font-semibold bg-white box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid left-4 -top-3">Mejor valor con el paquete completo</p>
+<div class="gap-x-6 grid grid-cols-none gap-y-6 pt-[19px] md:grid-cols-[repeat(2,minmax(0px,1fr))]"><article class="relative text-zinc-50 bg-primary-600 border border-gray-200 p-6 rounded-2xl border-solid"><p class="badge left-4 -top-3">Mejor valor con el paquete completo</p>
 <div class="flex items-start gap-4">
 <div class="flex-1">
-<h3 class="font-heading text-[21px] md:text-[28px] font-medium box-border caret-transparent leading-[28px] md:leading-[34px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Impreso <span class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">+ gratis</span> digital</h3>
-<p class="text-[oklab(0.985059_0.0000448823_0.0000197291_/_0.9)] text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Mejor para viajeros a largo plazo y viajeros frecuentes</p>
-<p id="print-digital-price" class="text-3xl font-bold box-border caret-transparent tracking-[-0.75px] leading-9 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4">$79</p>
-<p class="text-[oklab(0.985059_0.0000448823_0.0000197291_/_0.8)] text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Envío calculado al finalizar la compra</p>
-<a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=print_digital_button" class="text-gray-900 text-sm font-semibold items-center bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] caret-transparent inline-flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-5 px-4 py-3 rounded-full">Iniciar solicitud</a>
+<h3 class="font-heading text-[21px] md:text-[28px] font-medium leading-[28px] md:leading-[34px]">Impreso <span class="">+ gratis</span> digital</h3>
+<p class="text-sm leading-5 mt-1">Mejor para viajeros a largo plazo y viajeros frecuentes</p>
+<p id="print-digital-price" class="text-3xl font-bold tracking-[-0.75px] leading-9 mt-4">$79</p>
+<p class="text-xs leading-4">Envío calculado al finalizar la compra</p>
+<a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=print_digital_button" class="btn btn-on-dark mt-5">Iniciar solicitud</a>
 </div>
 <div class="flex-shrink-0">
 <img src="../images/print pricing card.png" alt="Tarjeta de precios impresa" class="h-20 md:h-32 w-auto object-contain" />
 </div>
 </div>
-<ul class="text-sm box-border caret-transparent leading-5 list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-6 pl-0"><li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" style="filter: brightness(0) invert(1);" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Acceso gratuito a todos los beneficios del formato PCI digital incluido</span>
+<ul class="text-sm leading-5 list-none mt-6 pl-0"><li class="items-start gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white h-4 w-4" style="filter: brightness(0) invert(1);" />
+<span class="block">Acceso gratuito a todos los beneficios del formato PCI digital incluido</span>
 </li>
-<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" style="filter: brightness(0) invert(1);" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Aceptado en más de 150 países — Viaje sin preocupaciones</span>
+<li class="items-start gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white h-4 w-4" style="filter: brightness(0) invert(1);" />
+<span class="block">Aceptado en más de 150 países — Viaje sin preocupaciones</span>
 </li>
-<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" style="filter: brightness(0) invert(1);" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Incluye una tarjeta de identificación gratuita con detalles de licencia en inglés</span>
+<li class="items-start gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white h-4 w-4" style="filter: brightness(0) invert(1);" />
+<span class="block">Incluye una tarjeta de identificación gratuita con detalles de licencia en inglés</span>
 </li>
-<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" style="filter: brightness(0) invert(1);" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Reconocido globalmente y cumple con estándares internacionales</span>
+<li class="items-start gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white h-4 w-4" style="filter: brightness(0) invert(1);" />
+<span class="block">Reconocido globalmente y cumple con estándares internacionales</span>
 </li>
-<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" style="filter: brightness(0) invert(1);" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Esencial para países que no hablan inglés</span>
+<li class="items-start gap-x-2 flex gap-y-2 text-left"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white h-4 w-4" style="filter: brightness(0) invert(1);" />
+<span class="block">Esencial para países que no hablan inglés</span>
 </li>
 </ul>
 </article>
-<article class="relative bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-2xl border-solid"><p class="absolute text-success-500 text-xs font-semibold bg-white box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 px-3 py-1 rounded-[3.35544e+07px] border-solid right-4 -top-3">Comience su aventura en pocos minutos</p>
+<article class="relative bg-white border border-gray-200 p-6 rounded-2xl border-solid"><p class="absolute text-success-500 text-xs font-semibold bg-white leading-4 border border-gray-200 px-3 py-1 border-solid right-4 -top-3">Comience su aventura en pocos minutos</p>
 <div class="flex items-start gap-4">
 <div class="flex-1">
-<h3 class="font-heading text-[21px] md:text-[28px] font-medium box-border caret-transparent leading-[28px] md:leading-[34px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Solo digital</h3>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-1">Mejor para viajes cortos o planes de último minuto</p>
-<p id="digital-only-price" class="text-3xl font-bold box-border caret-transparent tracking-[-0.75px] leading-9 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-4">$59</p>
-<a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=digital_button" class="text-zinc-50 text-sm font-semibold items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_4px_6px_-1px,rgba(0,0,0,0.1)_0px_2px_4px_-2px] caret-transparent inline-flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-5 px-4 py-3 rounded-full">Iniciar solicitud</a>
+<h3 class="font-heading text-[21px] md:text-[28px] font-medium leading-[28px] md:leading-[34px]">Solo digital</h3>
+<p class="text-slate-600 text-sm leading-5 mt-1">Mejor para viajes cortos o planes de último minuto</p>
+<p id="digital-only-price" class="text-3xl font-bold tracking-[-0.75px] leading-9 mt-4">$59</p>
+<a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=digital_button" class="btn btn-primary mt-5">Iniciar solicitud</a>
 </div>
 <div class="flex-shrink-0">
 <img src="../images/digital pricing card.png" alt="Tarjeta de precios digital" class="h-20 md:h-32 w-auto object-contain" />
 </div>
 </div>
-<ul class="text-sm box-border caret-transparent leading-5 list-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-6 pl-0"><li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Formato digital de fácil acceso, aceptado en muchos países</span>
+<ul class="text-sm leading-5 list-none mt-6 pl-0"><li class="items-start gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
+<span class="block">Formato digital de fácil acceso, aceptado en muchos países</span>
 </li>
-<li class="items-start box-border caret-transparent gap-x-2 flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Se puede obtener en línea, proceso rápido y fácil</span>
+<li class="items-start gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
+<span class="block">Se puede obtener en línea, proceso rápido y fácil</span>
 </li>
-<li class="items-start box-border caret-transparent gap-x-2 flex opacity-60 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left mb-3"><img src="../images/icons/icon-13.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Ampliamente aceptado, pero no en todos los países</span>
+<li class="items-start gap-x-2 flex opacity-60 gap-y-2 text-left mb-3"><img src="../images/icons/icon-13.svg" alt="Icon" class="h-4 w-4" />
+<span class="block">Ampliamente aceptado, pero no en todos los países</span>
 </li>
-<li class="items-start box-border caret-transparent gap-x-2 flex opacity-60 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2 text-left"><img src="../images/icons/icon-13.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">No incluye Folleto Impreso y Tarjeta Plástica Complementaria</span>
+<li class="items-start gap-x-2 flex opacity-60 gap-y-2 text-left"><img src="../images/icons/icon-13.svg" alt="Icon" class="h-4 w-4" />
+<span class="block">No incluye Folleto Impreso y Tarjeta Plástica Complementaria</span>
 </li>
 </ul>
 </article>
 </div>
 </section>
-<section aria-label="testimonios" class="box-border caret-transparent max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto px-4 py-12 md:py-16"><header class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mb-6"><h2 class="font-heading text-[28px] font-medium box-border caret-transparent justify-center leading-[36px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-1 md:text-[34px] md:leading-[40px]">Lo que dicen nuestros clientes</h2>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2 md:text-base md:leading-6">Vea lo que cientos de clientes satisfechos dicen sobre su experiencia de conducción internacional sin problemas</p></header>
-<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-6 rounded-2xl border-solid"><div class="[align-items:normal] box-border caret-transparent gap-x-4 flex flex-col justify-normal outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 md:items-center md:flex-row md:justify-between"><div class="text-sm items-center box-border caret-transparent gap-x-2 flex leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-2"><div class="text-[oklch(0.795_0.184_86.047)] items-center box-border caret-transparent flex outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><img src="../images/icons/icon-14.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<img src="../images/icons/icon-14.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<img src="../images/icons/icon-14.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<img src="../images/icons/icon-14.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
-<img src="../images/icons/icon-15.svg" alt="Icon" class="box-border caret-transparent h-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] w-4" />
+<section aria-label="testimonios" class="max-w-6xl mx-auto px-4 py-12 md:py-16"><header class="text-center mb-6"><h2 class="heading-1 text-center mt-1">Lo que dicen nuestros clientes</h2>
+<p class="text-slate-600 text-sm leading-5 mt-2 md:text-base md:leading-6">Vea lo que cientos de clientes satisfechos dicen sobre su experiencia de conducción internacional sin problemas</p></header>
+<div class="card"><div class="[align-items:normal] gap-x-4 flex flex-col justify-normal gap-y-4 md:items-center md:flex-row md:justify-between"><div class="text-sm items-center gap-x-2 flex leading-5 gap-y-2"><div class="text-[oklch(0.795_0.184_86.047)] items-center flex"><img src="../images/icons/icon-14.svg" alt="Icon" class="h-4 w-4" />
+<img src="../images/icons/icon-14.svg" alt="Icon" class="h-4 w-4" />
+<img src="../images/icons/icon-14.svg" alt="Icon" class="h-4 w-4" />
+<img src="../images/icons/icon-14.svg" alt="Icon" class="h-4 w-4" />
+<img src="../images/icons/icon-15.svg" alt="Icon" class="h-4 w-4" />
 </div>
-<span class="box-border caret-transparent block outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">4.8 (341 reseñas)</span>
+<span class="block">4.8 (341 reseñas)</span>
 </div>
-<p class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">Sarah de Texas recibió su PCI hace 2 horas</p>
+<p class="text-slate-600 text-xs leading-4">Sarah de Texas recibió su PCI hace 2 horas</p>
 </div>
-<div class="box-border caret-transparent gap-x-4 grid grid-cols-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-4 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><blockquote class="text-sm bg-white box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-4 rounded-2xl border-solid"><p class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">"¡Muy rápido! Envié la solicitud al mediodía y obtuve mi PCI antes de mi vuelo."</p>
-<footer class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Sarah, EE.UU. • Viajera verificada</footer>
+<div class="gap-x-4 grid grid-cols-none gap-y-4 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><blockquote class="text-sm bg-white leading-5 border border-gray-200 p-4 rounded-2xl border-solid"><p class="">"¡Muy rápido! Envié la solicitud al mediodía y obtuve mi PCI antes de mi vuelo."</p>
+<footer class="text-slate-600 text-xs leading-4 mt-2">Sarah, EE.UU. • Viajera verificada</footer>
 </blockquote>
-<blockquote class="text-sm bg-white box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-4 rounded-2xl border-solid"><p class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">"El alquiler de autos en Japón fue perfecto. El proceso tomó 2 minutos."</p>
-<footer class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Marco, IT • Condujo en Japón</footer>
+<blockquote class="text-sm bg-white leading-5 border border-gray-200 p-4 rounded-2xl border-solid"><p class="">"El alquiler de autos en Japón fue perfecto. El proceso tomó 2 minutos."</p>
+<footer class="text-slate-600 text-xs leading-4 mt-2">Marco, IT • Condujo en Japón</footer>
 </blockquote>
-<blockquote class="text-sm bg-white box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-4 rounded-2xl border-solid"><p class="box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">"Pasos claros, precios justos, excelente soporte en WhatsApp."</p>
-<footer class="text-slate-600 text-xs box-border caret-transparent leading-4 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Aisha, EAU • Viaje urgente</footer>
+<blockquote class="text-sm bg-white leading-5 border border-gray-200 p-4 rounded-2xl border-solid"><p class="">"Pasos claros, precios justos, excelente soporte en WhatsApp."</p>
+<footer class="text-slate-600 text-xs leading-4 mt-2">Aisha, EAU • Viaje urgente</footer>
 </blockquote>
 </div>
 </div>
 </section>
-<section class="box-border caret-transparent max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mx-auto px-4 py-12 md:py-16"><h2 class="font-heading text-[28px] font-medium box-border caret-transparent justify-center leading-[36px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] text-center mt-1 md:text-[34px] md:leading-[40px]">Preguntas frecuentes</h2>
-<div class="box-border caret-transparent gap-x-6 grid grid-cols-none outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-2xl border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">¿Qué es un Documento de Conducir Internacional?</p>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Un Documento de Conducir Internacional (PCI) es un documento que traduce su licencia de conducir existente a múltiples idiomas. Actúa como un complemento, no un reemplazo, de su licencia de conducir válida.</p>
+<section class="max-w-6xl mx-auto px-4 py-12 md:py-16"><h2 class="heading-1 text-center mt-1">Preguntas frecuentes</h2>
+<div class="gap-x-6 grid grid-cols-none gap-y-6 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="card"><p class="font-semibold">¿Qué es un Documento de Conducir Internacional?</p>
+<p class="text-slate-600 text-sm leading-5 mt-2">Un Documento de Conducir Internacional (PCI) es un documento que traduce su licencia de conducir existente a múltiples idiomas. Actúa como un complemento, no un reemplazo, de su licencia de conducir válida.</p>
 </div>
-<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-2xl border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">¿Necesito un PCI?</p>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Depende de su destino. Muchos países requieren legalmente un PCI para conducir, y la mayoría de las agencias de alquiler de automóviles en el extranjero lo solicitarán. Es altamente recomendado para viajes internacionales para evitar posibles penalizaciones y problemas.</p>
+<div class="card"><p class="font-semibold">¿Necesito un PCI?</p>
+<p class="text-slate-600 text-sm leading-5 mt-2">Depende de su destino. Muchos países requieren legalmente un PCI para conducir, y la mayoría de las agencias de alquiler de automóviles en el extranjero lo solicitarán. Es altamente recomendado para viajes internacionales para evitar posibles penalizaciones y problemas.</p>
 </div>
-<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-2xl border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">¿Por cuánto tiempo es válido mi PCI?</p>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Un PCI es típicamente válido por un año desde la fecha de emisión, o hasta que su licencia de conducir nacional expire, lo que ocurra primero. Algunos PCI emitidos bajo diferentes acuerdos internacionales pueden ser válidos hasta por tres años.</p>
+<div class="card"><p class="font-semibold">¿Por cuánto tiempo es válido mi PCI?</p>
+<p class="text-slate-600 text-sm leading-5 mt-2">Un PCI es típicamente válido por un año desde la fecha de emisión, o hasta que su licencia de conducir nacional expire, lo que ocurra primero. Algunos PCI emitidos bajo diferentes acuerdos internacionales pueden ser válidos hasta por tres años.</p>
 </div>
-<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-2xl border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">¿Qué países aceptan el PCI?</p>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Más de 150 países en todo el mundo aceptan el Documento de Conducir Internacional. Es reconocido en la mayoría de las Américas, Europa, Asia, África y Australia.</p>
+<div class="card"><p class="font-semibold">¿Qué países aceptan el PCI?</p>
+<p class="text-slate-600 text-sm leading-5 mt-2">Más de 150 países en todo el mundo aceptan el Documento de Conducir Internacional. Es reconocido en la mayoría de las Américas, Europa, Asia, África y Australia.</p>
 </div>
-<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-2xl border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">¿Qué tan rápido puedo obtener mi PCI?</p>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Las solicitudes en persona en su oficina de emisión local a menudo se pueden procesar en menos de una hora. Las solicitudes en línea y por correo pueden tomar desde unos pocos días hasta varias semanas, dependiendo del proveedor y las opciones de envío seleccionadas.</p>
+<div class="card"><p class="font-semibold">¿Qué tan rápido puedo obtener mi PCI?</p>
+<p class="text-slate-600 text-sm leading-5 mt-2">Las solicitudes en persona en su oficina de emisión local a menudo se pueden procesar en menos de una hora. Las solicitudes en línea y por correo pueden tomar desde unos pocos días hasta varias semanas, dependiendo del proveedor y las opciones de envío seleccionadas.</p>
 </div>
-<div class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] border border-gray-200 p-5 rounded-2xl border-solid"><p class="font-semibold box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]">¿En qué países es válido esto?</p>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Este PCI es válido en más de 150 países que firmaron la Convención de Ginebra de 1949 y/o la Convención de Viena de 1968 sobre Tráfico Vial, incluidos destinos populares como Europa, Asia, África y América del Sur.</g/p>
+<div class="card"><p class="font-semibold">¿En qué países es válido esto?</p>
+<p class="text-slate-600 text-sm leading-5 mt-2">Este PCI es válido en más de 150 países que firmaron la Convención de Ginebra de 1949 y/o la Convención de Viena de 1968 sobre Tráfico Vial, incluidos destinos populares como Europa, Asia, África y América del Sur.</g/p>
 </div>
 </div>
 </section>
-<section aria-label="llamado a la acción final" class="bg-white box-border caret-transparent outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)]"><div class="items-center box-border caret-transparent gap-x-6 grid grid-cols-none max-w-6xl outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] gap-y-6 mx-auto px-4 py-12 md:grid-cols-[repeat(3,minmax(0px,1fr))] md:py-16"><div class="box-border caret-transparent col-end-auto col-start-auto outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:col-end-[span_2] md:col-start-[span_2]"><h2 class="font-heading text-[28px] font-medium box-border caret-transparent leading-[36px] outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:text-[34px] md:leading-[40px]">Obtenga su documento de conducir internacional ahora</h2>
-<p class="text-slate-600 text-sm box-border caret-transparent leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] mt-2">Procese antes de su viaje — obtenga la aprobación hoy.</p>
+<section aria-label="llamado a la acción final" class="bg-white"><div class="items-center gap-x-6 grid grid-cols-none max-w-6xl gap-y-6 mx-auto px-4 py-12 md:grid-cols-[repeat(3,minmax(0px,1fr))] md:py-16"><div class="col-end-auto col-start-auto md:col-end-[span_2] md:col-start-[span_2]"><h2 class="heading-1">Obtenga su documento de conducir internacional ahora</h2>
+<p class="text-slate-600 text-sm leading-5 mt-2">Procese antes de su viaje — obtenga la aprobación hoy.</p>
 </div>
-<div class="box-border caret-transparent justify-self-auto outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] md:justify-self-end"><a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=footer_button" class="text-zinc-50 text-sm items-center bg-primary-500 shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.1)_0px_4px_6px_-4px] box-border caret-transparent inline-flex justify-center leading-5 outline-[oklab(0.638374_-0.127061_0.0523999_/_0.5)] px-5 py-3 rounded-full">Obtenga la aprobación en 2 horas</a>
+<div class="justify-self-auto md:justify-self-end"><a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=footer_button" class="btn btn-primary">Obtenga la aprobación en 2 horas</a>
 </div>
 </div>
 </section>
@@ -658,10 +658,6 @@ const pricingTabs = document.querySelectorAll('.pricing-tab');
 const printDigitalPrice = document.getElementById('print-digital-price');
 const digitalOnlyPrice = document.getElementById('digital-only-price');
 
-// Active button classes
-const activeClasses = 'text-neutral-50 bg-[linear-gradient(rgb(46,122,79)_0%,oklab(0.638374_-0.127061_0.0523999_/_0.8)_100%)] border-transparent';
-const inactiveClasses = 'border-transparent';
-
 function updatePrices(duration) {
   const prices = pricingData[duration];
   printDigitalPrice.textContent = `$${prices.printDigital}`;
@@ -671,10 +667,7 @@ function updatePrices(duration) {
 // Function to update active button styling
 function updateActiveButton(selectedButton) {
   pricingTabs.forEach(tab => {
-    // Remove active classes
-    tab.classList.remove(...activeClasses.split(' '));
-    // Add inactive classes
-    tab.classList.add(...inactiveClasses.split(' '));
+    tab.classList.remove('pricing-tab-active');
     
     // Update text color for spans and p tags inside
     const spans = tab.querySelectorAll('span, p');
@@ -686,9 +679,7 @@ function updateActiveButton(selectedButton) {
     });
   });
   
-  // Add active classes to selected button
-  selectedButton.classList.remove(...inactiveClasses.split(' '));
-  selectedButton.classList.add(...activeClasses.split(' '));
+  selectedButton.classList.add('pricing-tab-active');
   
   // Update text color for selected button
   const selectedSpans = selectedButton.querySelectorAll('span, p');
