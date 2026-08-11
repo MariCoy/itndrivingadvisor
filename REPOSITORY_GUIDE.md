@@ -166,7 +166,7 @@ itndrivingadvisor/
 #### tailwind.config.js (Key Settings)
 - **Content scanning:** All HTML files in root directory
 - **Custom colors:** Primary (blue-purple), Secondary (slate), Success (green), Error (red)
-- **Custom fonts:** Inter variable font, Instrument Serif for headings
+- **Custom fonts:** Google Sans (body), Instrument Serif (headings)
 - **Default border radius:** 2px
 
 ### JavaScript
