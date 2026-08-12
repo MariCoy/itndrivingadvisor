@@ -17,8 +17,8 @@ aside.card form {
 .idp-auto-badge {
   font-size: 10px;
   font-weight: 500;
-  color: #2B30A3;
-  background: #eef0ff;
+  color: var(--color-success-600);
+  background: var(--color-success-50);
   padding: 1px 6px;
   border-radius: 4px;
   opacity: 0;
