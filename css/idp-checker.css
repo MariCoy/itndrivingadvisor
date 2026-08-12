@@ -4,7 +4,8 @@ aside.card form {
   overflow: visible;
 }
 
-.idp-field { margin-bottom: 14px; }
+.idp-field { margin-bottom: 12px; }
+.idp-field:nth-child(2) { margin-bottom: 0; }
 .idp-field-label {
   font-size: 13px;
   font-weight: 600;
