@@ -4,6 +4,7 @@
 
 :root {
   /* Primary */
+  --color-primary-25: #F2F3FA;
   --color-primary-50: #E4E5F4;
   --color-primary-100: #D0D1EB;
   --color-primary-200: #A7A9D9;
@@ -200,7 +201,7 @@
   }
 
   .site-header {
-    @apply sticky top-0 z-20 border-b border-gray-200 backdrop-blur;
+    @apply sticky top-0 z-20 backdrop-blur;
     background-color: rgb(255 255 255 / 0.8);
   }
 

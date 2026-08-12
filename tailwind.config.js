@@ -34,6 +34,7 @@ module.exports = {
       },
       colors: {
         primary: {
+          25: 'var(--color-primary-25)',
           50: 'var(--color-primary-50)',
           100: 'var(--color-primary-100)',
           200: 'var(--color-primary-200)',
