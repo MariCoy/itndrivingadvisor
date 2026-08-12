@@ -61,11 +61,12 @@ aside.card form {
 }
 .idp-dropdown-trigger input::placeholder { color: #9ca3af; font-weight: 400; }
 .idp-dropdown-trigger .idp-arrow {
-  width: 18px; text-align: center;
+  width: 16px;
+  height: 16px;
   color: #6b7280;
   transition: transform 0.2s;
   flex-shrink: 0;
-  font-size: 12px;
+  display: block;
 }
 .idp-dropdown-trigger .idp-arrow.open { transform: rotate(180deg); }
 
