@@ -13,8 +13,8 @@ const TRANSLATIONS = {
       howItWorks: 'How it works',
       pricing: 'Pricing',
       faq: 'FAQ',
-      contact: 'Contact Us',
-      getYourIdp: 'Get Your Translation'
+      contact: 'Contact us',
+      getYourIdp: 'Get your translation'
     },
     footer: {
       tagline: 'Your trusted partner for international driving translations.',
@@ -298,12 +298,14 @@ function updateNavigationLinks(currentLang, basePath) {
     const linkType = link.getAttribute('data-nav-link');
     let href = link.getAttribute('href');
 
-    // Update image src for logo
-    if (linkType === 'home') {
-      const img = link.querySelector('img');
-      if (img && basePath) {
-        img.src = `${basePath}/images/Advisor_Logo.svg`;
-      }
+    // Update image src for logos (locale subdirs need ../images/)
+    if (linkType === 'home' && basePath) {
+      link.querySelectorAll('img').forEach((img) => {
+        const file = img.src.includes('Advisor_Logo_mini')
+          ? 'Advisor_Logo_mini.svg'
+          : 'Advisor_Logo.svg';
+        img.src = `${basePath}/images/${file}`;
+      });
     }
 
     // Update href for navigation links
@@ -334,10 +336,10 @@ function translateHeaderHtml(html, currentLang) {
   html = html.replace('>How it works</a>', `>${t.howItWorks}</a>`);
   html = html.replace('>Pricing</a>', `>${t.pricing}</a>`);
   html = html.replace('>FAQ</a>', `>${t.faq}</a>`);
-  html = html.replace('>Contact Us</a>', `>${t.contact}</a>`);
+  html = html.replace('>Contact us</a>', `>${t.contact}</a>`);
 
   // CTA button - need to preserve the icon
-  html = html.replace(/Get Your Translation\s*<img/g, `${t.getYourIdp} <img`);
+  html = html.replace(/Get your translation\s*<img/g, `${t.getYourIdp} <img`);
 
   return html;
 }
