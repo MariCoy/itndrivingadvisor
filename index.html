@@ -9,257 +9,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="dist/styles.css">
+  <link rel="stylesheet" href="css/idp-checker.css">
   <script src="js/components.js"></script>
+  <script src="js/idp-checker.js" defer></script>
 
 <script>
-function validateForm() {
-  let isValid = true;
-  
-  // Get form field values
-  const firstName = document.getElementById('firstName').value.trim();
-  const lastName = document.getElementById('lastName').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const countryTravel = document.getElementById('countryTravel').value;
-  
-  // Reset error states
-  document.getElementById('firstNameError').classList.add('hidden');
-  document.getElementById('lastNameError').classList.add('hidden');
-  document.getElementById('emailError').classList.add('hidden');
-  document.getElementById('countryError').classList.add('hidden');
-  
-  // Reset field styles
-  document.getElementById('firstName').classList.remove('input-error');
-  document.getElementById('lastName').classList.remove('input-error');
-  document.getElementById('email').classList.remove('input-error');
-  document.getElementById('countryTravel').classList.remove('input-error');
-  
-  // Validate first name
-  if (!firstName || firstName.length < 2) {
-    document.getElementById('firstNameError').classList.remove('hidden');
-    document.getElementById('firstName').classList.add('input-error');
-    isValid = false;
-  }
-  
-  // Validate last name
-  if (!lastName || lastName.length < 2) {
-    document.getElementById('lastNameError').classList.remove('hidden');
-    document.getElementById('lastName').classList.add('input-error');
-    isValid = false;
-  }
-  
-  // Validate email
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email || !emailRegex.test(email)) {
-    document.getElementById('emailError').classList.remove('hidden');
-    document.getElementById('email').classList.add('input-error');
-    isValid = false;
-  }
-  
-  // Validate country
-  if (!countryTravel || !countries.includes(countryTravel)) {
-    document.getElementById('countryError').classList.remove('hidden');
-    document.getElementById('countryTravel').classList.add('input-error');
-    isValid = false;
-  }
-  
-  return isValid;
-}
-
 function submitForm() {
-  // Validate form first
-  if (!validateForm()) {
-    // Scroll to first error
-    const firstError = document.querySelector('.input-error');
-    if (firstError) {
-      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      firstError.focus();
-    }
-    return;
-  }
-  
-  // Get form field values
-  const firstName = document.getElementById('firstName').value.trim();
-  const lastName = document.getElementById('lastName').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const countryTravel = document.getElementById('countryTravel').value;
-  
-  // Build the URL with parameters
   const baseUrl = 'https://idpcheckout.fillout.com/t/2ESX5foenCus';
-  const params = new URLSearchParams({
-    first_name: firstName,
-    last_name: lastName,
-    email: email,
-    country_travel: countryTravel
-  });
-  
-  // Redirect to external form with parameters
+  const params = new URLSearchParams({ source: 'hero_form' });
+
+  if (typeof idpSelectedDest !== 'undefined' && idpSelectedDest) {
+    params.set('country_travel', idpSelectedDest.name);
+  }
+  if (typeof idpSelectedSource !== 'undefined' && idpSelectedSource) {
+    params.set('source_country', idpSelectedSource.name);
+  }
+
   window.open(`${baseUrl}?${params.toString()}`, '_blank');
 }
-
-// Countries list for autocomplete
-const countries = [
-  "Afghanistan", "Albania", "Algeria", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
-  "Bahrain", "Bangladesh", "Belarus", "Belgium", "Benin", "Bolivia", "Bosnia and Herzegovina", "Botswana",
-  "Brazil", "Bulgaria", "Cambodia", "Canada", "Chile", "China", "Colombia", "Costa Rica", "Croatia",
-  "Cyprus", "Czech Republic", "Denmark", "Dominican Republic", "Ecuador", "Egypt", "Estonia", "Finland",
-  "France", "Georgia", "Germany", "Ghana", "Greece", "Guatemala", "Haiti", "Hungary", "Iceland", "India",
-  "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan",
-  "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Lithuania",
-  "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Mali", "Malta", "Mexico", "Moldova", "Monaco",
-  "Mongolia", "Montenegro", "Morocco", "Namibia", "Nepal", "Netherlands", "New Zealand", "Niger", "Nigeria",
-  "North Macedonia", "Norway", "Pakistan", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Romania",
-  "Russia", "Rwanda", "San Marino", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone",
-  "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sri Lanka", "Sweden",
-  "Switzerland", "Syria", "Tajikistan", "Thailand", "Togo", "Tunisia", "Turkey", "Turkmenistan", "Uganda",
-  "Ukraine", "United Arab Emirates", "United Kingdom", "Uruguay", "Uzbekistan", "Vatican City", "Venezuela",
-  "Vietnam", "Zimbabwe"
-];
-
-// Country autocomplete functionality
-function initCountryAutocomplete() {
-  const input = document.getElementById('countryTravel');
-  const dropdown = document.getElementById('countryDropdown');
-  let selectedIndex = -1;
-  let filteredCountries = [];
-
-  function filterCountries(query) {
-    if (!query) return countries;
-    return countries.filter(country => 
-      country.toLowerCase().includes(query.toLowerCase())
-    );
-  }
-
-  function showDropdown(countries) {
-    dropdown.innerHTML = '';
-    if (countries.length === 0) {
-      dropdown.classList.add('hidden');
-      return;
-    }
-
-    countries.forEach((country, index) => {
-      const option = document.createElement('div');
-      option.className = 'px-3 py-2 cursor-pointer hover:bg-gray-100 text-sm';
-      option.textContent = country;
-      option.addEventListener('click', () => selectCountry(country));
-      dropdown.appendChild(option);
-    });
-
-    dropdown.classList.remove('hidden');
-  }
-
-  function selectCountry(country) {
-    input.value = country;
-    dropdown.classList.add('hidden');
-    input.classList.remove('input-error');
-    document.getElementById('countryError').classList.add('hidden');
-    selectedIndex = -1;
-  }
-
-  function highlightOption(index) {
-    const options = dropdown.querySelectorAll('div');
-    options.forEach((option, i) => {
-      if (i === index) {
-        option.classList.add('bg-primary-50', 'text-primary-600');
-      } else {
-        option.classList.remove('bg-primary-50', 'text-primary-600');
-      }
-    });
-  }
-
-  input.addEventListener('input', function() {
-    const query = this.value.trim();
-    filteredCountries = filterCountries(query);
-    showDropdown(filteredCountries);
-    selectedIndex = -1;
-    
-    // Real-time validation
-    if (query && countries.includes(query)) {
-      this.classList.remove('input-error');
-      document.getElementById('countryError').classList.add('hidden');
-    }
-  });
-
-  input.addEventListener('keydown', function(e) {
-    if (!dropdown.classList.contains('hidden')) {
-      switch(e.key) {
-        case 'ArrowDown':
-          e.preventDefault();
-          selectedIndex = Math.min(selectedIndex + 1, filteredCountries.length - 1);
-          highlightOption(selectedIndex);
-          break;
-        case 'ArrowUp':
-          e.preventDefault();
-          selectedIndex = Math.max(selectedIndex - 1, -1);
-          highlightOption(selectedIndex);
-          break;
-        case 'Enter':
-          e.preventDefault();
-          if (selectedIndex >= 0 && filteredCountries[selectedIndex]) {
-            selectCountry(filteredCountries[selectedIndex]);
-          }
-          break;
-        case 'Escape':
-          dropdown.classList.add('hidden');
-          selectedIndex = -1;
-          break;
-      }
-    }
-  });
-
-  // Hide dropdown when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-      dropdown.classList.add('hidden');
-      selectedIndex = -1;
-    }
-  });
-
-  // Focus handling
-  input.addEventListener('focus', function() {
-    if (this.value.trim()) {
-      filteredCountries = filterCountries(this.value.trim());
-      showDropdown(filteredCountries);
-    }
-  });
-}
-
-// Add real-time validation
-document.addEventListener('DOMContentLoaded', function() {
-  // Initialize country autocomplete
-  initCountryAutocomplete();
-  
-  // Add input event listeners for real-time validation
-  document.getElementById('firstName').addEventListener('input', function() {
-    if (this.value.trim().length >= 2) {
-      this.classList.remove('input-error');
-      document.getElementById('firstNameError').classList.add('hidden');
-    }
-  });
-  
-  document.getElementById('lastName').addEventListener('input', function() {
-    if (this.value.trim().length >= 2) {
-      this.classList.remove('input-error');
-      document.getElementById('lastNameError').classList.add('hidden');
-    }
-  });
-  
-  document.getElementById('email').addEventListener('input', function() {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (emailRegex.test(this.value.trim())) {
-      this.classList.remove('input-error');
-      document.getElementById('emailError').classList.add('hidden');
-    }
-  });
-  
-  document.getElementById('countryTravel').addEventListener('input', function() {
-    if (this.value && countries.includes(this.value)) {
-      this.classList.remove('input-error');
-      document.getElementById('countryError').classList.add('hidden');
-    }
-  });
-});
-
-// Carousel functionality removed - now using static image
 
 // Initialize page when loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -368,17 +135,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="h-full overscroll-x-none w-full"><div class="bg-white min-h-full w-full">
 <!-- Header Component -->
 <div data-component="header"></div>
-<main><section class="relative overflow-hidden bg-primary-50"><div class="absolute bg-[url('images/world-dots-hero.svg')] bg-no-repeat bg-cover opacity-25 -z-10 bg-center inset-0 md:opacity-30"></div>
-<div class="absolute bg-[linear-gradient(rgba(234,244,240,1)_0%,rgba(234,244,240,0.7)_50%,rgba(234,244,240,1)_100%)] -z-10 inset-0"></div>
-<div class="items-start gap-x-10 grid grid-cols-none max-w-6xl gap-y-10 mx-auto pt-[40px] md:pt-[65px] pb-[40px] md:pb-[50px] px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div><h1 class="heading-hero">Prepare your driving licence for international travel</h1>
-<p class="text-slate-600 mt-3"><span>Get a professionally prepared multilingual translation of your valid driving licence, with guidance based on where you are travelling.</span>
+<main><section class="relative overflow-visible bg-primary-50"><div class="absolute bg-[url('images/world-dots-hero.svg')] bg-no-repeat bg-cover opacity-25 -z-10 bg-center inset-0 md:opacity-30 overflow-hidden"></div>
+<div class="absolute bg-[linear-gradient(rgba(234,244,240,1)_0%,rgba(234,244,240,0.7)_50%,rgba(234,244,240,1)_100%)] -z-10 inset-0 overflow-hidden"></div>
+<div class="items-center gap-x-6 grid grid-cols-none max-w-6xl gap-y-6 md:gap-y-10 mx-auto py-6 md:py-[64px] px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div class="w-full max-w-lg"><h1 class="heading-hero">Prepare your driving licence for international travel</h1>
+<p class="text-slate-600 mt-4"><span>Get a professionally prepared multilingual translation of your valid driving licence, with guidance based on where you are travelling.</span>
 </p>
-<div class="gap-x-3 flex flex-col gap-y-3 mt-6 md:flex-row"><a href="destination-checker.html" class="btn btn-primary"><span class="block">Check my destination</span>
-</a>
-<a href="#what-you-receive" class="btn btn-secondary"><span class="block">See features</span>
-</a>
-</div>
-<div class="text-slate-600 text-xs items-center gap-x-2 flex flex-wrap justify-center leading-4 gap-y-2 mt-6 md:text-sm md:leading-5 md:gap-x-4 md:justify-start md:flex-nowrap"><div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
+<div class="text-slate-600 text-xs items-center gap-x-2 flex flex-wrap justify-start leading-4 gap-y-2 mt-4 md:mt-6 md:text-sm md:leading-5 md:gap-x-4 md:flex-nowrap"><div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
 <span class="whitespace-nowrap">Fast digital delivery</span>
 </div>
 <div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
@@ -388,68 +150,85 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="whitespace-nowrap">Printed option available</span>
 </div>
 </div>
-<p class="text-slate-500 text-xs leading-4 mt-4 md:text-sm md:leading-5">Independent private service. Not a government-issued International Driving Permit. Requirements and acceptance vary by destination.</p>
+<p class="text-slate-500 text-xs leading-4 mt-4 md:text-sm md:leading-5 hidden md:block">Independent private service. Not a government-issued International Driving Permit. Requirements and acceptance vary by destination.</p>
 </div>
-<aside class="card"><div class="items-center flex justify-between"><div class="items-center gap-x-2 flex gap-y-2"><h2 class="font-heading text-base font-medium leading-7">Start application</h2>
-</div>
-<span class="text-xs block leading-4 text-slate-600">Step 1 of 3</span>
-</div>
-<form aria-label="IDD application step 1" class="gap-x-4 grid gap-y-4 mt-4"><div class="text-sm gap-x-2 grid grid-cols-2 leading-5 gap-y-2">
-<label class="gap-x-2 grid leading-5 gap-y-2"><span class="block">First Name <span class="text-red-500">*</span></span>
-<input id="firstName" aria-label="First Name" placeholder="Jane" required class="input" />
-<span id="firstNameError" class="text-red-500 text-xs hidden">First name is required</span>
-</label>
-<label class="gap-x-2 grid leading-5 gap-y-2"><span class="block">Last Name <span class="text-red-500">*</span></span>
-<input id="lastName" aria-label="Last Name" placeholder="Doe" required class="input" />
-<span id="lastNameError" class="text-red-500 text-xs hidden">Last name is required</span>
-</label>
-</div>
-<label class="text-sm gap-x-2 grid leading-5 gap-y-2"><span class="block">Email <span class="text-red-500">*</span></span>
-<input id="email" aria-label="Email" placeholder="jane@example.com" type="email" required class="input" />
-<span id="emailError" class="text-red-500 text-xs hidden">Please enter a valid email address</span>
-<span class="text-slate-600 text-xs block leading-4">We'll send your digital IDD here.</span>
-</label>
-<label class="text-sm gap-x-2 grid leading-5 gap-y-2"><div class="flex items-center justify-between"><span class="block">Destination Country <span class="text-red-500">*</span></span><!--<button type="button" onclick="openLimitationsModal()" class="text-primary-500 text-xs flex items-center gap-1 hover:text-primary-600 transition-colors font-medium"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>See limitations</button>--></div>
-<div class="relative">
-<input id="countryTravel" aria-label="Country of Travel" placeholder="Type to search countries..." required class="input" autocomplete="off" />
-<div id="countryDropdown" class="absolute z-50 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-60 overflow-y-auto hidden">
+<aside class="card"><div class="items-center flex justify-between"><div class="items-center gap-x-2 flex gap-y-2"><h2 class="font-heading text-base font-medium leading-7">See if you need a translation</h2>
 </div>
 </div>
-<span id="countryError" class="text-red-500 text-xs hidden">Please select a valid destination country</span>
-</label>
-<button type="button" onclick="submitForm()" class="btn btn-primary mt-2">Start application</button>
-<div class="text-slate-600 text-xs items-center flex flex-wrap justify-center leading-4 gap-x-4 gap-y-2 md:gap-x-6"><div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="images/icons/icon-7.svg" alt="Icon" class="text-success-500 h-3.5 w-3.5" />
-<span class="block">Your data is secure</span>
+<form aria-label="Destination checker and application" class="mt-4" onsubmit="event.preventDefault(); submitForm();">
+<div class="idp-field">
+  <div class="idp-field-label">Where was your license issued? <span class="idp-auto-badge" id="idpAutoBadge">Auto-detected</span></div>
+  <div class="idp-dropdown-wrapper" id="idpSourceDropdown">
+    <div class="idp-dropdown-trigger" onclick="idpToggle('source', event)">
+      <img class="idp-flag" id="idpSourceFlag" src="" alt="" style="display:none">
+      <input type="text" id="idpSourceInput" placeholder="Select your country" oninput="idpFilter('source')" onfocus="idpOpen('source')" autocomplete="off">
+      <span class="idp-arrow" id="idpSourceArrow">▾</span>
+    </div>
+    <div class="idp-dropdown-list" id="idpSourceList"></div>
+  </div>
 </div>
-<div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="images/icons/icon-7.svg" alt="Icon" class="text-success-500 h-3.5 w-3.5" />
-<span class="block">100% Money‑back Guarantee</span>
+<div class="idp-field">
+  <div class="idp-field-label">Where are you traveling to?</div>
+  <div class="idp-dropdown-wrapper" id="idpDestDropdown">
+    <div class="idp-dropdown-trigger" onclick="idpToggle('dest', event)">
+      <img class="idp-flag" id="idpDestFlag" src="" alt="" style="display:none">
+      <input type="text" id="idpDestInput" placeholder="Select destination country" oninput="idpFilter('dest')" onfocus="idpOpen('dest')" autocomplete="off">
+      <span class="idp-arrow" id="idpDestArrow">▾</span>
+    </div>
+    <div class="idp-dropdown-list" id="idpDestList"></div>
+  </div>
 </div>
+<div id="idpResultCard" class="idp-result-card" style="display:none;">
+  <div class="idp-result-row">
+    <div class="idp-rlabel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+      <span id="idpResultLabel">Service status</span>
+    </div>
+    <div class="idp-rvalue"><span class="idp-badge" id="idpStatusBadge"></span></div>
+  </div>
+  <div class="idp-result-row" id="idpValidityRow">
+    <div class="idp-rlabel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Format &amp; period
+    </div>
+    <div class="idp-rvalue" id="idpValidityValue"></div>
+  </div>
+  <div class="idp-result-row" id="idpPriceRow">
+    <div class="idp-rlabel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Price
+    </div>
+    <div class="idp-rvalue" id="idpPriceValue">Starts at $49</div>
+  </div>
+  <div id="idpConditionNote" class="idp-condition-note" style="display:none;"></div>
 </div>
+<button type="button" onclick="submitForm()" class="btn btn-primary w-full mt-4">Start application</button>
 </form>
 </aside>
+<p class="text-slate-500 text-xs leading-4 md:text-sm md:leading-5 md:hidden">Independent private service. Not a government-issued International Driving Permit. Requirements and acceptance vary by destination.</p>
 </div>
 </section>
-<section aria-label="key benefits" class="max-w-6xl mx-auto pt-5 pb-[90px] px-4"><div class="gap-x-4 grid grid-cols-none gap-y-4 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div><div class="items-start gap-x-3 flex gap-y-3"><img src="images/icons/icon-8.svg" alt="Icon" class="text-success-500 h-6 w-6" />
+<section aria-label="key benefits" class="max-w-6xl mx-auto pt-5 pb-12 md:pb-16 px-4"><div class="gap-x-6 grid grid-cols-none gap-y-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div><div class="items-start gap-x-3 flex gap-y-3"><img src="images/icons/icon-8.svg" alt="Icon" class="text-success-500 h-6 w-6" />
 <div><h3 class="font-heading text-[18px] font-medium">Multilingual translation</h3>
-<p class="text-slate-600 text-sm leading-5 mt-1">Helps make your valid driver’s licence easier to understand when travelling internationally.</p>
+<p class="text-slate-600 text-sm leading-5 mt-1">Clearer licence details when you travel</p>
 </div>
 </div>
 </div>
 <div><div class="items-start gap-x-3 flex gap-y-3"><img src="images/icons/icon-9.svg" alt="Icon" class="text-success-500 h-6 w-6" />
 <div><h3 class="font-heading text-[18px] font-medium">Fast turnaround</h3>
-<p class="text-slate-600 text-sm leading-5 mt-1">Apply in minutes. Digital copy delivered within 2 hours.</p>
+<p class="text-slate-600 text-sm leading-5 mt-1">Digital copy delivered in 2 hours</p>
 </div>
 </div>
 </div>
 <div><div class="items-start gap-x-3 flex gap-y-3"><img src="images/icons/icon-10.svg" alt="Icon" class="text-success-500 h-6 w-6" />
 <div><h3 class="font-heading text-[18px] font-medium">20+ languages</h3>
-<p class="text-slate-600 text-sm leading-5 mt-1">Professional translations for hassle-free car rentals abroad.</p>
+<p class="text-slate-600 text-sm leading-5 mt-1">Built for car rentals abroad</p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section aria-label="how and languages" class="bg-white"><div class="items-start gap-x-10 grid grid-cols-none max-w-6xl gap-y-10 mx-auto pt-[60px] pb-[55px] px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div><h2 id="works" class="heading-1">How it works</h2>
+<section aria-label="how and languages" class="bg-white"><div class="items-start gap-x-6 grid grid-cols-none max-w-6xl gap-y-10 mx-auto py-12 md:py-16 px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div><h2 id="works" class="heading-1">How it works</h2>
 <p class="text-slate-600 text-sm leading-5 mt-2"><span>We streamlined the process so you can get on the road faster.</span>
 </p>
 <ol class="list-none mt-6 pl-0"><li class="items-center gap-x-3 flex gap-y-3 text-left mb-4"><span class="text-success-500 text-xs font-semibold items-center bg-success-50 grid shrink-0 h-7 justify-items-center leading-4 w-7 rounded-full">1</span>
@@ -466,7 +245,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </li>
 </ol>
 </div>
-<aside class="card"><h4 class="font-heading font-medium text-[21px] leading-[28px]">Supported languages</h4>
+<aside><h4 class="font-heading font-medium text-[21px] leading-[28px]">Supported languages</h4>
 <p class="text-slate-600 text-sm leading-5 mt-2"><span>English, Spanish, French, German, Italian, Portuguese, Arabic, Chinese, Japanese, Korean and more.</span>
 </p>
 <ul class="gap-x-2 flex flex-wrap list-none gap-y-2 mt-4 pl-0"><li class="text-xs items-center bg-white flex leading-4 text-left border border-gray-200 px-3 py-1 rounded-full border-solid gap-x-1"><span class="text-base">🇺🇸</span><span class="font-medium block tracking-[0.3px] uppercase">en</span>
@@ -493,7 +272,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </aside>
 </div>
 </section>
-<section aria-label="what you receive" class="bg-white"><div class="items-center gap-x-10 grid grid-cols-none max-w-6xl gap-y-10 mx-auto px-4 py-12 md:grid-cols-[repeat(2,minmax(0px,1fr))] md:py-16"><figure><div class="aspect-[4_/_3] w-full overflow-hidden rounded-2xl"><div class="h-full w-full"><picture><img alt="IDD booklet cover and interior pages on a desk" src="https://internationaldrivingadvisor.com/images/advisor-booklet.png" class="h-full max-w-full object-cover w-full rounded-2xl" /></picture></div></div><figcaption class="text-secondary-500 text-xs leading-4 mt-3">Preview of the digital International Driving Documemt you&#39;ll receive.</figcaption></figure>
+<section aria-label="what you receive" class="bg-white"><div class="items-center gap-x-6 grid grid-cols-none max-w-6xl gap-y-10 mx-auto py-12 md:py-16 px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><figure><div class="aspect-[4_/_3] w-full overflow-hidden rounded-2xl"><div class="h-full w-full"><picture><img alt="IDD booklet cover and interior pages on a desk" src="https://internationaldrivingadvisor.com/images/advisor-booklet.png" class="h-full max-w-full object-cover w-full rounded-2xl" /></picture></div></div><figcaption class="text-secondary-500 text-xs leading-4 mt-3">Preview of the digital International Driving Documemt you&#39;ll receive.</figcaption></figure>
 <div><h2 id="what-you-receive" class="heading-1">What you'll receive</h2>
 <ul class="text-sm leading-5 list-none mt-4 pl-0"><li class="items-center gap-x-2 flex gap-y-2 text-left mb-3"><img src="images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
 <span class="block">Destination-specific guidance included</span>
@@ -517,11 +296,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 </div>
 </section>
-<section aria-label="pricing options" class="max-w-6xl mx-auto pt-16 pb-12 px-4 md:pb-16" id="pricing"><header class="mb-6"><h2 class="heading-1 text-center"><span>100% money-back guarantee</span></h2>
+<section aria-label="pricing options" class="max-w-6xl mx-auto py-12 md:py-16 px-4" id="pricing"><header class="mb-6"><h2 class="heading-1 text-center"><span>100% money-back guarantee</span></h2>
 <p class="text-slate-600 text-sm justify-center leading-5 text-center mt-2"><span class="justify-center">Full refund if we fail to deliver what we promised due to our error, plus free replacements when needed.</span>
 </p>
 </header>
-<div class="text-xs gap-x-2 grid grid-cols-[repeat(3,minmax(0px,1fr))] leading-4 gap-y-2 text-center mb-4 md:text-sm md:leading-5 max-w-[540px] w-full mx-auto bg-gray-100 p-1 rounded-full"><button type="button" class="pricing-tab pricing-tab-active" data-duration="3"><span class="text-xs leading-4 md:text-sm md:leading-5">3 years</span>
+<div class="text-xs gap-x-2 grid grid-cols-[repeat(3,minmax(0px,1fr))] leading-4 gap-y-2 text-center mb-6 md:text-sm md:leading-5 max-w-[540px] w-full mx-auto bg-gray-100 p-1 rounded-full"><button type="button" class="pricing-tab pricing-tab-active" data-duration="3"><span class="text-xs leading-4 md:text-sm md:leading-5">3 years</span>
 <p class="text-gray-100 text-xs leading-4 md:text-sm md:leading-5">Expires 2029</p>
 </button>
 <button type="button" class="pricing-tab" data-duration="2"><span class="text-xs leading-4 md:text-sm md:leading-5">2 years</span>
@@ -531,7 +310,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p class="text-slate-600 text-xs leading-4 md:text-sm md:leading-5">Expires 2027</p>
 </button>
 </div>
-<div class="gap-x-6 grid grid-cols-none gap-y-6 pt-[19px] md:grid-cols-[repeat(2,minmax(0px,1fr))]"><article class="relative text-zinc-50 bg-primary-600 border border-gray-200 p-6 rounded-2xl border-solid"><p class="badge left-4 -top-3">Best value with the complete package</p>
+<div class="gap-x-6 grid grid-cols-none gap-y-6 pt-5 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><article class="relative text-zinc-50 bg-primary-600 border border-gray-200 p-6 rounded-2xl border-solid"><p class="badge left-4 -top-3">Best value with the complete package</p>
 <div class="flex items-start gap-4">
 <div class="flex-1">
 <h3 class="font-heading text-[21px] md:text-[28px] font-medium leading-[28px] md:leading-[34px]">Print <span>+ free</span> digital</h3>
@@ -589,7 +368,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </article>
 </div>
 </section>
-<section aria-label="social proof" class="max-w-6xl mx-auto px-4 py-12 md:py-16"><header class="text-center mb-6"><h2 class="heading-1 text-center mt-1">What our customers say</h2>
+<section aria-label="social proof" class="max-w-6xl mx-auto px-4 py-12 md:py-16"><header class="text-center mb-6"><h2 class="heading-1 text-center">What our customers say</h2>
 <p class="text-slate-600 text-sm leading-5 mt-2 md:text-base md:leading-6">See what hundreds of satisfied customers say about their seamless international driving experience</p></header>
 <div class="card"><div class="[align-items:normal] gap-x-4 flex flex-col justify-normal gap-y-4 md:items-center md:flex-row md:justify-between"><div class="text-sm items-center gap-x-2 flex leading-5 gap-y-2"><div class="text-[oklch(0.795_0.184_86.047)] items-center flex"><img src="images/icons/icon-14.svg" alt="Icon" class="h-4 w-4" />
 <img src="images/icons/icon-14.svg" alt="Icon" class="h-4 w-4" />
@@ -613,7 +392,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 </div>
 </section>
-<section class="max-w-6xl mx-auto px-4 py-12 md:py-16"><h2 class="heading-1 text-center mt-1">Frequently asked questions</h2>
+<section class="max-w-6xl mx-auto px-4 py-12 md:py-16"><h2 class="heading-1 text-center">Frequently asked questions</h2>
 <div class="gap-x-6 grid grid-cols-none gap-y-6 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="card"><p class="font-semibold">What do you provide?</p>
 <p class="text-slate-600 text-sm leading-5 mt-2">A professionally prepared multilingual translation of your valid driver’s licence, plus destination-specific driving-document guidance. It supplements your licence — it does not replace it, and it is not a government-issued International Driving Permit.</p>
 </div>
@@ -634,7 +413,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 </div>
 </section>
-<section aria-label="final cta" class="bg-white"><div class="items-center gap-x-6 grid grid-cols-none max-w-6xl gap-y-6 mx-auto px-4 py-12 md:grid-cols-[repeat(3,minmax(0px,1fr))] md:py-16"><div class="col-end-auto col-start-auto md:col-end-[span_2] md:col-start-[span_2]"><h2 class="heading-1">Prepare your licence before you travel</h2>
+<section aria-label="final cta" class="bg-white"><div class="items-center gap-x-6 grid grid-cols-none max-w-6xl gap-y-6 mx-auto py-12 md:py-16 px-4 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="col-end-auto col-start-auto md:col-end-[span_2] md:col-start-[span_2]"><h2 class="heading-1">Prepare your licence before you travel</h2>
 <p class="text-slate-600 text-sm leading-5 mt-2">Check your destination, then get your multilingual translation — digital delivery in about 2 hours.</p>
 </div>
 <div class="justify-self-auto md:justify-self-end"><a href="destination-checker.html" class="btn btn-primary">Check my destination</a>

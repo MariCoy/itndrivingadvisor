@@ -88,10 +88,10 @@
   --font-serif: 'Instrument Serif', ui-serif, Georgia, Cambria, 'Times New Roman', serif;
   --tracking-heading: -0.025em;
 
-  --text-hero: 34px;
-  --text-hero-lg: 56px;
-  --leading-hero: 40px;
-  --leading-hero-lg: 62px;
+  --text-hero: 40px;
+  --text-hero-lg: 60px;
+  --leading-hero: 48px;
+  --leading-hero-lg: 68px;
   --text-h1: 28px;
   --text-h1-lg: 34px;
   --leading-h1: 36px;
