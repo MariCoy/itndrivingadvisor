@@ -232,62 +232,60 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(initSmoothScroll, 500);
 });
 
-// Initialize language selector dropdown
+// Initialize language selector dropdown(s) — mobile + desktop copies
 function initLanguageSelector(currentLang, basePath) {
   const langConfig = LANGUAGES[currentLang];
+  const selectors = document.querySelectorAll('.language-selector');
 
-  // Update current language display
-  const flagEl = document.getElementById('current-lang-flag');
-  const codeEl = document.getElementById('current-lang-code');
-  if (flagEl) flagEl.textContent = langConfig.flag;
-  if (codeEl) codeEl.textContent = langConfig.code;
+  selectors.forEach((selector) => {
+    const flagEl = selector.querySelector('.current-lang-flag');
+    const codeEl = selector.querySelector('.current-lang-code');
+    if (flagEl) flagEl.textContent = langConfig.flag;
+    if (codeEl) codeEl.textContent = langConfig.code;
 
-  // Toggle dropdown
-  const toggleBtn = document.getElementById('language-toggle');
-  const dropdown = document.getElementById('language-dropdown');
-  const chevron = document.getElementById('language-chevron');
+    const toggleBtn = selector.querySelector('.language-toggle');
+    const dropdown = selector.querySelector('.language-dropdown');
+    const chevron = selector.querySelector('.language-chevron');
 
-  if (toggleBtn && dropdown) {
+    if (!toggleBtn || !dropdown) return;
+
     toggleBtn.addEventListener('click', function(e) {
       e.stopPropagation();
-      dropdown.classList.toggle('hidden');
-      if (chevron) {
-        chevron.classList.toggle('rotate-180');
+      const willOpen = dropdown.classList.contains('hidden');
+      // Close any other open language dropdowns first
+      document.querySelectorAll('.language-dropdown').forEach((d) => d.classList.add('hidden'));
+      document.querySelectorAll('.language-chevron').forEach((c) => c.classList.remove('rotate-180'));
+      if (willOpen) {
+        dropdown.classList.remove('hidden');
+        if (chevron) chevron.classList.add('rotate-180');
       }
     });
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function() {
-      dropdown.classList.add('hidden');
-      if (chevron) {
-        chevron.classList.remove('rotate-180');
-      }
-    });
-
-    // Handle language selection
     const langLinks = dropdown.querySelectorAll('[data-lang]');
     langLinks.forEach(link => {
       const targetLang = link.getAttribute('data-lang');
       const currentPage = getCurrentPage();
 
-      // Build the correct URL for this language
       let targetUrl;
       if (targetLang === 'en') {
-        // English is at root
         targetUrl = basePath ? `${basePath}/${currentPage}` : currentPage;
       } else {
-        // Other languages in subdirectories
         targetUrl = basePath ? `${basePath}/${targetLang}/${currentPage}` : `${targetLang}/${currentPage}`;
       }
 
       link.href = targetUrl;
 
-      // Highlight current language
       if (targetLang === currentLang) {
         link.classList.add('bg-gray-100', 'font-medium');
       }
     });
-  }
+  });
+
+  // Close dropdowns when clicking outside (single listener)
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.language-dropdown').forEach((d) => d.classList.add('hidden'));
+    document.querySelectorAll('.language-chevron').forEach((c) => c.classList.remove('rotate-180'));
+  });
 }
 
 // Update navigation links based on current language

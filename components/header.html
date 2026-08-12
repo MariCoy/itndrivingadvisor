@@ -5,15 +5,15 @@
         <img src="images/Advisor_Logo_mini.svg" alt="International Driving Advisor" class="h-8 w-8 md:hidden" />
         <img src="images/Advisor_Logo.svg" alt="International Driving Advisor" class="hidden md:block h-8 w-auto" />
       </a>
-      <div class="relative" id="language-selector">
-        <button type="button" id="language-toggle" class="flex items-center gap-x-1 text-sm text-gray-700 hover:text-primary-500 transition-colors px-2 py-1 rounded-xl hover:bg-gray-100">
-          <span id="current-lang-flag">🇬🇧</span>
-          <span id="current-lang-code" class="hidden sm:inline">EN</span>
-          <svg class="w-4 h-4 transition-transform" id="language-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="relative md:hidden language-selector">
+        <button type="button" class="language-toggle flex items-center gap-x-1 text-sm text-gray-700 hover:text-primary-500 transition-colors px-2 py-1 rounded-xl hover:bg-gray-100">
+          <span class="current-lang-flag">🇬🇧</span>
+          <span class="current-lang-code hidden">EN</span>
+          <svg class="language-chevron w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
-        <div id="language-dropdown" class="hidden absolute left-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-200 py-1 z-50">
+        <div class="language-dropdown hidden absolute left-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-200 py-1 z-50">
           <a href="#" data-lang="en" data-lang-path="" class="flex items-center gap-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary-500">
             <span>🇬🇧</span><span>English</span>
           </a>
@@ -36,6 +36,29 @@
       <a data-nav-link="contact" href="contact.html" class="nav-link" data-i18n="nav.contact">Contact us</a>
     </nav>
     <div class="flex items-center gap-x-4">
+      <div class="relative hidden md:block language-selector">
+        <button type="button" class="language-toggle flex items-center gap-x-1 text-sm text-gray-700 hover:text-primary-500 transition-colors px-2 py-1 rounded-xl hover:bg-gray-100">
+          <span class="current-lang-flag">🇬🇧</span>
+          <span class="current-lang-code hidden sm:inline">EN</span>
+          <svg class="language-chevron w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="language-dropdown hidden absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-200 py-1 z-50">
+          <a href="#" data-lang="en" data-lang-path="" class="flex items-center gap-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary-500">
+            <span>🇬🇧</span><span>English</span>
+          </a>
+          <a href="#" data-lang="es" data-lang-path="/es" class="flex items-center gap-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary-500">
+            <span>🇪🇸</span><span>Español</span>
+          </a>
+          <a href="#" data-lang="fr" data-lang-path="/fr" class="flex items-center gap-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary-500">
+            <span>🇫🇷</span><span>Français</span>
+          </a>
+          <a href="#" data-lang="it" data-lang-path="/it" class="flex items-center gap-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary-500">
+            <span>🇮🇹</span><span>Italiano</span>
+          </a>
+        </div>
+      </div>
       <a data-nav-link="cta" href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=header_button" class="btn btn-primary px-4 py-2" data-i18n="nav.getYourIdp">
         Get your translation
         <img src="images/icons/icon-3.svg" alt="Icon" class="h-4 w-4" style="filter: brightness(0) invert(1);" />
