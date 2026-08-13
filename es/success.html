@@ -51,7 +51,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="flex-shrink-0 relative group">
              <img
               src="https://internationaldrivingadvisor.com/images/print-pricing-card-idd.png"
-              alt="Folleto de Permiso de Conducir Internacional"
+              alt="Folleto de traducción impreso"
               class="w-20 h-28 object-cover rounded-xl border border-gray-200 shadow-sm"
              />
           </div>
@@ -61,7 +61,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <div class="flex justify-between items-start">
                   <div>
                       <h3 id="product-name" class="font-bold text-zinc-900 text-lg">Impreso + Digital</h3>
-                      <p id="product-desc" class="text-sm text-zinc-500 mt-1 leading-snug whitespace-pre-line">PCI Impreso con Folleto Digital</p>
+                      <p id="product-desc" class="text-sm text-zinc-500 mt-1 leading-snug whitespace-pre-line">Impreso + traducción digital</p>
                   </div>
                   <span id="total-price-top" class="font-semibold text-zinc-900">$79.00</span>
               </div>
@@ -137,7 +137,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       const order = {
         id: params.get('spid') || 'IDA-8834',
         name: params.get('pdname') || 'Impreso + Digital',
-        desc: params.get('pddesc') || 'PCI Impreso con Folleto Digital\nValidez: 3 Años',
+        desc: params.get('pddesc') || 'Impreso + traducción digital\nPeriodo de servicio: 3 años',
         total: parseFloat(params.get('tprice') || '') || 79.00,
         shipping: parseFloat(params.get('ships') || '') || 0.00
       };

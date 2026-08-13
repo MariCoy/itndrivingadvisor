@@ -52,7 +52,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <div class="flex-shrink-0 relative group">
              <img 
               src="https://internationaldrivingadvisor.com/images/print-pricing-card-idd.png" 
-              alt="International Driving Permit Booklet" 
+              alt="Printed translation booklet" 
               class="w-20 h-28 object-cover rounded-xl border border-gray-200 shadow-sm"
              />
           </div>
@@ -62,7 +62,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <div class="flex justify-between items-start">
                   <div>
                       <h3 id="product-name" class="font-bold text-zinc-900 text-lg">Print + Digital</h3>
-                      <p id="product-desc" class="text-sm text-zinc-500 mt-1 leading-snug whitespace-pre-line">Print IDP with Digital Booklet</p>
+                      <p id="product-desc" class="text-sm text-zinc-500 mt-1 leading-snug whitespace-pre-line">Print + digital translation</p>
                   </div>
                   <span id="total-price-top" class="font-semibold text-zinc-900">$79.00</span>
               </div>
@@ -138,7 +138,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       const order = {
         id: params.get('spid') || 'IDA-8834',
         name: params.get('pdname') || 'Print + Digital',
-        desc: params.get('pddesc') || 'Print IDP with Digital Booklet\nValidity: 3 Years',
+        desc: params.get('pddesc') || 'Print + digital translation\nService period: 3 years',
         total: parseFloat(params.get('tprice') || '') || 79.00,
         shipping: parseFloat(params.get('ships') || '') || 0.00
       };
