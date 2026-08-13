@@ -31,7 +31,7 @@ const TRANSLATIONS = {
       refundPolicy: 'Refund Policy',
       shippingDelivery: 'Shipping & Delivery',
       copyright: '© 2025 International Driving Advisor. All rights reserved.',
-      disclaimer: 'Private licence translation — not government-issued. Not affiliated with AAA or any licensing authority. Always carry your original licence abroad.'
+      disclaimer: 'Legal Disclaimer: The document from International Driving Advisor is a private translation of your national driver\'s license — not government-issued and does not grant legal driving rights. It is also not affiliated with or endorsed by American Automobile Association (AAA) or any official licensing authority. When driving abroad, always carry your original license.'
     }
   },
   es: {
@@ -57,7 +57,7 @@ const TRANSLATIONS = {
       refundPolicy: 'Política de Reembolso',
       shippingDelivery: 'Envío y Entrega',
       copyright: '© 2025 International Driving Advisor. Todos los derechos reservados.',
-      disclaimer: 'Traducción privada de licencia — no emitida por el gobierno. Sin afiliación a AAA ni autoridades oficiales. Lleve siempre su licencia original.'
+      disclaimer: 'Aviso Legal: El documento de International Driving Advisor es una traducción privada de su licencia de conducir nacional — no es emitido por el gobierno y no otorga derechos legales de conducción. Tampoco está afiliado ni respaldado por la American Automobile Association (AAA) ni ninguna autoridad oficial de licencias. Al conducir en el extranjero, siempre lleve su licencia original.'
     }
   },
   fr: {
@@ -83,7 +83,7 @@ const TRANSLATIONS = {
       refundPolicy: 'Politique de Remboursement',
       shippingDelivery: 'Expédition et Livraison',
       copyright: '© 2025 International Driving Advisor. Tous droits réservés.',
-      disclaimer: 'Traduction privée de permis — non délivrée par le gouvernement. Non affilié à AAA ni aux autorités officielles. Gardez toujours votre permis original.'
+      disclaimer: 'Avertissement Juridique : Le document d\'International Driving Advisor est une traduction privée de votre permis de conduire national — n\'est pas délivré par le gouvernement et n\'accorde pas de droits de conduite légaux. Il n\'est pas non plus affilié ni approuvé par l\'American Automobile Association (AAA) ou toute autorité officielle de délivrance de permis. Lorsque vous conduisez à l\'étranger, gardez toujours votre permis original.'
     }
   },
   it: {
@@ -109,7 +109,7 @@ const TRANSLATIONS = {
       refundPolicy: 'Politica Rimborsi',
       shippingDelivery: 'Spedizione e Consegna',
       copyright: '© 2025 International Driving Advisor. Tutti i diritti riservati.',
-      disclaimer: 'Traduzione privata di patente — non rilasciata dal governo. Non affiliato ad AAA né ad autorità ufficiali. Porti sempre la patente originale.'
+      disclaimer: 'Disclaimer Legale: Il documento di International Driving Advisor è una traduzione privata della Sua patente di guida nazionale — non è rilasciato dal governo e non concede diritti legali di guida. Non è inoltre affiliato né approvato dall\'American Automobile Association (AAA) o da qualsiasi autorità ufficiale di rilascio patenti. Quando guida all\'estero, porti sempre la Sua patente originale.'
     }
   }
 };
@@ -381,7 +381,7 @@ function translateFooterHtml(html, currentLang) {
   html = html.replace('>© 2025 International Driving Advisor. All rights reserved.</p>', `>${t.copyright}</p>`);
 
   // Disclaimer (use a regex to handle the long text)
-  html = html.replace(/Private licence translation — not government-issued\.[^<]+/g, t.disclaimer);
+  html = html.replace(/Legal Disclaimer: The document from International Driving Advisor[^<]+/g, t.disclaimer);
 
   return html;
 }
