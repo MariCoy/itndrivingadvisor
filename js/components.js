@@ -129,11 +129,28 @@ function getBasePath() {
   return lang === 'en' ? '' : '..';
 }
 
-// Get current page filename
+// Get current page filename (handles /it, /it/, /it/index.html)
 function getCurrentPage() {
-  const path = window.location.pathname;
-  const filename = path.split('/').pop() || 'index.html';
-  return filename || 'index.html';
+  const segments = window.location.pathname.split('/').filter(Boolean);
+  if (segments.length === 0) return 'index.html';
+
+  const last = segments[segments.length - 1];
+  const localeCodes = Object.keys(LANGUAGES).filter((code) => code !== 'en');
+
+  if (localeCodes.includes(last)) return 'index.html';
+  if (last.endsWith('.html')) return last;
+  return 'index.html';
+}
+
+// Always build language URLs from site root (avoids /it/es when switching from /it/)
+function buildLanguageUrl(targetLang) {
+  const currentPage = getCurrentPage();
+  const langPath = LANGUAGES[targetLang].path;
+
+  if (currentPage === 'index.html') {
+    return langPath ? `${langPath}/` : '/';
+  }
+  return langPath ? `${langPath}/${currentPage}` : `/${currentPage}`;
 }
 
 // Component loader for header and footer
@@ -264,16 +281,7 @@ function initLanguageSelector(currentLang, basePath) {
     const langLinks = dropdown.querySelectorAll('[data-lang]');
     langLinks.forEach(link => {
       const targetLang = link.getAttribute('data-lang');
-      const currentPage = getCurrentPage();
-
-      let targetUrl;
-      if (targetLang === 'en') {
-        targetUrl = basePath ? `${basePath}/${currentPage}` : currentPage;
-      } else {
-        targetUrl = basePath ? `${basePath}/${targetLang}/${currentPage}` : `${targetLang}/${currentPage}`;
-      }
-
-      link.href = targetUrl;
+      link.href = buildLanguageUrl(targetLang);
 
       if (targetLang === currentLang) {
         link.classList.add('bg-gray-100', 'font-medium');

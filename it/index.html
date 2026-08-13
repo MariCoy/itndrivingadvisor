@@ -3,261 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ottieni la tua Traduzione Certificata in Pochi Minuti! - International Driving Advisor</title>
+  <title>Prepara la tua patente per i viaggi internazionali | International Driving Advisor</title>
   <link rel="stylesheet" href="../dist/styles.css">
-
+  <link rel="stylesheet" href="../css/idp-checker.css">
   <link rel="icon" type="image/svg+xml" href="../images/fav.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<script src="../js/components.js"></script>
-<script>
-function validateForm() {
-  let isValid = true;
-  
-  // Get form field values
-  const firstName = document.getElementById('firstName').value.trim();
-  const lastName = document.getElementById('lastName').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const countryTravel = document.getElementById('countryTravel').value;
-  
-  // Reset error states
-  document.getElementById('firstNameError').classList.add('hidden');
-  document.getElementById('lastNameError').classList.add('hidden');
-  document.getElementById('emailError').classList.add('hidden');
-  document.getElementById('countryError').classList.add('hidden');
-  
-  // Reset field styles
-  document.getElementById('firstName').classList.remove('input-error');
-  document.getElementById('lastName').classList.remove('input-error');
-  document.getElementById('email').classList.remove('input-error');
-  document.getElementById('countryTravel').classList.remove('input-error');
-  
-  // Validate first name
-  if (!firstName || firstName.length < 2) {
-    document.getElementById('firstNameError').classList.remove('hidden');
-    document.getElementById('firstName').classList.add('input-error');
-    isValid = false;
-  }
-  
-  // Validate last name
-  if (!lastName || lastName.length < 2) {
-    document.getElementById('lastNameError').classList.remove('hidden');
-    document.getElementById('lastName').classList.add('input-error');
-    isValid = false;
-  }
-  
-  // Validate email
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email || !emailRegex.test(email)) {
-    document.getElementById('emailError').classList.remove('hidden');
-    document.getElementById('email').classList.add('input-error');
-    isValid = false;
-  }
-  
-  // Validate country
-  if (!countryTravel || !countries.includes(countryTravel)) {
-    document.getElementById('countryError').classList.remove('hidden');
-    document.getElementById('countryTravel').classList.add('input-error');
-    isValid = false;
-  }
-  
-  return isValid;
-}
+  <script src="../js/components.js"></script>
+  <script src="../js/idp-checker.js" defer></script>
 
+<script>
 function submitForm() {
-  // Validate form first
-  if (!validateForm()) {
-    // Scroll to first error
-    const firstError = document.querySelector('.input-error');
-    if (firstError) {
-      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      firstError.focus();
-    }
-    return;
-  }
-  
-  // Get form field values
-  const firstName = document.getElementById('firstName').value.trim();
-  const lastName = document.getElementById('lastName').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const countryTravel = document.getElementById('countryTravel').value;
-  
-  // Build the URL with parameters
   const baseUrl = 'https://idpcheckout.fillout.com/t/2ESX5foenCus';
-  const params = new URLSearchParams({
-    first_name: firstName,
-    last_name: lastName,
-    email: email,
-    country_travel: countryTravel
-  });
-  
-  // Redirect to external form with parameters
+  const params = new URLSearchParams({ source: 'hero_form' });
+
+  if (typeof idpSelectedDest !== 'undefined' && idpSelectedDest) {
+    params.set('country_travel', idpSelectedDest.name);
+  }
+  if (typeof idpSelectedSource !== 'undefined' && idpSelectedSource) {
+    params.set('source_country', idpSelectedSource.name);
+  }
+
   window.open(`${baseUrl}?${params.toString()}`, '_blank');
 }
-
-// Countries list for autocomplete
-const countries = [
-  "Afghanistan", "Albania", "Algeria", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
-  "Bahrain", "Bangladesh", "Belarus", "Belgium", "Benin", "Bolivia", "Bosnia and Herzegovina", "Botswana",
-  "Brazil", "Bulgaria", "Cambodia", "Canada", "Chile", "China", "Colombia", "Costa Rica", "Croatia",
-  "Cyprus", "Czech Republic", "Denmark", "Dominican Republic", "Ecuador", "Egypt", "Estonia", "Finland",
-  "France", "Georgia", "Germany", "Ghana", "Greece", "Guatemala", "Haiti", "Hungary", "Iceland", "India",
-  "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan",
-  "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Lithuania",
-  "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Mali", "Malta", "Mexico", "Moldova", "Monaco",
-  "Mongolia", "Montenegro", "Morocco", "Namibia", "Nepal", "Netherlands", "New Zealand", "Niger", "Nigeria",
-  "North Macedonia", "Norway", "Pakistan", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Romania",
-  "Russia", "Rwanda", "San Marino", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone",
-  "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sri Lanka", "Sweden",
-  "Switzerland", "Syria", "Tajikistan", "Thailand", "Togo", "Tunisia", "Turkey", "Turkmenistan", "Uganda",
-  "Ukraine", "United Arab Emirates", "United Kingdom", "Uruguay", "Uzbekistan", "Vatican City", "Venezuela",
-  "Vietnam", "Zimbabwe"
-];
-
-// Country autocomplete functionality
-function initCountryAutocomplete() {
-  const input = document.getElementById('countryTravel');
-  const dropdown = document.getElementById('countryDropdown');
-  let selectedIndex = -1;
-  let filteredCountries = [];
-
-  function filterCountries(query) {
-    if (!query) return countries;
-    return countries.filter(country => 
-      country.toLowerCase().includes(query.toLowerCase())
-    );
-  }
-
-  function showDropdown(countries) {
-    dropdown.innerHTML = '';
-    if (countries.length === 0) {
-      dropdown.classList.add('hidden');
-      return;
-    }
-
-    countries.forEach((country, index) => {
-      const option = document.createElement('div');
-      option.className = 'px-3 py-2 cursor-pointer hover:bg-gray-100 text-sm';
-      option.textContent = country;
-      option.addEventListener('click', () => selectCountry(country));
-      dropdown.appendChild(option);
-    });
-
-    dropdown.classList.remove('hidden');
-  }
-
-  function selectCountry(country) {
-    input.value = country;
-    dropdown.classList.add('hidden');
-    input.classList.remove('input-error');
-    document.getElementById('countryError').classList.add('hidden');
-    selectedIndex = -1;
-  }
-
-  function highlightOption(index) {
-    const options = dropdown.querySelectorAll('div');
-    options.forEach((option, i) => {
-      if (i === index) {
-        option.classList.add('bg-primary-50', 'text-primary-600');
-      } else {
-        option.classList.remove('bg-primary-50', 'text-primary-600');
-      }
-    });
-  }
-
-  input.addEventListener('input', function() {
-    const query = this.value.trim();
-    filteredCountries = filterCountries(query);
-    showDropdown(filteredCountries);
-    selectedIndex = -1;
-    
-    // Real-time validation
-    if (query && countries.includes(query)) {
-      this.classList.remove('input-error');
-      document.getElementById('countryError').classList.add('hidden');
-    }
-  });
-
-  input.addEventListener('keydown', function(e) {
-    if (!dropdown.classList.contains('hidden')) {
-      switch(e.key) {
-        case 'ArrowDown':
-          e.preventDefault();
-          selectedIndex = Math.min(selectedIndex + 1, filteredCountries.length - 1);
-          highlightOption(selectedIndex);
-          break;
-        case 'ArrowUp':
-          e.preventDefault();
-          selectedIndex = Math.max(selectedIndex - 1, -1);
-          highlightOption(selectedIndex);
-          break;
-        case 'Enter':
-          e.preventDefault();
-          if (selectedIndex >= 0 && filteredCountries[selectedIndex]) {
-            selectCountry(filteredCountries[selectedIndex]);
-          }
-          break;
-        case 'Escape':
-          dropdown.classList.add('hidden');
-          selectedIndex = -1;
-          break;
-      }
-    }
-  });
-
-  // Hide dropdown when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-      dropdown.classList.add('hidden');
-      selectedIndex = -1;
-    }
-  });
-
-  // Focus handling
-  input.addEventListener('focus', function() {
-    if (this.value.trim()) {
-      filteredCountries = filterCountries(this.value.trim());
-      showDropdown(filteredCountries);
-    }
-  });
-}
-
-// Add real-time validation
-document.addEventListener('DOMContentLoaded', function() {
-  // Initialize country autocomplete
-  initCountryAutocomplete();
-  
-  // Add input event listeners for real-time validation
-  document.getElementById('firstName').addEventListener('input', function() {
-    if (this.value.trim().length >= 2) {
-      this.classList.remove('input-error');
-      document.getElementById('firstNameError').classList.add('hidden');
-    }
-  });
-  
-  document.getElementById('lastName').addEventListener('input', function() {
-    if (this.value.trim().length >= 2) {
-      this.classList.remove('input-error');
-      document.getElementById('lastNameError').classList.add('hidden');
-    }
-  });
-  
-  document.getElementById('email').addEventListener('input', function() {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (emailRegex.test(this.value.trim())) {
-      this.classList.remove('input-error');
-      document.getElementById('emailError').classList.add('hidden');
-    }
-  });
-  
-  document.getElementById('countryTravel').addEventListener('input', function() {
-    if (this.value && countries.includes(this.value)) {
-      this.classList.remove('input-error');
-      document.getElementById('countryError').classList.add('hidden');
-    }
-  });
-});
 
 // Carousel functionality removed - now using static image
 
@@ -368,86 +137,99 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="h-full overscroll-x-none w-full"><div class="bg-white min-h-full w-full">
 <!-- Header Component -->
 <div data-component="header"></div>
-<main><section class="relative overflow-hidden bg-white"><div class="absolute bg-[url('../images/world-dots-hero.svg')] bg-no-repeat bg-cover opacity-25 -z-10 bg-center inset-0 md:opacity-30"></div>
-<div class="items-start gap-x-10 grid grid-cols-none max-w-6xl gap-y-10 mx-auto py-10 md:py-[80px] px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div><h1 class="heading-hero">Guida con fiducia all'estero. Ottieni la tua traduzione certificata in pochi minuti!</h1>
-<p class="text-slate-600 mt-3"><span>Riconosciuta in oltre 190 paesi, le nostre traduzioni certificate di patenti di guida rendono la guida internazionale semplice, sicura e senza stress.</span>
+<main><section class="relative overflow-visible bg-white"><div class="absolute bg-[url('../images/world-dots-hero.svg')] bg-no-repeat bg-cover opacity-25 -z-10 bg-center inset-0 md:opacity-30 overflow-hidden"></div>
+<div class="items-center gap-x-6 grid grid-cols-none max-w-6xl gap-y-6 md:gap-y-10 mx-auto py-6 md:py-[80px] px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div class="w-full max-w-lg"><h1 class="heading-hero">Prepara la tua patente per i viaggi internazionali</h1>
+<p class="text-slate-600 mt-4"><span>Ottieni una traduzione professionale multilingue della tua patente valida, con indicazioni in base alla destinazione.</span>
 </p>
-<div class="gap-x-3 flex flex-col gap-y-3 mt-6 md:flex-row"><a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=hero_button" class="btn btn-primary"><span class="block">Richiedi in 3 minuti</span>
-</a>
-<a href="#what-you-receive" class="btn btn-secondary"><span class="block">Vedi funzionalità</span>
-</a>
-</div>
-<div class="text-slate-600 text-xs items-center gap-x-2 flex flex-wrap justify-center leading-4 gap-y-2 mt-6 md:text-sm md:leading-5 md:gap-x-4 md:justify-start md:flex-nowrap"><div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
-<span class="whitespace-nowrap">Garanzia soddisfatti o rimborsati</span>
+<div class="text-slate-600 text-xs items-center gap-x-2 flex flex-wrap justify-start leading-4 gap-y-2 mt-4 md:mt-6 md:text-sm md:leading-5 md:gap-x-4 md:flex-nowrap"><div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
+<span class="whitespace-nowrap">Consegna digitale rapida</span>
 </div>
 <div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
-<span class="whitespace-nowrap">Nessun costo nascosto</span>
+<span class="whitespace-nowrap">Più lingue</span>
 </div>
 <div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
-<span class="whitespace-nowrap">Assistenza 24/7</span>
+<span class="whitespace-nowrap">Opzione cartacea disponibile</span>
 </div>
 </div>
+<p class="text-slate-500 text-xs leading-4 mt-4 md:text-sm md:leading-5 hidden md:block">Servizio privato indipendente. Non è un Permesso Internazionale di Guida rilasciato dal governo. Requisiti e accettazione variano in base alla destinazione.</p>
 </div>
-<aside class="card bg-primary-25 p-4 md:p-6 border-0"><div class="items-center flex justify-between"><div class="items-center gap-x-2 flex gap-y-2"><h2 class="font-heading text-base font-medium leading-7">Inizia la richiesta</h2>
-</div>
-<span class="text-xs block leading-4 text-slate-600">Passo 1 di 3</span>
-</div>
-<form aria-label="IDP application step 1" class="gap-x-4 grid gap-y-4 mt-4"><div class="text-sm gap-x-2 grid grid-cols-2 leading-5 gap-y-2">
-<label class="gap-x-2 grid leading-5 gap-y-2"><span class="block">Nome <span class="text-red-500">*</span></span>
-<input id="firstName" aria-label="First Name" placeholder="Maria" required class="input" />
-<span id="firstNameError" class="text-red-500 text-xs hidden">Il nome è obbligatorio</span>
-</label>
-<label class="gap-x-2 grid leading-5 gap-y-2"><span class="block">Cognome <span class="text-red-500">*</span></span>
-<input id="lastName" aria-label="Last Name" placeholder="Rossi" required class="input" />
-<span id="lastNameError" class="text-red-500 text-xs hidden">Il cognome è obbligatorio</span>
-</label>
-</div>
-<label class="text-sm gap-x-2 grid leading-5 gap-y-2"><span class="block">Email <span class="text-red-500">*</span></span>
-<input id="email" aria-label="Email" placeholder="maria@esempio.it" type="email" required class="input" />
-<span id="emailError" class="text-red-500 text-xs hidden">Si prega di inserire un indirizzo email valido</span>
-<span class="text-slate-600 text-xs block leading-4">Invieremo la tua PCI digitale qui.</span>
-</label>
-<label class="text-sm gap-x-2 grid leading-5 gap-y-2"><span class="block">Paese di Destinazione <span class="text-red-500">*</span></span>
-<div class="relative">
-<input id="countryTravel" aria-label="Country of Travel" placeholder="Digita per cercare paesi..." required class="input" autocomplete="off" />
-<div id="countryDropdown" class="absolute z-50 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-60 overflow-y-auto hidden">
+<aside class="card bg-primary-25 p-4 md:p-6 border-0"><div class="items-center flex justify-between"><div class="items-center gap-x-2 flex gap-y-2"><h2 class="font-heading text-base font-medium leading-7">Scopri se ti serve una traduzione</h2>
 </div>
 </div>
-<span id="countryError" class="text-red-500 text-xs hidden">Si prega di selezionare un paese di destinazione valido</span>
-</label>
-<button type="button" onclick="submitForm()" class="btn btn-primary mt-2">Inizia la richiesta</button>
-<div class="text-slate-600 text-xs items-center flex flex-wrap justify-center leading-4 gap-x-4 gap-y-2 md:gap-x-6"><div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="../images/icons/icon-7.svg" alt="Icon" class="text-success-500 h-3.5 w-3.5" />
-<span class="block">I Suoi dati sono sicuri</span>
+<form aria-label="Verifica destinazione e richiesta" class="mt-2" onsubmit="event.preventDefault(); submitForm();">
+<div class="idp-field">
+  <div class="idp-field-label">Dove è stata rilasciata la tua patente? <span class="idp-auto-badge" id="idpAutoBadge">Rilevato automaticamente</span></div>
+  <div class="idp-dropdown-wrapper" id="idpSourceDropdown">
+    <div class="idp-dropdown-trigger" onclick="idpToggle('source', event)">
+      <img class="idp-flag" id="idpSourceFlag" src="" alt="" style="display:none">
+      <input type="text" id="idpSourceInput" placeholder="Seleziona il tuo paese" oninput="idpFilter('source')" onfocus="idpOpen('source')" autocomplete="off">
+      <svg class="idp-arrow" id="idpSourceArrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="idp-dropdown-list" id="idpSourceList"></div>
+  </div>
 </div>
-<div class="items-center gap-x-1 flex justify-center gap-y-1"><img src="../images/icons/icon-7.svg" alt="Icon" class="text-success-500 h-3.5 w-3.5" />
-<span class="block">Garanzia Soddisfatti o Rimborsati 100%</span>
+<div class="idp-field">
+  <div class="idp-field-label">Dove stai viaggiando?</div>
+  <div class="idp-dropdown-wrapper" id="idpDestDropdown">
+    <div class="idp-dropdown-trigger" onclick="idpToggle('dest', event)">
+      <img class="idp-flag" id="idpDestFlag" src="" alt="" style="display:none">
+      <input type="text" id="idpDestInput" placeholder="Seleziona il paese di destinazione" oninput="idpFilter('dest')" onfocus="idpOpen('dest')" autocomplete="off">
+      <svg class="idp-arrow" id="idpDestArrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="idp-dropdown-list" id="idpDestList"></div>
+  </div>
 </div>
+<div id="idpResultCard" class="idp-result-card" style="display:none;">
+  <div class="idp-result-row">
+    <div class="idp-rlabel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+      <span id="idpResultLabel">Stato del servizio</span>
+    </div>
+    <div class="idp-rvalue"><span class="idp-badge" id="idpStatusBadge"></span></div>
+  </div>
+  <div class="idp-result-row" id="idpValidityRow">
+    <div class="idp-rlabel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Formato e periodo
+    </div>
+    <div class="idp-rvalue" id="idpValidityValue"></div>
+  </div>
+  <div class="idp-result-row" id="idpPriceRow">
+    <div class="idp-rlabel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Prezzo
+    </div>
+    <div class="idp-rvalue" id="idpPriceValue">A partire da $49</div>
+  </div>
+  <div id="idpConditionNote" class="idp-condition-note" style="display:none;"></div>
 </div>
+<button type="button" onclick="submitForm()" class="btn btn-primary w-full mt-4">Inizia la richiesta</button>
 </form>
 </aside>
+<p class="text-slate-500 text-xs leading-4 md:text-sm md:leading-5 md:hidden">Servizio privato indipendente. Non è un Permesso Internazionale di Guida rilasciato dal governo. Requisiti e accettazione variano in base alla destinazione.</p>
 </div>
 </section>
-<section aria-label="key benefits" class="max-w-6xl mx-auto pt-5 pb-[90px] px-4"><div class="gap-x-4 grid grid-cols-none gap-y-4 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div><div class="items-center gap-x-3 flex gap-y-3"><img src="../images/icons/icon-8.svg" alt="Icon" class="text-success-500 h-6 w-6" />
-<div><h3 class="font-heading text-[18px] font-medium">Legalmente riconosciuta</h3>
-<p class="text-slate-600 text-sm leading-5 mt-1">Accettata in oltre 150 paesi insieme alla Sua patente di guida valida.</p>
+<section aria-label="key benefits" class="max-w-6xl mx-auto pt-5 pb-12 md:pb-16 px-4"><div class="gap-x-6 grid grid-cols-none gap-y-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div><div class="items-center gap-x-3 flex gap-y-3"><img src="../images/icons/icon-8.svg" alt="Icon" class="text-success-500 h-6 w-6" />
+<div><h3 class="font-heading text-[18px] font-medium">Traduzione multilingue</h3>
+<p class="text-slate-600 text-sm leading-5 mt-1">Dettagli della patente più chiari quando viaggi</p>
 </div>
 </div>
 </div>
 <div><div class="items-center gap-x-3 flex gap-y-3"><img src="../images/icons/icon-9.svg" alt="Icon" class="text-success-500 h-6 w-6" />
 <div><h3 class="font-heading text-[18px] font-medium">Elaborazione rapida</h3>
-<p class="text-slate-600 text-sm leading-5 mt-1">Richiedi in pochi minuti. Copia digitale consegnata entro 2 ore.</p>
+<p class="text-slate-600 text-sm leading-5 mt-1">Copia digitale consegnata entro 2 ore</p>
 </div>
 </div>
 </div>
 <div><div class="items-center gap-x-3 flex gap-y-3"><img src="../images/icons/icon-10.svg" alt="Icon" class="text-success-500 h-6 w-6" />
 <div><h3 class="font-heading text-[18px] font-medium">Oltre 20 lingue</h3>
-<p class="text-slate-600 text-sm leading-5 mt-1">Traduzioni professionali per noleggi auto senza problemi all'estero.</p>
+<p class="text-slate-600 text-sm leading-5 mt-1">Pensato per i noleggi auto all'estero</p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section aria-label="how and languages" class="bg-white"><div class="items-start gap-x-10 grid grid-cols-none max-w-6xl gap-y-10 mx-auto pt-[60px] pb-[55px] px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div><h2 id="works" class="heading-1">Come funziona</h2>
+<section aria-label="how and languages" class="bg-white"><div class="items-start gap-x-6 grid grid-cols-none max-w-6xl gap-y-10 mx-auto py-12 md:py-16 px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><div><h2 id="works" class="heading-1">Come funziona</h2>
 <p class="text-slate-600 text-sm leading-5 mt-2"><span>Abbiamo semplificato il processo in modo che possa mettersi in viaggio più velocemente.</span>
 </p>
 <ol class="list-none mt-6 pl-0"><li class="items-center gap-x-3 flex gap-y-3 text-left mb-4"><span class="text-success-500 text-xs font-semibold items-center bg-success-50 grid shrink-0 h-7 justify-items-center leading-4 w-7 rounded-full">1</span>
@@ -459,13 +241,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </p>
 </li>
 <li class="items-center gap-x-3 flex gap-y-3 text-left"><span class="text-success-500 text-xs font-semibold items-center bg-success-50 grid shrink-0 h-7 justify-items-center leading-4 w-7 rounded-full">3</span>
-<p class="text-sm leading-5"><span>Ricevi la tua PCI digitale via email</span>
+<p class="text-sm leading-5"><span>Ricevi la tua IDD digitale via email</span>
 </p>
 </li>
 </ol>
 </div>
-<aside class="card"><h4 class="font-heading font-medium text-[21px] leading-[28px]">Lingue supportate</h4>
-<p class="text-slate-600 text-sm leading-5 mt-2 text-balance"><span>Inglese, Spagnolo, Francese, Tedesco, Italiano, Portoghese, Arabo, Cinese, Giapponese, Coreano e altre.</span>
+<aside><h4 class="font-heading font-medium text-[21px] leading-[28px]">Lingue supportate</h4>
+<p class="text-slate-600 text-sm leading-5 mt-2 text-balance"><span>Inglese, spagnolo, francese, tedesco, italiano, portoghese, arabo, cinese, giapponese, coreano e altre.</span>
 </p>
 <ul class="gap-x-2 flex flex-wrap list-none gap-y-2 mt-4 pl-0"><li class="text-xs items-center bg-white flex leading-4 text-left border border-gray-200 px-3 py-1 rounded-full border-solid gap-x-1"><span class="text-base">🇺🇸</span><span class="font-medium block tracking-[0.3px] uppercase">en</span>
 </li>
@@ -492,49 +274,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </aside>
 </div>
 </section>
-<section aria-label="what you receive" class="bg-white"><div class="items-center gap-x-10 grid grid-cols-none max-w-6xl gap-y-10 mx-auto px-4 py-12 md:grid-cols-[repeat(2,minmax(0px,1fr))] md:py-16"><figure><div class="aspect-[4_/_3] w-full overflow-hidden rounded-2xl"><div class="h-full w-full"><picture><img alt="IDP booklet cover and interior pages on a desk" src="https://internationaldrivingadvisor.com/images/advisor-booklet.png" class="h-full max-w-full object-cover w-full rounded-2xl" /></picture></div></div><figcaption class="text-secondary-500 text-xs leading-4 mt-3 text-center">Anteprima del Documento di Guida Internazionale digitale che riceverà.</figcaption></figure>
+<section aria-label="what you receive" class="bg-white"><div class="items-center gap-x-6 grid grid-cols-none max-w-6xl gap-y-10 mx-auto py-12 md:py-16 px-4 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><figure><div class="aspect-[4_/_3] w-full overflow-hidden rounded-2xl"><div class="h-full w-full"><picture><img alt="Copertina e pagine interne del libretto IDD su una scrivania" src="https://internationaldrivingadvisor.com/images/advisor-booklet.png" class="h-full max-w-full object-cover w-full rounded-2xl" /></picture></div></div><figcaption class="text-secondary-500 text-xs leading-4 mt-3 text-center">Anteprima del documento internazionale di guida digitale che riceverà.</figcaption></figure>
 <div><h2 id="what-you-receive" class="heading-1">Cosa riceverai</h2>
 <ul class="text-sm leading-5 list-none mt-4 pl-0"><li class="items-center gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
-<span class="block">Valida in oltre 150 paesi</span>
+<span class="block">Indicazioni specifiche per la destinazione incluse</span>
 </li>
 <li class="items-center gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
 <span class="block">Disponibile nella tua lingua</span>
 </li>
 <li class="items-center gap-x-2 flex gap-y-2 text-left"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
-<span class="block">Validità: 12 mesi dalla data di emissione</span>
+<span class="block">Consegna digitale, opzione cartacea disponibile</span>
 </li>
 </ul>
 <div class="text-slate-600 text-xs items-center gap-x-2 flex leading-4 gap-y-2 mt-4"><span class="flex overflow-hidden"><span class="hidden h-5 w-5 -mr-1"></span>
-<img sizes="20px" alt="United States flag" src="../images/flags/Flag_of_the_United_States.svg" class="h-5 max-w-full object-cover w-5 -mr-1 rounded-full ring-1 ring-gray-200" />
-<img sizes="20px" alt="France flag" src="../images/flags/Flag_of_France.svg" class="h-5 max-w-full object-cover w-5 -mr-1 rounded-full ring-1 ring-gray-200" />
-<img sizes="20px" alt="Germany flag" src="../images/flags/Flag_of_Germany.svg" class="h-5 max-w-full object-cover w-5 -mr-1 rounded-full ring-1 ring-gray-200" />
-<img sizes="20px" alt="Italy flag" src="../images/flags/Flag_of_Italy.svg" class="h-5 max-w-full object-cover w-5 -mr-1 rounded-full ring-1 ring-gray-200" />
-<img sizes="20px" alt="Spain flag" src="../images/flags/Flag_of_Spain.svg" class="h-5 max-w-full object-cover w-5 rounded-full ring-1 ring-gray-200" />
+<img sizes="20px" alt="Bandiera degli Stati Uniti" src="../images/flags/Flag_of_the_United_States.svg" class="h-5 max-w-full object-cover w-5 -mr-1 rounded-full ring-1 ring-gray-200" />
+<img sizes="20px" alt="Bandiera della Francia" src="../images/flags/Flag_of_France.svg" class="h-5 max-w-full object-cover w-5 -mr-1 rounded-full ring-1 ring-gray-200" />
+<img sizes="20px" alt="Bandiera della Germania" src="../images/flags/Flag_of_Germany.svg" class="h-5 max-w-full object-cover w-5 -mr-1 rounded-full ring-1 ring-gray-200" />
+<img sizes="20px" alt="Bandiera dell'Italia" src="../images/flags/Flag_of_Italy.svg" class="h-5 max-w-full object-cover w-5 -mr-1 rounded-full ring-1 ring-gray-200" />
+<img sizes="20px" alt="Bandiera della Spagna" src="../images/flags/Flag_of_Spain.svg" class="h-5 max-w-full object-cover w-5 rounded-full ring-1 ring-gray-200" />
 </span>
-<span class="block">Le bandiere rappresentano la copertura. L'elenco esatto verrà fornito dopo l'acquisto.</span>
+<span class="block">Verifica la destinazione prima di ordinare — i requisiti variano.</span>
 </div>
 </div>
 </div>
 </section>
-<section aria-label="pricing options" class="max-w-6xl mx-auto pt-16 pb-12 px-4 md:pb-16" id="pricing"><header class="mb-6"><h2 class="heading-1 text-center"><span>Garanzia soddisfatti o rimborsati 100%</span></h2>
-<p class="text-slate-600 text-sm justify-center leading-5 text-center mt-2"><span class="justify-center">Rimborso completo se non accettata da nessuna parte, più sostituzioni gratuite illimitate.</span>
+<section aria-label="pricing options" class="max-w-6xl mx-auto py-12 md:py-16 px-4" id="pricing"><header class="mb-6"><h2 class="heading-1 text-center"><span>Garanzia soddisfatti o rimborsati al 100%</span></h2>
+<p class="text-slate-600 text-sm justify-center leading-5 text-center mt-2"><span class="justify-center">Rimborso completo se non manteniamo quanto promesso per nostro errore, più sostituzioni gratuite quando necessario.</span>
 </p>
 </header>
-<div class="text-xs gap-x-2 grid grid-cols-[repeat(3,minmax(0px,1fr))] leading-4 gap-y-2 text-center mb-4 md:text-sm md:leading-5 max-w-[540px] w-full mx-auto bg-gray-100 p-1 rounded-full"><button type="button" class="pricing-tab pricing-tab-active" data-duration="3"><span class="text-xs leading-4 md:text-sm md:leading-5">3 anni</span>
-<p class="text-gray-100 text-xs leading-4 md:text-sm md:leading-5">Scade nel 2028</p>
+<div class="text-xs gap-x-2 grid grid-cols-[repeat(3,minmax(0px,1fr))] leading-4 gap-y-2 text-center mb-6 md:text-sm md:leading-5 max-w-[540px] w-full mx-auto bg-gray-100 p-1 rounded-full"><button type="button" class="pricing-tab pricing-tab-active" data-duration="3"><span class="text-xs leading-4 md:text-sm md:leading-5">3 anni</span>
+<p class="text-gray-100 text-xs leading-4 md:text-sm md:leading-5">Scade nel 2029</p>
 </button>
 <button type="button" class="pricing-tab" data-duration="2"><span class="text-xs leading-4 md:text-sm md:leading-5">2 anni</span>
-<p class="text-slate-600 text-xs leading-4 md:text-sm md:leading-5">Scade nel 2027</p>
+<p class="text-slate-600 text-xs leading-4 md:text-sm md:leading-5">Scade nel 2028</p>
 </button>
 <button type="button" class="pricing-tab" data-duration="1"><span class="text-xs leading-4 md:text-sm md:leading-5">1 anno</span>
-<p class="text-slate-600 text-xs leading-4 md:text-sm md:leading-5">Scade nel 2026</p>
+<p class="text-slate-600 text-xs leading-4 md:text-sm md:leading-5">Scade nel 2027</p>
 </button>
 </div>
-<div class="gap-x-6 grid grid-cols-none gap-y-6 pt-[19px] md:grid-cols-[repeat(2,minmax(0px,1fr))]"><article class="relative text-zinc-50 bg-primary-600 border border-gray-200 p-6 rounded-2xl border-solid"><p class="badge left-4 -top-3">Miglior valore con il pacchetto completo</p>
+<div class="gap-x-6 grid grid-cols-none gap-y-6 pt-5 md:grid-cols-[repeat(2,minmax(0px,1fr))]"><article class="relative text-zinc-50 bg-primary-600 border border-gray-200 p-6 rounded-2xl border-solid"><p class="badge left-4 -top-3">Miglior valore con il pacchetto completo</p>
 <div class="flex items-start gap-4">
 <div class="flex-1">
 <h3 class="font-heading text-[21px] md:text-[28px] font-medium leading-[28px] md:leading-[34px]">Stampata <span>+ gratis</span> digitale</h3>
-<p class="text-sm leading-5 mt-1">Ideale per Viaggiatori a Lungo Termine e Frequent Flyer</p>
+<p class="text-sm leading-5 mt-1">Ideale per viaggiatori frequenti e soggiorni lunghi</p>
 <p id="print-digital-price" class="text-3xl font-bold tracking-[-0.75px] leading-9 mt-4">$79</p>
 <p class="text-xs leading-4">Spedizione calcolata al checkout</p>
 <a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=print_digital_button" class="btn btn-on-dark mt-5">Inizia la richiesta</a>
@@ -544,27 +326,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 </div>
 <ul class="text-sm leading-5 list-none mt-6 pl-0"><li class="items-start gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white h-4 w-4" style="filter: brightness(0) invert(1);" />
-<span class="block">Accesso gratuito a tutti i vantaggi del formato PCI Digitale incluso</span>
+<span class="block">Accesso gratuito a tutti i vantaggi del formato IDD digitale incluso</span>
 </li>
 <li class="items-start gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white h-4 w-4" style="filter: brightness(0) invert(1);" />
-<span class="block">Accettata in oltre 150 Paesi — Viaggia Senza Preoccupazioni</span>
+<span class="block">Traduzione multilingue della tua patente di guida valida</span>
 </li>
 <li class="items-start gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white h-4 w-4" style="filter: brightness(0) invert(1);" />
-<span class="block">Include una Carta ID Gratuita con Dettagli della Patente in Inglese</span>
+<span class="block">Include una carta ID gratuita con i dettagli della patente in inglese</span>
 </li>
 <li class="items-start gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white h-4 w-4" style="filter: brightness(0) invert(1);" />
-<span class="block">Riconosciuta a Livello Globale e Conforme agli Standard Internazionali</span>
+<span class="block">Servizio privato di traduzione preparato professionalmente</span>
 </li>
 <li class="items-start gap-x-2 flex gap-y-2 text-left"><img src="../images/icons/icon-12.svg" alt="Icon" class="fill-white h-4 w-4" style="filter: brightness(0) invert(1);" />
-<span class="block">Essenziale per Paesi Non Anglofoni</span>
+<span class="block">Essenziale per i paesi non anglofoni</span>
 </li>
 </ul>
 </article>
 <article class="relative bg-white border border-gray-200 p-6 rounded-2xl border-solid"><p class="absolute text-success-500 text-xs font-semibold bg-white leading-4 border border-gray-200 px-3 py-1 rounded-full border-solid right-4 -top-3">Inizia la tua avventura in pochi minuti</p>
 <div class="flex items-start gap-4">
 <div class="flex-1">
-<h3 class="font-heading text-[21px] md:text-[28px] font-medium leading-[28px] md:leading-[34px]">Digitale only</h3>
-<p class="text-slate-600 text-sm leading-5 mt-1">Ideale per Viaggi Brevi o Piani dell'Ultimo Minuto</p>
+<h3 class="font-heading text-[21px] md:text-[28px] font-medium leading-[28px] md:leading-[34px]">Solo digitale</h3>
+<p class="text-slate-600 text-sm leading-5 mt-1">Ideale per viaggi brevi o piani dell'ultimo minuto</p>
 <p id="digital-only-price" class="text-3xl font-bold tracking-[-0.75px] leading-9 mt-4">$59</p>
 <a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=digital_button" class="btn btn-secondary mt-5">Inizia la richiesta</a>
 </div>
@@ -573,22 +355,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 </div>
 <ul class="text-sm leading-5 list-none mt-6 pl-0"><li class="items-start gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
-<span class="block">Formato digitale facilmente accessibile, accettato in molti paesi</span>
+<span class="block">Formato digitale facilmente accessibile per viaggi rapidi</span>
 </li>
 <li class="items-start gap-x-2 flex gap-y-2 text-left mb-3"><img src="../images/icons/icon-4.svg" alt="Icon" class="text-success-500 h-4 w-4" />
-<span class="block">Può essere ottenuta online, processo veloce e facile</span>
+<span class="block">Si può ottenere online, processo veloce e semplice</span>
 </li>
 <li class="items-start gap-x-2 flex opacity-60 gap-y-2 text-left mb-3"><img src="../images/icons/icon-13.svg" alt="Icon" class="h-4 w-4" />
-<span class="block">Accettata ampiamente, ma non in tutti i paesi</span>
+<span class="block">Alcune destinazioni richiedono una copia cartacea — verifica prima</span>
 </li>
 <li class="items-start gap-x-2 flex opacity-60 gap-y-2 text-left"><img src="../images/icons/icon-13.svg" alt="Icon" class="h-4 w-4" />
-<span class="block">Non include Libretto Stampato e Tessera Plastificata Omaggio</span>
+<span class="block">Non include libretto stampato e tessera plastificata omaggio</span>
 </li>
 </ul>
 </article>
 </div>
 </section>
-<section aria-label="social proof" class="max-w-6xl mx-auto px-4 py-12 md:py-16"><header class="text-center mb-6"><h2 class="heading-1 text-center mt-1">Cosa dicono i nostri clienti</h2>
+<section aria-label="social proof" class="max-w-6xl mx-auto px-4 py-12 md:py-16"><header class="text-center mb-6"><h2 class="heading-1 text-center">Cosa dicono i nostri clienti</h2>
 <p class="text-slate-600 text-sm leading-5 mt-2 md:text-base md:leading-6">Scopri cosa dicono centinaia di clienti soddisfatti della loro esperienza di guida internazionale senza problemi</p></header>
 <div class="card"><div class="[align-items:normal] gap-x-4 flex flex-col justify-normal gap-y-4 md:items-center md:flex-row md:justify-between"><div class="text-sm items-center gap-x-2 flex leading-5 gap-y-2"><div class="text-[oklch(0.795_0.184_86.047)] items-center flex"><img src="../images/icons/icon-14.svg" alt="Icon" class="h-4 w-4" />
 <img src="../images/icons/icon-14.svg" alt="Icon" class="h-4 w-4" />
@@ -598,9 +380,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <span class="block">4.8 (341 recensioni)</span>
 </div>
-<p class="text-slate-600 text-xs leading-4">Sarah dal Texas ha ricevuto la sua PCI 2 ore fa</p>
+<p class="text-slate-600 text-xs leading-4">Sarah dal Texas ha ricevuto la sua IDD 2 ore fa</p>
 </div>
-<div class="gap-x-4 grid grid-cols-none gap-y-4 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><blockquote class="text-sm bg-white leading-5 border border-gray-200 p-4 rounded-2xl border-solid"><p>“Così veloce! Inviata a pranzo e ho ricevuto la mia PCI prima del volo.”</p>
+<div class="gap-x-4 grid grid-cols-none gap-y-4 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><blockquote class="text-sm bg-white leading-5 border border-gray-200 p-4 rounded-2xl border-solid"><p>“Così veloce! Inviata a pranzo e ho ricevuto la mia IDD prima del volo.”</p>
 <footer class="text-slate-600 text-xs leading-4 mt-2">Sarah, US • Viaggiatore verificato</footer>
 </blockquote>
 <blockquote class="text-sm bg-white leading-5 border border-gray-200 p-4 rounded-2xl border-solid"><p>“Noleggio auto in Giappone senza problemi. Il processo ha richiesto 2 minuti.”</p>
@@ -612,31 +394,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 </div>
 </section>
-<section class="max-w-6xl mx-auto px-4 py-12 md:py-16"><h2 class="heading-1 text-center mt-1">Domande frequenti</h2>
-<div class="gap-x-6 grid grid-cols-none gap-y-6 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="card"><p class="font-semibold">Cos'è una Patente di Guida Internazionale?</p>
-<p class="text-slate-600 text-sm leading-5 mt-2">Una Patente di Guida Internazionale (PCI) è un documento che traduce la tua patente di guida esistente in più lingue. Funziona come supplemento, non come sostituzione, della tua patente di guida valida.</p>
+<section class="max-w-6xl mx-auto px-4 py-12 md:py-16"><h2 class="heading-1 text-center">Domande frequenti</h2>
+<div class="gap-x-6 grid grid-cols-none gap-y-6 mt-6 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="card"><p class="font-semibold">Cosa offrite?</p>
+<p class="text-slate-600 text-sm leading-5 mt-2">Una traduzione multilingue preparata professionalmente della tua patente di guida valida, più indicazioni sui documenti di guida in base alla destinazione. Integra la patente — non la sostituisce, e non è un Permesso Internazionale di Guida rilasciato dal governo.</p>
 </div>
-<div class="card"><p class="font-semibold">Ho bisogno di una PCI?</p>
-<p class="text-slate-600 text-sm leading-5 mt-2">Dipende dalla tua destinazione. Molti paesi richiedono legalmente una PCI per guidare, e la maggior parte delle agenzie di noleggio auto all'estero ne richiederà una. È altamente raccomandata per i viaggi internazionali per evitare potenziali sanzioni e problemi.</p>
+<div class="card"><p class="font-semibold">Mi serve per il mio viaggio?</p>
+<p class="text-slate-600 text-sm leading-5 mt-2">Dipende dall'origine della patente e dalla destinazione. Alcuni viaggi possono richiedere anche un IDP ufficiale. <a href="../destination-checker.html" class="text-primary-500 underline">Verifica la destinazione</a> prima di ordinare.</p>
 </div>
-<div class="card"><p class="font-semibold">Per quanto tempo è valida la mia PCI?</p>
-<p class="text-slate-600 text-sm leading-5 mt-2">Una PCI è tipicamente valida per un anno dalla data di emissione, o fino alla scadenza della tua patente di guida nazionale, a seconda di quale evento si verifichi prima. Alcune PCI rilasciate in base a diversi accordi internazionali possono essere valide fino a tre anni.</p>
+<div class="card"><p class="font-semibold">Per quanto tempo è disponibile la traduzione?</p>
+<p class="text-slate-600 text-sm leading-5 mt-2">Offriamo opzioni di servizio di 1, 2 e 3 anni per il documento di traduzione privata. Non è la stessa cosa della validità ufficiale dell'IDP, che dipende dall'autorità emittente e dalle regole della destinazione.</p>
 </div>
-<div class="card"><p class="font-semibold">Quali paesi accettano la PCI?</p>
-<p class="text-slate-600 text-sm leading-5 mt-2">Oltre 150 paesi in tutto il mondo accettano la Patente di Guida Internazionale. È riconosciuta nella maggior parte delle Americhe, Europa, Asia, Africa e Australia.</p>
+<div class="card"><p class="font-semibold">Dove posso usare questo servizio?</p>
+<p class="text-slate-600 text-sm leading-5 mt-2">Requisiti e accettazione variano in base alla destinazione. Usa il nostro <a href="../destination-checker.html" class="text-primary-500 underline">verificatore di destinazione</a> per indicazioni sul tuo viaggio.</p>
 </div>
-<div class="card"><p class="font-semibold">Quanto velocemente posso ottenere la mia PCI?</p>
-<p class="text-slate-600 text-sm leading-5 mt-2">Le richieste di persona presso l'ufficio di rilascio locale possono spesso essere elaborate in meno di un'ora. Le richieste online e per posta possono richiedere da pochi giorni a diverse settimane, a seconda del fornitore e delle opzioni di spedizione selezionate.</p>
+<div class="card"><p class="font-semibold">Quanto velocemente posso ottenere la traduzione?</p>
+<p class="text-slate-600 text-sm leading-5 mt-2">La consegna digitale è di solito entro circa 2 ore dopo una richiesta completa. Le copie cartacee richiedono più tempo in base alla spedizione.</p>
 </div>
-<div class="card"><p class="font-semibold">In quali paesi è valida?</p>
-<p class="text-slate-600 text-sm leading-5 mt-2">Questa PCI è valida in oltre 150 paesi che hanno firmato la Convenzione di Ginevra del 1949 e/o la Convenzione di Vienna del 1968 sulla Circolazione Stradale, incluse destinazioni popolari come Europa, Asia, Africa e Sud America.</p>
+<div class="card"><p class="font-semibold">È un IDP ufficiale?</p>
+<p class="text-slate-600 text-sm leading-5 mt-2">No. Questo è un servizio privato indipendente di traduzione. A seconda dell'origine della patente e della destinazione, potrebbe essere comunque necessario un IDP ufficiale oltre alla patente originale.</p>
 </div>
 </div>
 </section>
-<section aria-label="final cta" class="bg-white"><div class="items-center gap-x-6 grid grid-cols-none max-w-6xl gap-y-6 mx-auto px-4 py-12 md:grid-cols-[repeat(3,minmax(0px,1fr))] md:py-16"><div class="col-end-auto col-start-auto md:col-end-[span_2] md:col-start-[span_2]"><h2 class="heading-1">Ottieni ora il tuo documento di guida internazionale</h2>
-<p class="text-slate-600 text-sm leading-5 mt-2">Elabora prima del Suo viaggio — ottieni l'approvazione oggi.</p>
+<section aria-label="final cta" class="bg-white"><div class="items-center gap-x-6 grid grid-cols-none max-w-6xl gap-y-6 mx-auto py-12 md:py-16 px-4 md:grid-cols-[repeat(3,minmax(0px,1fr))]"><div class="col-end-auto col-start-auto md:col-end-[span_2] md:col-start-[span_2]"><h2 class="heading-1">Prepara la patente prima di viaggiare</h2>
+<p class="text-slate-600 text-sm leading-5 mt-2">Verifica la destinazione, poi ottieni la traduzione multilingue — consegna digitale in circa 2 ore.</p>
 </div>
-<div class="justify-self-auto md:justify-self-end"><a href="https://idpcheckout.fillout.com/t/2ESX5foenCus?source=footer_button" class="btn btn-primary">Ottieni l'approvazione in 2 ore</a>
+<div class="justify-self-auto md:justify-self-end"><a href="../destination-checker.html" class="btn btn-primary">Verifica la mia destinazione</a>
 </div>
 </div>
 </section>

@@ -251,6 +251,68 @@ let idpSelectedDest = null;
 // ===== CHECKOUT URL =====
 const IDP_CHECKOUT_URL = "https://idpcheckout.fillout.com/t/2ESX5foenCus?source=header_button&_gl=1*1rrofuz*_gcl_au*OTA2NTQyNTAyLjE3Njk2NzI5NjY.";
 
+// ===== I18N =====
+const IDP_I18N = {
+  en: {
+    noCountries: 'No countries found',
+    resultFor: 'IDP for {name}',
+    accepted: 'Accepted',
+    conditions: 'Accepted with conditions',
+    notAccepted: 'Not accepted',
+    printedDigital: 'Printed + Digital IDP',
+    printed: 'Printed IDP',
+    printedOnly: 'Printed IDP Only',
+    years13: '1–3 years',
+    year1: '1 year'
+  },
+  es: {
+    noCountries: 'No se encontraron países',
+    resultFor: 'IDP para {name}',
+    accepted: 'Aceptado',
+    conditions: 'Aceptado con condiciones',
+    notAccepted: 'No aceptado',
+    printedDigital: 'IDP impreso + digital',
+    printed: 'IDP impreso',
+    printedOnly: 'Solo IDP impreso',
+    years13: '1–3 años',
+    year1: '1 año'
+  },
+  fr: {
+    noCountries: 'Aucun pays trouvé',
+    resultFor: 'IDP pour {name}',
+    accepted: 'Accepté',
+    conditions: 'Accepté sous conditions',
+    notAccepted: 'Non accepté',
+    printedDigital: 'IDP imprimé + numérique',
+    printed: 'IDP imprimé',
+    printedOnly: 'IDP imprimé uniquement',
+    years13: '1–3 ans',
+    year1: '1 an'
+  },
+  it: {
+    noCountries: 'Nessun paese trovato',
+    resultFor: 'IDP per {name}',
+    accepted: 'Accettato',
+    conditions: 'Accettato con condizioni',
+    notAccepted: 'Non accettato',
+    printedDigital: 'IDP cartaceo + digitale',
+    printed: 'IDP cartaceo',
+    printedOnly: 'Solo IDP cartaceo',
+    years13: '1–3 anni',
+    year1: '1 anno'
+  }
+};
+
+function idpT(key, vars) {
+  const lang = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
+  const dict = IDP_I18N[lang] || IDP_I18N.en;
+  let str = dict[key] || IDP_I18N.en[key] || key;
+  if (vars) {
+    Object.keys(vars).forEach(k => { str = str.replace(`{${k}}`, vars[k]); });
+  }
+  return str;
+}
+
 // ===== HELPERS =====
 function idpFlagUrl(code) {
   return `https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.4/flags/4x3/${code.toLowerCase()}.svg`;
@@ -260,7 +322,7 @@ function idpRenderOptions(listId, filtered, type) {
   const list = document.getElementById(listId);
   list.innerHTML = '';
   if (filtered.length === 0) {
-    list.innerHTML = '<div class="idp-no-results">No countries found</div>';
+    list.innerHTML = `<div class="idp-no-results">${idpT('noCountries')}</div>`;
     return;
   }
   const selected = type === 'source' ? idpSelectedSource : idpSelectedDest;
@@ -368,26 +430,28 @@ function idpUpdateResult() {
   if (satText) satText.style.display = 'block';
 
   const dest = idpSelectedDest;
-  document.getElementById('idpResultLabel').textContent = `IDP for ${dest.name}`;
+  document.getElementById('idpResultLabel').textContent = idpT('resultFor', { name: dest.name });
 
   const badge = document.getElementById('idpStatusBadge');
+  const acceptedIcon = '<svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L7 8.586 5.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>';
+  const conditionsIcon = '<svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm.93-9.412l-.562 3.378c-.022.132.058.195.152.195.068 0 .169-.028.25-.092l-.034.198c-.13.12-.344.21-.554.21-.336 0-.488-.2-.416-.57l.562-3.378c.022-.132-.058-.195-.152-.195-.068 0-.169.028-.25.092l.034-.198c.13-.12.344-.21.554-.21.336 0 .488.2.416.57zM8 5.5a.75.75 0 100-1.5.75.75 0 000 1.5z"/></svg>';
+  const rejectedIcon = '<svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zM5.354 5.354a.5.5 0 01.707 0L8 7.293l1.939-1.94a.5.5 0 01.707.708L8.707 8l1.94 1.939a.5.5 0 01-.708.707L8 8.707l-1.939 1.94a.5.5 0 01-.707-.708L7.293 8 5.354 6.061a.5.5 0 010-.707z"/></svg>';
+  const duration = dest.validity === 3 ? idpT('years13') : dest.validity === 1 ? idpT('year1') : '';
 
   if (dest.in_ === 'yes') {
     badge.className = 'idp-badge accepted';
-    badge.innerHTML = `<svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L7 8.586 5.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg> Accepted`;
-    const format = dest.digital_copy ? 'Printed + Digital IDP' : 'Printed IDP';
-    const duration = dest.validity === 3 ? '1–3 years' : dest.validity === 1 ? '1 year' : '';
-    document.getElementById('idpValidityValue').textContent = `${format}, ${duration}`;
+    badge.innerHTML = `${acceptedIcon} ${idpT('accepted')}`;
+    const format = dest.digital_copy ? idpT('printedDigital') : idpT('printed');
+    document.getElementById('idpValidityValue').textContent = duration ? `${format}, ${duration}` : format;
     validityRow.style.display = 'flex';
     priceRow.style.display = 'flex';
     condNote.style.display = 'none';
 
   } else if (dest.in_ === 'yes_with_conditions') {
     badge.className = 'idp-badge conditions';
-    badge.innerHTML = `<svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zm.93-9.412l-.562 3.378c-.022.132.058.195.152.195.068 0 .169-.028.25-.092l-.034.198c-.13.12-.344.21-.554.21-.336 0-.488-.2-.416-.57l.562-3.378c.022-.132-.058-.195-.152-.195-.068 0-.169.028-.25.092l.034-.198c.13-.12.344-.21.554-.21.336 0 .488.2.416.57zM8 5.5a.75.75 0 100-1.5.75.75 0 000 1.5z"/></svg> Accepted with conditions`;
-    const format = dest.digital_copy ? 'Printed + Digital IDP' : 'Printed IDP Only';
-    const duration = dest.validity === 3 ? '1–3 years' : dest.validity === 1 ? '1 year' : '';
-    document.getElementById('idpValidityValue').textContent = `${format}, ${duration}`;
+    badge.innerHTML = `${conditionsIcon} ${idpT('conditions')}`;
+    const format = dest.digital_copy ? idpT('printedDigital') : idpT('printedOnly');
+    document.getElementById('idpValidityValue').textContent = duration ? `${format}, ${duration}` : format;
     validityRow.style.display = 'flex';
     priceRow.style.display = 'flex';
     if (dest.condition_using) {
@@ -399,7 +463,7 @@ function idpUpdateResult() {
 
   } else {
     badge.className = 'idp-badge not-accepted';
-    badge.innerHTML = `<svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M8 16A8 8 0 108 0a8 8 0 000 16zM5.354 5.354a.5.5 0 01.707 0L8 7.293l1.939-1.94a.5.5 0 01.707.708L8.707 8l1.94 1.939a.5.5 0 01-.708.707L8 8.707l-1.939 1.94a.5.5 0 01-.707-.708L7.293 8 5.354 6.061a.5.5 0 010-.707z"/></svg> Not accepted`;
+    badge.innerHTML = `${rejectedIcon} ${idpT('notAccepted')}`;
     validityRow.style.display = 'none';
     priceRow.style.display = 'none';
     condNote.style.display = 'none';
